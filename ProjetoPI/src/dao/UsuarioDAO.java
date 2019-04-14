@@ -5,28 +5,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Grupo;
 import model.Usuario;
 
 public class UsuarioDAO {
-
-	public Usuario /*ou void?*/ createUsuario(Usuario usuario) {
+	
+	public int salvar(Usuario usuario) {
 		String sql = "INSERT INTO usuario (id, nome, email, senha) "
 				+ "VALUES (?, ?, ?, ?)";
-		try (Connection conn = ConnectionFactory.conectar(); 
-				PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, usuario.getId());
 			ps.setString(2, usuario.getNome());
 			ps.setString(3, usuario.getEmail());
 			ps.setString(4, usuario.getSenha());
 			ps.execute();
+			String sqlQuery = "SELECT LAST_INSERT_ID()";
+			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery);
+					ResultSet rs = ps2.executeQuery();) {
+				if (rs.next()) {
+					usuario.setId(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
-			System.out.println(e.getStackTrace());
-
+			e.printStackTrace();
 		}
-		return usuario;
+		return usuario.getId();
 	}
 
-	public void deleteUsuario(Usuario usuario) {
+	public void deletar(Usuario usuario) {
 		String sqlDelete = "DELETE FROM usuario WHERE id = ?";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlDelete);) {
@@ -37,7 +46,7 @@ public class UsuarioDAO {
 		}
 	}
 
-	public void updateUsuario(Usuario usuario) {
+	public void atualizar(Usuario usuario) {
 		String sqlUpdate = "UPDATE usuario SET nome=?, email=?, senha=? WHERE id=?";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
@@ -51,7 +60,7 @@ public class UsuarioDAO {
 		}
 	}
 
-	public Usuario readUsuario(int id, Usuario usuario) {
+	public Usuario carregar(int id, Usuario usuario) {
 		String sqlSelect = "SELECT nome, email, senha FROM usuario WHERE id =?";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlSelect);) {

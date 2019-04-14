@@ -12,19 +12,19 @@ public class UsuarioService {
 	}
 
 	public void create(Usuario usuario) {
-		dao.createUsuario(usuario);
+		dao.salvar(usuario);
 	}
 
 	public void update(Usuario usuario) {
-		dao.updateUsuario(usuario);
+		dao.atualizar(usuario);
 	}
 
 	public void delete(Usuario usuario) {
-		dao.deleteUsuario(usuario);
+		dao.deletar(usuario);
 	}
 
 	public Usuario read(int id, Usuario usuario) {
-		Usuario u = dao.readUsuario(id, usuario);
+		Usuario u = dao.carregar(id, usuario);
 		return u;
 	}
 
