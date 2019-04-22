@@ -12,7 +12,7 @@ public class TurmaService {
 	}
 
 	public void incluir(Turma t) {
-		dao.incluir(t);
+		dao.salvar(t);
 	}
 
 	public void atualizar(Turma t) {
@@ -24,7 +24,7 @@ public class TurmaService {
 	}
 
 	public Turma carregar(int id, Turma t) {
-		Turma use = dao.carregar(id, t);
-		return use;
+		Turma turma = dao.carregar(id);
+		return turma;
 	}
 }

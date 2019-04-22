@@ -8,24 +8,32 @@ import java.sql.SQLException;
 import model.Turma;
 
 public class TurmaDAO {
-	public void incluir(Turma t) {
-		String sqlInsert = "INSERT INTO usuario (id, semestreLetivo, anoLetivo, sigla) " + "VALUES (?, ?, ?, ?)";
-		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-			ps.setInt(1, t.getId());
-			ps.setInt(2, t.getSemestreLetivo());
-			ps.setInt(3, t.getAnoLetivo());
-			ps.setString(4, t.getSigla());
-			ps.execute();
-		} catch (SQLException e) {
-			System.out.println(e.getStackTrace());
 
+	public int salvar(Turma turma) {
+		String sql = "INSERT INTO usuario (id, semestreLetivo, anoLetivo, sigla) VALUES (?, ?, ?, ?)";
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, turma.getId());
+			ps.setInt(2, turma.getSemestreLetivo());
+			ps.setInt(3, turma.getAnoLetivo());
+			ps.setString(4, turma.getSigla());
+			ps.execute();
+			String sqlQuery = "SELECT LAST_INSERT_ID()";
+			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery); ResultSet rs = ps2.executeQuery();) {
+				if (rs.next()) {
+					turma.setId(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return turma.getId();
 	}
 
 	public void excluir(Turma t) {
-		String sqlDelete = "DELETE FROM usuario WHERE id = ?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement stm = conn.prepareStatement(sqlDelete);) {
+		String sql = "DELETE FROM usuario WHERE id = ?";
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement stm = conn.prepareStatement(sql);) {
 			stm.setInt(1, t.getId());
 			stm.execute();
 		} catch (Exception e) {
@@ -33,35 +41,36 @@ public class TurmaDAO {
 		}
 	}
 
-	public void atualizar(Turma t) {
-		String sqlUpdate = "UPDATE pais SET nome=?, populacao=?, area=? WHERE id=?";
+	public void atualizar(Turma turma) {
+		String sql = "UPDATE usuario SET semestreLetivo=?, anoLetivo=?, sigla=? WHERE id=?";
 		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
-			stm.setInt(1, t.getSemestreLetivo());
-			stm.setInt(2, t.getAnoLetivo());
-			stm.setString(3, t.getSigla());
-			stm.setInt(4, t.getId());
+				PreparedStatement stm = conn.prepareStatement(sql);) {
+			stm.setInt(1, turma.getSemestreLetivo());
+			stm.setInt(2, turma.getAnoLetivo());
+			stm.setString(3, turma.getSigla());
+			stm.setInt(4, turma.getId());
 			stm.execute();
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
 	}
 
-	public Turma carregar(int id, Turma t) {
+	public Turma carregar(int id) {
 		String sqlSelect = "SELECT semestreLetivo, anoLetivo, sigla FROM usuario WHERE id =?";
+		Turma turma = new Turma();
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
 			stm.setInt(1, id);
 			try (ResultSet rs = stm.executeQuery();) {
 				if (rs.next()) {
-					t.setSemestreLetivo(rs.getInt("semestreLetivo"));
-					t.setAnoLetivo(rs.getInt("anoLetivo"));
-					t.setSigla(rs.getString("sigla"));
+					turma.setSemestreLetivo(rs.getInt("semestreLetivo"));
+					turma.setAnoLetivo(rs.getInt("anoLetivo"));
+					turma.setSigla(rs.getString("sigla"));
 				} else {
-					t.setId(-1);
-					t.setSemestreLetivo(-1);
-					t.setAnoLetivo(-1);
-					t.setSigla(null);
+					turma.setId(-1);
+					turma.setSemestreLetivo(-1);
+					turma.setAnoLetivo(-1);
+					turma.setSigla(null);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -69,6 +78,6 @@ public class TurmaDAO {
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
 		}
-		return t;
+		return turma;
 	}
 }

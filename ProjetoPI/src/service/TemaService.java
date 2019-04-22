@@ -11,7 +11,7 @@ public class TemaService {
 	}
 	
 	public void incluir (Tema t) {
-		dao.incluir(t);
+		dao.salvar(t);
 	}
 	
 	public void atualizar (Tema t) {
@@ -22,8 +22,8 @@ public class TemaService {
 		dao.excluir(t);
 	}
 	
-	public Tema carregar (int id, Tema t) {
-		Tema use = dao.carregar(id, t);
-		return use;
+	public Tema carregar (int id) {
+		Tema tema = dao.carregar(id);
+		return tema;
 	}
 }

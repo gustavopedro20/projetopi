@@ -4,66 +4,77 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import model.Tema;
 
 public class TemaDAO {
-	public void incluir(Tema t) {
-		String sqlInsert = "INSERT INTO usuario (id, dtCadastro, titulo, introducao, requisitos) " + "VALUES (?, ?, ?, ?)";
-		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-			ps.setInt(1, t.getId());
-			ps.setDate(2, (java.sql.Date) t.getDtCadastro());
-			ps.setString(3, t.getTitulo());
-			ps.setString(4, t.getIntoducao());
+
+	public int salvar(Tema tema) {
+		String sql = "INSERT INTO tema (dtCadastro, titulo, introducao, requisitos) VALUES (?, ?, ?, ?)";
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, tema.getId());
+			ps.setDate(2, (java.sql.Date) tema.getDtCadastro());
+			ps.setString(3, tema.getTitulo());
+			ps.setString(4, tema.getIntoducao());
 			ps.execute();
-		} catch (SQLException e) {
-			System.out.println(e.getStackTrace());
-
-		}
-	}
-
-	public void excluir(Tema t) {
-		String sqlDelete = "DELETE FROM professorBanca WHERE id = ?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement stm = conn.prepareStatement(sqlDelete);) {
-			stm.setInt(1, t.getId());
-			stm.execute();
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-		}
-	}
-
-	public void atualizar(Tema t) {
-		String sqlUpdate = "UPDATE pais SET nome=?, populacao=?, area=? WHERE id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
-			stm.setDate(1, (java.sql.Date) t.getDtCadastro());
-			stm.setString(2, t.getTitulo());
-			stm.setString(3, t.getIntoducao());
-			stm.setString(4, t.getRequisitos());
-			stm.setInt(5, t.getId());
-			stm.execute();
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-		}
-	}
-
-	public Tema carregar(int id, Tema t) {
-		String sqlSelect = "SELECT nome, email, senha FROM usuario WHERE id =?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-			stm.setInt(1, id);
-			try (ResultSet rs = stm.executeQuery();) {
+			String sqlQuery = "SELECT LAST_INSERT_ID()";
+			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery); ResultSet rs = ps2.executeQuery();) {
 				if (rs.next()) {
-					t.setDtCadastro(rs.getDate("dtCadastro"));
-					t.setTitulo(rs.getString("tirulo"));
-					t.setIntoducao(rs.getString("intoducao"));
-					t.setRequisitos(rs.getString("requisitos"));
+					tema.setId(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tema.getId();
+	}
+
+	public void excluir(Tema tema) {
+		String sql = "DELETE FROM tema WHERE id = ?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement stm = conn.prepareStatement(sql);) {
+			stm.setInt(1, tema.getId());
+			stm.execute();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+
+	public void atualizar(Tema tema) {
+		String sql = "UPDATE tema SET dtCadastro=?, titulo=?, introducao=?, requisitos=? WHERE id=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setDate(1, (java.sql.Date) tema.getDtCadastro());
+			ps.setString(2, tema.getTitulo());
+			ps.setString(3, tema.getIntoducao());
+			ps.setString(4, tema.getRequisitos());
+			ps.setInt(5, tema.getId());
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+
+	public Tema carregar(int id) {
+		String sql = "SELECT dtCadastro, titulo, introducao, requisitos FROM tema WHERE id =?";
+		Tema tema = new Tema();
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					tema.setDtCadastro(rs.getDate("dtCadastro"));
+					tema.setTitulo(rs.getString("tirulo"));
+					tema.setIntoducao(rs.getString("intoducao"));
+					tema.setRequisitos(rs.getString("requisitos"));
 				} else {
-					t.setId(-1);
-					t.setDtCadastro(null);
-					t.setTitulo(null);
-					t.setIntoducao(null);
-					t.setRequisitos(null);
+					tema.setId(-1);
+					tema.setDtCadastro(null);
+					tema.setTitulo(null);
+					tema.setIntoducao(null);
+					tema.setRequisitos(null);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -71,6 +82,6 @@ public class TemaDAO {
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
 		}
-		return t;
+		return tema;
 	}
 }

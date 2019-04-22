@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Grupo;
 import model.Usuario;
 
 public class UsuarioDAO {
