@@ -6,7 +6,17 @@ public class Grupo {
 	private int num;
 	private String nome;
 	private Professor prof;
-	private Aluno aluno;
+	private Aluno aluno;	
+	
+	public Grupo(Professor prof, int num, String nome) {
+		this.num = num;
+		this.nome = nome;
+		this.prof = prof;
+	}
+	
+	public Grupo () {
+		
+	}
 	
 	public int getId() {
 		return id;

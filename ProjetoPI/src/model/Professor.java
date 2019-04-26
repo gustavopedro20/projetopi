@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Professor extends Usuario {
 	
 	private int adm;
-	private String matr;
+	private String matricula;
 	private ArrayList<Grupo> grupo = new ArrayList<>();
 	private ArrayList<ProfessorBanca> pb = new ArrayList<>();
 	
@@ -22,13 +22,13 @@ public class Professor extends Usuario {
 	public void setAdm(int adm) {
 		this.adm = adm;
 	}
-	public String getMatr() {
-		return matr;
-	}
-	public void setMatr(String matr) {
-		this.matr = matr;
-	}
 
+	public String getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
 	public ArrayList<Grupo> getGrupo() {
 		return grupo;
 	}

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@page import="model.Grupo" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,36 +14,35 @@
 </head>
 
 <body>
-    <%Grupo grupo = (Grupo)request.getAttribute("grupo"); %>
         <!-- Barra superior com os menus de navegação -->
-
+		<c:import url="Menu.jsp"/>
         <!-- Container Principal -->
         <div id="main" class="container">
-            <h3 class="page-header">Visualizar Grupo #<%=grupo.getId() %></h3>
+            <h3 class="page-header">Visualizar Grupo #${grupo.id}</h3>
             <div class="row">
                 <div class="col-md-12">
                     <p><strong>Nome</strong>
                     </p>
                     <p>
-                        <%=grupo.getNome() %>
+                        ${grupo.nome}
                     </p>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <p><strong>Numero</strong>
                     </p>
                     <p>
-                        <%=grupo.getNum() %>
+                        ${grupo.num}
                     </p>
                 </div>
             </div>
-
+            
             <hr />
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <a href="index.html" class="btn btn-default">Voltar</a>
+                    <a href="index.jsp" class="btn btn-default">Voltar</a>
                 </div>
             </div>
         </div>
