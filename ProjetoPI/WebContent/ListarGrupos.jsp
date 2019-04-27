@@ -87,7 +87,7 @@
                                                ${grupo.id }
                                             </td>
                                             <td>
-                                            	${Professor.id }
+                                            	${grupo.prof.id }
                                             </td>
                                             <td>
                                                 ${grupo.nome }
