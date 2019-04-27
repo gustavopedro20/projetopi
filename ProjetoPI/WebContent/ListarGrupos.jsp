@@ -74,7 +74,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th> Professor </th>
+                                    <th>Professor</th>
                                     <th>Nome</th>
                                     <th>Numero</th>                                    
                                     <th class="actions">Ações</th>

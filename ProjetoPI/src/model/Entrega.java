@@ -1,15 +1,15 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Entrega {
 	
 	private int id;
 	private Date dtCadastro;
-	private ArrayList<Avaliacao> avaliacao = new ArrayList<>();
+	//private ArrayList<Avaliacao> avaliacao = new ArrayList<>();
 	private Grupo grupo;
-	private Atividade atividade;
+	//private Atividade atividade;
+	private int idAtividade;
 	
 	public int getId() {
 		return id;
@@ -27,13 +27,13 @@ public class Entrega {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	public ArrayList<Avaliacao> getAvaliacao() {
+	/*public ArrayList<Avaliacao> getAvaliacao() {
 		return avaliacao;
 	}
 	
 	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
-	}
+	}*/
 	
 	public Grupo getGrupo() {
 		return grupo;
@@ -42,13 +42,16 @@ public class Entrega {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
-	
-	public Atividade getAtividade() {
-		return atividade;
+
+	public int getIdAtividade() {
+		return idAtividade;
 	}
-	
-	public void setAtividade(Atividade atividade) {
-		this.atividade = atividade;
+
+	public void setIdAtividade(int idAtividade) {
+		this.idAtividade = idAtividade;
 	}
+
+
+
 
 }

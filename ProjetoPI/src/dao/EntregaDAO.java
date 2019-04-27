@@ -6,78 +6,74 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Atividade;
 import model.Entrega;
-import model.Grupo;
 
 public class EntregaDAO {
 	
-	public void createEntrega(Entrega entrega) {
-		String sqlCreate = "INSERT INTO entrega (grupo_id, atividade_id, dt_cadastro) VALUES (?, ?, ?) ";
+	public int criar(Entrega entrega) {
+		String sql = "INSERT INTO entrega (grupo_id, atividade_id, dt_cadastro) VALUES (?, ?, ?) ";
 		
-		Grupo grupo = new Grupo();
-		Atividade atividade = new Atividade();
-		
-		try (Connection conn = ConnectionFactory.conectar(); 
-				PreparedStatement ps = conn.prepareStatement(sqlCreate)) {
-			ps.setInt(1, grupo.getId());
-			ps.setInt(2, atividade.getId());			
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, entrega.getGrupo().getId());
+			ps.setInt(2, entrega.getIdAtividade());			
 			ps.setDate(3, (Date) entrega.getDtCadastro());
-			ps.executeUpdate();
-
+			ps.execute();
+			String sqlQuery = "SELECT LAST_INSERT_ID()";
+			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery);
+					ResultSet rs = ps2.executeQuery();) {
+				if (rs.next()) {
+					entrega.setId(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
-			System.out.println(e.getStackTrace());
-
+			e.printStackTrace();
 		}
+		return entrega.getId();
 	}
 	
-	public void deleteEntrega(Entrega entrega) {
+	public void deletar(int id) {
 		String sqlDelete = "DELETE FROM entrega WHERE id = ?";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlDelete);) {
-			ps.setInt(1, entrega.getId());
+			ps.setInt(1, id);
 			ps.execute();
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
 	}
 	
-	public void updateEntrega(Entrega entrega) {
-		String sqlUpdate = "UPDATE entrega SET grupo_id=?, atividade_id=?, dt_cadastro=? WHERE id=?";
-		
-		Grupo grupo = new Grupo();
-		Atividade atividade = new Atividade();
-		
+	public void atualizar(Entrega entrega) {
+		String sqlUpdate = "UPDATE entrega SET grupo_id=?, atividade_id=?, dt_cadastro=? WHERE id=?";		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
-			ps.setInt(1, grupo.getId());
-			ps.setInt(2, atividade.getId());
+			ps.setInt(1, entrega.getGrupo().getId());
+			ps.setInt(2, entrega.getIdAtividade());
 			ps.setDate(3, (Date) entrega.getDtCadastro());
+			ps.setInt(4, entrega.getId());
 			ps.execute();
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
 	}
 	
-	public Entrega readEntrega(int id) {
+	public Entrega carregar(int id) {
 		String sqlRead = "SELECT grupo_id, atividade_id, dt_cadastro FROM entrega WHERE id =?";
-		
 		Entrega entrega = new Entrega();
-		Grupo grupo = new Grupo();
-		Atividade atividade = new Atividade();
 		
 		try (Connection conn = ConnectionFactory.conectar(); 
 				PreparedStatement ps = conn.prepareStatement(sqlRead);) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
-					grupo.setId(rs.getInt("grupo_id"));
-					atividade.setId(rs.getInt("atividade_id"));
+					entrega.getGrupo().setId(rs.getInt("grupo_id"));
+					entrega.setIdAtividade(rs.getInt("atividade_id"));
 					entrega.setDtCadastro(rs.getDate("dt_cadastro"));
 				} else {
-					entrega.setId(-1);
-					grupo.setId(-1);
-					atividade.setId(-1);
+					entrega.getGrupo().setId(-1);
+					entrega.setIdAtividade(-1);
 					entrega.setDtCadastro(null);
 				}
 			} catch (SQLException e) {

@@ -11,20 +11,20 @@ public class EntregaService {
 		dao = new EntregaDAO();
 	}
 
-	public void create(Entrega entrega) {
-		dao.createEntrega(entrega);
+	public void criar(Entrega entrega) {
+		dao.criar(entrega);
 	}
 
-	public void update(Entrega entrega) {
-		dao.updateEntrega(entrega);
+	public void atualizar(Entrega entrega) {
+		dao.atualizar(entrega);
 	}
 
-	public void delete(Entrega entrega) {
-		dao.deleteEntrega(entrega);
+	public void deletar(int id) {
+		dao.deletar(id);
 	}
 
-	public Entrega read(int id) {
-		Entrega entrega = dao.readEntrega(id);
+	public Entrega carregar(int id) {
+		Entrega entrega = dao.carregar(id);
 		return entrega;
 	}
 }

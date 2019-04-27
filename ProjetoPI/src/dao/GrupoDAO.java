@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Grupo;
-import model.Professor;
 
 public class GrupoDAO {
 	
@@ -62,6 +61,7 @@ public class GrupoDAO {
 			ps.setInt(1, grupo.getProf().getId());
 			ps.setInt(1, grupo.getNum());
 			ps.setString(2, grupo.getNome());
+			ps.setInt(4, grupo.getId());
 			ps.execute();
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());

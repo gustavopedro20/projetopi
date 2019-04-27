@@ -3,7 +3,8 @@ package model;
 public class Aluno extends Usuario {
 	
 	private String ra;
-	private Turma turma;
+	//private Turma turma;
+	private String turma;
 	private Grupo grupo;
 	
 	public Aluno(int id, String nome, String email, String senha) {
@@ -22,14 +23,22 @@ public class Aluno extends Usuario {
 		this.ra = ra;
 	}
 	
-	public Turma getTurma() {
+	/*public Turma getTurma() {
 		return turma;
 	}
 	
 	public void setTurma(Turma turma) {
 		this.turma = turma;
-	}
+	}*/
 	
+	public String getTurma() {
+		return turma;
+	}
+
+	public void setTurma(String turma) {
+		this.turma = turma;
+	}
+
 	public Grupo getGrupo() {
 		return grupo;
 	}

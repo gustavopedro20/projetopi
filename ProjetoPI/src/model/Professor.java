@@ -7,7 +7,7 @@ public class Professor extends Usuario {
 	private int adm;
 	private String matricula;
 	private ArrayList<Grupo> grupo = new ArrayList<>();
-	private ArrayList<ProfessorBanca> pb = new ArrayList<>();
+	//private ArrayList<ProfessorBanca> pb = new ArrayList<>();
 	
 	public Professor(int id, String nome, String email, String senha) {
 		super(id, nome, email, senha);
@@ -39,11 +39,11 @@ public class Professor extends Usuario {
 	public void setGrupo(ArrayList<Grupo> grupo) {
 		this.grupo = grupo;
 	}
-	public ArrayList<ProfessorBanca> getPb() {
+	/*public ArrayList<ProfessorBanca> getPb() {
 		return pb;
 	}
 	public void setPb(ArrayList<ProfessorBanca> pb) {
 		this.pb = pb;
-	}
+	}*/
 
 }
