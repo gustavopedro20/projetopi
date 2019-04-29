@@ -16,7 +16,7 @@ public class EntregaDAO {
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, entrega.getGrupo().getId());
-			ps.setInt(2, entrega.getIdAtividade());			
+			ps.setInt(2, entrega.getAtividade().getId());			
 			ps.setDate(3, (Date) entrega.getDtCadastro());
 			ps.execute();
 			String sqlQuery = "SELECT LAST_INSERT_ID()";
@@ -50,7 +50,7 @@ public class EntregaDAO {
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
 			ps.setInt(1, entrega.getGrupo().getId());
-			ps.setInt(2, entrega.getIdAtividade());
+			ps.setInt(2, entrega.getAtividade().getId());
 			ps.setDate(3, (Date) entrega.getDtCadastro());
 			ps.setInt(4, entrega.getId());
 			ps.execute();
@@ -69,11 +69,11 @@ public class EntregaDAO {
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
 					entrega.getGrupo().setId(rs.getInt("grupo_id"));
-					entrega.setIdAtividade(rs.getInt("atividade_id"));
+					entrega.getAtividade().setId(rs.getInt("atividade_id"));
 					entrega.setDtCadastro(rs.getDate("dt_cadastro"));
 				} else {
 					entrega.getGrupo().setId(-1);
-					entrega.setIdAtividade(-1);
+					entrega.getAtividade().setId(-1);
 					entrega.setDtCadastro(null);
 				}
 			} catch (SQLException e) {

@@ -8,8 +8,8 @@ public class Entrega {
 	private Date dtCadastro;
 	//private ArrayList<Avaliacao> avaliacao = new ArrayList<>();
 	private Grupo grupo;
-	//private Atividade atividade;
-	private int idAtividade;
+	private Atividade atividade;
+	
 	
 	public int getId() {
 		return id;
@@ -43,13 +43,14 @@ public class Entrega {
 		this.grupo = grupo;
 	}
 
-	public int getIdAtividade() {
-		return idAtividade;
+	public Atividade getAtividade() {
+		return atividade;
 	}
 
-	public void setIdAtividade(int idAtividade) {
-		this.idAtividade = idAtividade;
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
 	}
+
 
 
 
