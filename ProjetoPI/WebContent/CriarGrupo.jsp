@@ -20,15 +20,33 @@
     <div id="main" class="container">
         <h3 class="page-header">Incluir Grupo</h3>
         <!-- Formulario para inclusao de clientes -->
-        <form action="ManterGrupo.do" method="post">
+        <form action="listar_professores.do" method="post">
             <!-- area de campos do form -->
             
-            <div class="row">
+            <div class="container">
+					<!--  <h4 class="page-header">Teste Combo Box</h4>-->
+				<div class="row">
+					<div class="col-sm-3">
+						<select class="form-control">
+							<c:forEach var="professor" items="${lista}">
+							
+								<option value="${professor.id}">${professor.nome}</option>	
+								
+                            </c:forEach>
+						</select>
+					</div>
+				</div>
+				<br />
+			</div>
+            
+       <!--
+             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="nome">Professor</label>
                     <input type="text" class="form-control" name="professor" id="professor" required maxlength="100" placeholder="professor">
                 </div>
             </div>
+            --> 
             
             <div class="row">
                 <div class="form-group col-md-12">

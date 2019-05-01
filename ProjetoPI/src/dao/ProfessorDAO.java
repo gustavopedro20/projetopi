@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Grupo;
 import model.Professor;
 import model.Usuario;
 
@@ -88,19 +89,24 @@ public class ProfessorDAO {
 		}
 		return professor;
 	}
+	
+	public ArrayList<Professor> listarProfessores() {
+		
+		Professor prof;
+		ArrayList<Professor> lista = new ArrayList<>();
 
-	public ArrayList<Professor> listarProfessores(){
-		Professor professor;
-		ArrayList<Professor> lista = new ArrayList<Professor>();
 		String sql = "SELECT * FROM professor";
+		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
+			
 			try (ResultSet rs = ps.executeQuery();) {
+				
 				while (rs.next()) {
-					professor = new Professor();
-					professor.setId(rs.getInt("id"));
-					professor.setNome(rs.getString("nome"));
-					lista.add(professor);
+					prof = new Professor();
+					prof.setId(rs.getInt("professor_id"));
+					prof.setNome(rs.getString("nome"));
+					lista.add(prof);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -108,6 +114,7 @@ public class ProfessorDAO {
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
 		}
+		
 		return lista;
 	}
 }

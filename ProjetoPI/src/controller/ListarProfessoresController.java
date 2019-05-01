@@ -2,6 +2,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,10 @@ public class ListarProfessoresController extends HttpServlet {
 		HttpSession session = request.getSession();
 		ProfessorService ps = new ProfessorService();
 		lista = ps.listarProfessores();
-		session.setAttribute("lista", lista);
+		//System.out.println(lista);
+		request.setAttribute("lista", lista);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("");
+		dispatcher.forward(request, response);
 		
 	}
 	protected void doPost(HttpServletRequest request,

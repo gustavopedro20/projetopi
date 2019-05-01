@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Grupo;
+import model.Professor;
 
 public class GrupoDAO {
 	
@@ -76,7 +77,9 @@ public class GrupoDAO {
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {				
+				if (rs.next()) {	
+					Professor prof = new Professor();
+					grupo.setProf(prof);
 					grupo.getProf().setId(rs.getInt("professor_id"));
 					grupo.setNum(rs.getInt("numero"));
 					grupo.setNome(rs.getString("nome"));
