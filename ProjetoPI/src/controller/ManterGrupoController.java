@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Grupo;
+import model.Professor;
 import service.GrupoService;
 
 
@@ -52,8 +53,10 @@ public class ManterGrupoController extends HttpServlet {
 		}
 
 		Grupo grupo = new Grupo();
+		Professor prof = new Professor();
 		grupo.setId(id);
-		grupo.getProf().setId(Integer.parseInt(pIdProfessor));
+		prof.setId(Integer.parseInt(pIdProfessor));
+		grupo.setProf(prof);
 		grupo.setNome(pNome);
 		grupo.setNum(Integer.parseInt(pNumero));
 		GrupoService gs = new GrupoService();
