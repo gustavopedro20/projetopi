@@ -28,9 +28,9 @@
                             Deseja realmente excluir este grupo?
                         </div>
                         <div class="modal-footer">
-                            <form action="ManterGrupo.do" method="post">
+                            <form action="controller.do" method="post">
                                 <input type="hidden" name="id" id="id_excluir" />
-                                <button type="submit" class="btn btn-primary" name="acao" value="Excluir">Sim</button>
+                                <button type="submit" class="btn btn-primary" name="command" value="ExcluirGrupo">Sim</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
                             </form>
                         </div>
@@ -42,7 +42,7 @@
 			<c:import url="Menu.jsp"/>
             <!-- Container Principal -->
             <div id="main" class="container">
-                <form action="listar_grupos.do" method="post">
+                <form action="controller.do" method="post">
                     <div id="top" class="row">
                         <div class="col-md-3">
                             <h2>Grupos</h2>
@@ -52,7 +52,7 @@
                             <div class="input-group h2">
                                 <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
                                 <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit" name="acao" value="buscar">
+                <button class="btn btn-primary" type="submit" name="command" value="ListarGruposBuscar">
                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                                 </span>
@@ -73,7 +73,7 @@
                         <table class="table table-striped" cellspacing="0" cellpadding="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>ID Grupo</th>
                                     <th>Professor</th>
                                     <th>Nome</th>
                                     <th>Numero</th>                                    
@@ -84,20 +84,20 @@
           					<c:forEach var="grupo" items="${lista }">
                                        <tr>
                                             <td>
-                                               ${grupo.id }
+                                               ${grupo.id}
                                             </td>
                                             <td>
-                                            	${grupo.prof.id }
+                                                ${grupo.prof.nome}
                                             </td>
                                             <td>
-                                                ${grupo.nome }
+                                                ${grupo.nome}
                                             </td>
                                             <td>
-                                                ${grupo.num }
+                                                ${grupo.num}
                                             </td>
                                             <td class="actions">
-                                                <a class="btn btn-success btn-xs" href="ManterGrupo.do?acao=Visualizar&id=${grupo.id }">Visualizar</a>
-                                                <a class="btn btn-warning btn-xs" href="ManterGrupo.do?acao=Editar&id=${grupo.id }">Editar</a>
+                                                <a class="btn btn-success btn-xs" href="controller.do?command=VisualizarGrupo&id=${grupo.id }">Visualizar</a>                                               
+                                                <a class="btn btn-warning btn-xs" href="controller.do?command=EditarGrupo&id=${grupo.id }">Editar</a>
                                                 <button id="btn${grupo.id }%>" type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-modal" data-grupo="${grupo.id }">Excluir</button>
                                             </td>
                                         </tr>
@@ -109,10 +109,10 @@
                     </div>
                 </div>
                 <!-- /#list -->
-
+                <!--
                 <div id="bottom" class="row">
                     <div class="col-md-12">
-                        <!-- paginação ainda não foi implementada -->
+                         paginação ainda não foi implementada 
                         <ul class="pagination">
                             <li class="disabled"><a>&lt; Anterior</a>
                             </li>
@@ -125,9 +125,9 @@
                             <li class="next"><a href="#" rel="next">Próximo &gt;</a>
                             </li>
                         </ul>
-                        <!-- /.pagination -->
+                         /.pagination 
                     </div>
-                </div>
+                </div> -->
                 </c:if>
                 <!-- /#bottom -->
             </div>

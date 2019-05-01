@@ -100,11 +100,12 @@ public class GrupoDAO {
 	public ArrayList<Grupo> listarGrupos() {
 		
 		Grupo grupo;
+		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 
 		String sql = "SELECT "
 				+ "g.id, "
-				+ "u.id, "
+				+ "u.nome, "
 				+ "g.nome, "
 				+ "g.numero "
 				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
@@ -117,8 +118,13 @@ public class GrupoDAO {
 				
 				while (rs.next()) {
 					grupo = new Grupo();
+					prof = new Professor();
 					grupo.setId(rs.getInt("g.id"));
-					grupo.getProf().setId(rs.getInt("u.id"));
+					
+					prof.setNome(rs.getString("u.nome"));
+					grupo.setProf(prof);
+					//grupo.getProf().setId(rs.getInt("u.nome"));
+					
 					grupo.setNome(rs.getString("g.nome"));
 					grupo.setNum(rs.getInt("g.numero"));
 					lista.add(grupo);
@@ -135,11 +141,12 @@ public class GrupoDAO {
 	
 	public ArrayList<Grupo> listarGrupos(String chave) {
 		Grupo grupo;
+		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 		//String sqlSelect = "SELECT id, nome, numero FROM grupo where upper(nome) like ?";
 		String sql = "SELECT "
 				+ "g.id, "
-				+ "u.id, "
+				+ "u.nome, "
 				+ "g.nome, "
 				+ "g.numero "
 				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
@@ -152,8 +159,13 @@ public class GrupoDAO {
 			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
 					grupo = new Grupo();
+					prof = new Professor();
 					grupo.setId(rs.getInt("id"));
-					grupo.getProf().setId(rs.getInt("u.id"));
+					
+					prof.setNome(rs.getString("u.nome"));
+					grupo.setProf(prof);
+					
+					//grupo.getProf().setId(rs.getInt("u.id"));
 					grupo.setNome(rs.getString("nome"));
 					grupo.setNum(rs.getInt("numero"));
 					lista.add(grupo);

@@ -21,7 +21,7 @@
                 <div id="main" class="container">
                     <h3 class="page-header">Alterar Grupo #${grupo.id }</h3>
                     <!-- Formulario para alteração de clientes -->
-                    <form action="ManterGrupo.do" method="post">
+                    <form action="controller.do" method="post">
                         <!-- area de campos do form -->
                         <input type="hidden" name="id" value="${grupo.id }" />
                         <div class="row">
@@ -39,7 +39,7 @@
                         <hr />
                         <div id="actions" class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" name="acao" value="Alterar">Salvar</button>
+                                <button type="submit" class="btn btn-primary" name="command" value="AlterarGrupo">Salvar</button>
                                 <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a>
                             </div>
                         </div>

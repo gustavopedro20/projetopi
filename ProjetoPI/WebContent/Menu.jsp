@@ -13,7 +13,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="listar_grupos.do?acao=reiniciar">Grupos</a>
+                    <li><a href="controller.do?command=ListarGruposReiniciar">Grupos</a>
+                    
                     </li>
                     <li><a href="#">PH</a>
                     </li>

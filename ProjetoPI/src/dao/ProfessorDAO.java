@@ -64,22 +64,28 @@ public class ProfessorDAO {
 		}
 	}
 	
+	//CARREGAR POR ID
 	public Professor carregar(int id) {
-		String sqlRead = "SELECT nome, email, senha FROM professor WHERE professor_id =?";
-		Professor professor = new Professor();
+		//String sqlRead = "SELECT nome, email, senha FROM professor WHERE professor_id =?";
+		String sql = "SELECT u.nome, u.email, u.senha, p.administrador, p.matricula FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id";
+		Professor prof = new Professor();
 		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sqlRead);) {
+				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
-					professor.setNome(rs.getString("nome"));
-					professor.setEmail(rs.getString("email"));
-					professor.setSenha(rs.getString("senha"));
+					prof.setNome(rs.getString("u.nome"));
+					prof.setEmail(rs.getString("u.email"));
+					prof.setSenha(rs.getString("u.senha"));
+					prof.setAdm(rs.getInt("p.administrador"));
+					prof.setMatricula(rs.getString("p.matricula"));
 				} else {
-					professor.setId(-1);
-					professor.setNome(null);
-					professor.setEmail(null);
-					professor.setSenha(null);
+					prof.setId(-1);
+					prof.setNome(null);
+					prof.setEmail(null);
+					prof.setSenha(null);
+					prof.setAdm(-1);
+					prof.setMatricula(null);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -87,7 +93,7 @@ public class ProfessorDAO {
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
 		}
-		return professor;
+		return prof;
 	}
 	
 	public ArrayList<Professor> listarProfessores() {
@@ -95,7 +101,7 @@ public class ProfessorDAO {
 		Professor prof;
 		ArrayList<Professor> lista = new ArrayList<>();
 
-		String sql = "SELECT * FROM professor";
+		String sql = "SELECT u.id, u.nome FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id";
 		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -104,8 +110,8 @@ public class ProfessorDAO {
 				
 				while (rs.next()) {
 					prof = new Professor();
-					prof.setId(rs.getInt("professor_id"));
-					prof.setNome(rs.getString("nome"));
+					prof.setId(rs.getInt("u.id"));
+					prof.setNome(rs.getString("u.nome"));
 					lista.add(prof);
 				}
 			} catch (SQLException e) {
