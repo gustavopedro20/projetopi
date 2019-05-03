@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Grupo;
+import model.Professor;
 import service.GrupoService;
+import service.ProfessorService;
 
 public class CriarGrupo implements Command {
 
@@ -34,6 +36,11 @@ public class CriarGrupo implements Command {
 		grupo.setNome(pNome);
 		grupo.setNum(numero);
 		GrupoService cs = new GrupoService();
+		
+		//REFAZER
+		Professor prof = new Professor();
+		ProfessorService ps = new ProfessorService();
+		ArrayList<Professor> listaProfessor = ps.listarProfessores(); 
 
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
@@ -41,7 +48,9 @@ public class CriarGrupo implements Command {
 		cs.criar(grupo);
 		ArrayList<Grupo> lista = new ArrayList<>();
 		lista.add(grupo);
+		
 		session.setAttribute("lista", lista);
+		session.setAttribute("lista_professor", listaProfessor);
 		view = request.getRequestDispatcher("ListarGrupos.jsp");
 
 		view.forward(request, response);

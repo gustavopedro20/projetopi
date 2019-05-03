@@ -96,6 +96,39 @@ public class ProfessorDAO {
 		return prof;
 	}
 	
+	public Professor comboBoxProfessor(Professor prof) {
+		//String sqlRead = "SELECT nome, email, senha FROM professor WHERE professor_id =?";
+		String sql = "SELECT u.id, u.nome, u.email, u.senha, p.administrador, p.matricula FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id";
+		 
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			//ps.setInt(1, prof.getId());
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					prof = new Professor();
+					prof.setId(rs.getInt("u.id"));
+					prof.setNome(rs.getString("u.nome"));
+					prof.setEmail(rs.getString("u.email"));
+					prof.setSenha(rs.getString("u.senha"));
+					prof.setAdm(rs.getInt("p.administrador"));
+					prof.setMatricula(rs.getString("p.matricula"));
+				} else {
+					prof.setId(-1);
+					prof.setNome(null);
+					prof.setEmail(null);
+					prof.setSenha(null);
+					prof.setAdm(-1);
+					prof.setMatricula(null);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return prof;
+	}
+	
 	public ArrayList<Professor> listarProfessores() {
 		
 		Professor prof;

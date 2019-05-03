@@ -8,18 +8,18 @@ import model.Grupo;
 
 public class GrupoService {
 	
-	GrupoDAO dao;
+	GrupoDAO dao = new GrupoDAO();
 
-	public GrupoService() {
+	/*public GrupoService() {
 		dao = new GrupoDAO();
+	}*/
+
+	public int criar(Grupo grupo) {
+		return dao.criar(grupo);
 	}
 
-	public void criar(Grupo grupo) {
-		dao.criar(grupo);
-	}
-
-	public void atualizar(Grupo g) {
-		dao.atualizar(g);
+	public void atualizar(Grupo grupo) {
+		dao.atualizar(grupo);
 	}
 
 	public void deletar(int id) {

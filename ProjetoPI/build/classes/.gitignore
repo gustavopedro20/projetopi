@@ -1,5 +1,4 @@
-/controller/
-/dao/
 /model/
+/dao/
 /service/
 /command/

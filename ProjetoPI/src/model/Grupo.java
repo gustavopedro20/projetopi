@@ -1,12 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Grupo {
 	
 	private int id;
 	private int num;
 	private String nome;
 	private Professor prof;
-	private Aluno aluno;	
+	private ArrayList<Aluno> aluno;	
 	
 	public Grupo(Professor prof, int num, String nome) {
 		this.num = num;
@@ -49,13 +51,14 @@ public class Grupo {
 	public void setProf(Professor prof) {
 		this.prof = prof;
 	}
-	
-	public Aluno getAluno() {
+
+	public ArrayList<Aluno> getAluno() {
 		return aluno;
 	}
-	
-	public void setAluno(Aluno aluno) {
+
+	public void setAluno(ArrayList<Aluno> aluno) {
 		this.aluno = aluno;
 	}
+	
 
 }

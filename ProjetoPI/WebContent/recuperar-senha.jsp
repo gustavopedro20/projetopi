@@ -1,17 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>USJT - PI - Recuperar Senha</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
+    <c:import url="common/meta-link.jsp" />
+    <title>USJT - PI</title>
 </head>
 
 <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" autocomplete="off">
         <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
         <label for="inputEmail" class="sr-only">Nova Senha</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Nova Senha" required autofocus>
@@ -24,9 +22,7 @@
     </form>
 
     <footer>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/jquery-3.3.1.slim.min.js"></script>
-        <script src="js/popper.min.js"></script>
+        <c:import url="common/footer.jsp" />
     </footer>
 </body>
 

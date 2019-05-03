@@ -26,6 +26,7 @@ public class ListarGruposBuscar implements Command {
 		} else {
 			lista = gs.listarGrupos();
 		}
+		//lista = gs.listarGrupos();
 		session.setAttribute("lista", lista);
 
 		RequestDispatcher dispatcher = request

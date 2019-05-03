@@ -1,76 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <!DOCTYPE html>
-        <html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-        <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Projeto DevWeb - Visualizar Grupo</title>
+<head>
+    <c:import url="common/meta-link.jsp" />
+    <title>USJT - Detalhes do Grupo</title>
+</head>
 
-            <link href="css/bootstrap.min.css" rel="stylesheet">
-            <link href="css/style.css" rel="stylesheet">
-        </head>
+<body class="background-image">
+	<header>
+        <c:import url="common/menu.jsp" />
+    </header>
+    <!-- Container Principal -->
+    <div id="main" class="container">
+        <h3 class="page-header">Grupo de Id: ${grupo.id}</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <p><strong>Professor</strong>
+                </p>
+                <p>
+                    ${grupo.prof.nome}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p><strong>Nome</strong>
+                </p>
+                <p>
+                    ${grupo.nome}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p><strong>Número</strong>
+                </p>
+                <p>
+                    ${grupo.num}
+                </p>
+            </div>
+        </div>
+        <hr />
+        <div id="actions" class="row">
+            <div class="col-md-12">
+                <a href="controller.do?command=EditarGrupo&id=${grupo.id}" class="btn btn-primary">Editar</a>
+                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                <a href="ListarGrupos.jsp" class="btn btn-default">Voltar</a>
+            </div>
+        </div>
+    </div>
+    ]
+	<!-- Modal -->
+    <c:import url="common/delete-modal.jsp" />
+    <!-- /.Modal -->
+    
+    <footer>
+        <c:import url="common/footer.jsp" />
+    </footer>
+</body>
 
-        <body>
-                <!-- Modal -->
-                <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modalLabel">Excluir Grupo</h4>
-                            </div>
-                            <div class="modal-body">
-                                Deseja realmente excluir este grupo?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="controller.do" method="post">
-                                    <input type="hidden" name="id" value="${grupo.id }" />
-                                    <button type="submit" class="btn btn-primary" name="command" value="ExcluirGrupo">Sim</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.modal -->
-                <!-- Barra superior com os menus de navegação -->
-				<c:import url="Menu.jsp"/>
-                <!-- Container Principal -->
-                <div id="main" class="container">
-                    <h3 class="page-header">Visualizar Grupo #${grupo.id }</h3>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Nome</strong>
-                            </p>
-                            <p>
-                                ${grupo.nome }
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><strong>Numero</strong>
-                            </p>
-                            <p>
-                                ${grupo.num }
-                            </p>
-                        </div>
-                    </div>
-                    <hr />
-                    <div id="actions" class="row">
-                        <div class="col-md-12">
-                            <a href="controller.do?command=EditarGrupo&id=${grupo.id }" class="btn btn-primary">Editar</a>
-                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                            <a href="ListarGrupos.jsp" class="btn btn-default">Voltar</a>
-                        </div>
-                    </div>
-                </div>
-                <script src="js/jquery.min.js"></script>
-                <script src="js/bootstrap.min.js"></script>
-        </body>
-
-        </html>
+</html>

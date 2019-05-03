@@ -1,27 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projeto DevWeb - Cadastro</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <c:import url="common/meta-link.jsp" />
+    <title>USJT - PI</title>
 </head>
 
-<body>
-    <!-- Barra superior com os menus de navegaÃ§Ã£o -->
-	<c:import url="Menu.jsp"/>
-    <!-- Container Principal -->
-    <div id="main" class="container">
-        <h3 class="page-header">Cadastros de Grupos</h3>
+<body class="text-center">
+    <form class="form-signin" autocomplete="off">
+        <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Senha</label>
+        <input type="password" id="inputPassword" class="form-control" style="margin-bottom: 0" placeholder="Senha" required>
 
-    </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+        <div class="esqueceu-senha"><a href="#">Esqueci minha senha</a></div>
+        <button class="btn btn-lg btn-success btn-block entrar" type="submit">Entrar</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+
+    <footer>
+        <c:import url="common/footer.jsp" />
+    </footer>
 </body>
 
 </html>

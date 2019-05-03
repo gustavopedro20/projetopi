@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Professor;
 import model.Usuario;
 
 public class UsuarioDAO {
@@ -83,5 +84,27 @@ public class UsuarioDAO {
 		}
 		return usuario;
 	}
+	
+	/*public Usuario getSingle (String email) {
+		String sql = "SELECT id, nome, email, senha FROM usuario WHERE email =?";
+		Usuario usuario = new Usuario() {
+		};
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, email);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha")) {};
+					return usuario;
+				} 
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return usuario;
+	}*/
+
 	
 }

@@ -70,21 +70,23 @@ public class GrupoDAO {
 	}
 
 	public Grupo carregar(int id) {
-		String sql = "SELECT orientador_id, numero, nome FROM grupo WHERE id =?";	
+		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
+	
 		Grupo grupo = new Grupo();
+		Professor prof = new Professor();
 		grupo.setId(id);		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setInt(1, id);
+			ps.setInt(1, grupo.getId());
 			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {	
-					Professor prof = new Professor();
+				if (rs.next()) {
+					prof.setId(rs.getInt("u.id"));
+					prof.setNome(rs.getString("u.nome"));
 					grupo.setProf(prof);
-					grupo.getProf().setId(rs.getInt("professor_id"));
-					grupo.setNum(rs.getInt("numero"));
-					grupo.setNome(rs.getString("nome"));
+					grupo.setNome(rs.getString("g.nome"));
+					grupo.setNum(rs.getInt("g.numero"));
 				} else {
-					grupo.getProf().setId(-1);
+					grupo.setProf(null);
 					grupo.setNum(-1);
 					grupo.setNome(null);
 				}
@@ -103,13 +105,14 @@ public class GrupoDAO {
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 
-		String sql = "SELECT "
+		/*String sql = "SELECT "
 				+ "g.id, "
 				+ "u.nome, "
 				+ "g.nome, "
 				+ "g.numero "
 				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
-				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";
+				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";*/
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";
 		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -119,12 +122,10 @@ public class GrupoDAO {
 				while (rs.next()) {
 					grupo = new Grupo();
 					prof = new Professor();
-					grupo.setId(rs.getInt("g.id"));
-					
+					prof.setId(rs.getInt("u.id"));
 					prof.setNome(rs.getString("u.nome"));
-					grupo.setProf(prof);
-					//grupo.getProf().setId(rs.getInt("u.nome"));
-					
+					grupo.setId(rs.getInt("g.id"));
+					grupo.setProf(prof);					
 					grupo.setNome(rs.getString("g.nome"));
 					grupo.setNum(rs.getInt("g.numero"));
 					lista.add(grupo);
@@ -144,14 +145,15 @@ public class GrupoDAO {
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 		//String sqlSelect = "SELECT id, nome, numero FROM grupo where upper(nome) like ?";
-		String sql = "SELECT "
+		/*String sql = "SELECT "
 				+ "g.id, "
 				+ "u.nome, "
 				+ "g.nome, "
 				+ "g.numero "
 				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id "
-				+ "WHERE UPPER (g.nome) like";
+				+ "WHERE UPPER (g.nome) like";*/
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE UPPER (g.nome) LIKE";
 
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -160,12 +162,10 @@ public class GrupoDAO {
 				while (rs.next()) {
 					grupo = new Grupo();
 					prof = new Professor();
-					grupo.setId(rs.getInt("id"));
-					
+					prof.setId(rs.getInt("u.id"));
 					prof.setNome(rs.getString("u.nome"));
 					grupo.setProf(prof);
-					
-					//grupo.getProf().setId(rs.getInt("u.id"));
+					grupo.setId(rs.getInt("g.id"));
 					grupo.setNome(rs.getString("nome"));
 					grupo.setNum(rs.getInt("numero"));
 					lista.add(grupo);
