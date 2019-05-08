@@ -16,12 +16,13 @@
     <!-- Container Principal -->
     <div id="main" class="container">
         <form action="controller.do" method="post" autocomplete="off">
+
             <div id="top" class="row">
-                <div class="col-md-3">
-                    <h2>Grupos</h2>
+                <div class="page-header">
+                    <h4>Lista de todos os Grupos</h4>
                 </div>
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="input-group h2">
                         <input name="data[search]" class="form-control" id="search" type="text"
                             placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
@@ -30,86 +31,68 @@
                         </button>
                     </div>
                 </div>
-                <!--
+                
+                
                 <div class="col-md-3">
                     <a href="CriarGrupo.jsp" class="btn btn-primary pull-right h2">Novo Grupo</a>
-                </div>
-                -->
-            </div>
-            <!-- /#top -->
-        </form>
-        <hr />
-        <c:if test="${not empty lista}">
-            <div id="list" class="row">
-
-                <div class="table-responsive col-md-12">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID Grupo</th>
-                                <th>Professor</th>
-                                <th>Nome</th>
-                                <th>Numero</th>
-                                <th class="actions">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="grupo" items="${lista}">
-                                <tr>
-                                    <td>
-                                        ${grupo.id}
-                                    </td>
-                                    <td>
-                                        ${grupo.prof.nome}
-                                    </td>
-                                    <td>
-                                        ${grupo.nome}
-                                    </td>
-                                    <td>
-                                        ${grupo.num}
-                                    </td>
-                                    <td class="actions">
-                                        <a class="btn btn-success btn-sm"
-                                            href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Visualizar</a>
-                                        <a class="btn btn-warning btn-sm"
-                                            href="controller.do?command=EditarGrupo&id=${grupo.id}">Editar</a>
-                                        <button id="btn${grupo.id}%>" type="button" class="btn btn-danger btn-sm"
-                                            data-toggle="modal" data-target="#delete-modal"
-                                            data-grupo="${grupo.id}">Excluir</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <!-- /#list -->
-            <!--
-                <div id="bottom" class="row">
-                    <div class="col-md-12">
-                         paginação ainda não foi implementada 
-                        <ul class="pagination">
-                            <li class="disabled"><a>&lt; Anterior</a>
-                            </li>
-                            <li class="disabled"><a>1</a>
-                            </li>
-                            <li><a href="#">2</a>
-                            </li>
-                            <li><a href="#">3</a>
-                            </li>
-                            <li class="next"><a href="#" rel="next">Próximo &gt;</a>
-                            </li>
-                        </ul>
-                         /.pagination 
-                    </div>
                 </div> -->
-        </c:if>
-        <!-- /#bottom -->
+
+
+            </div>
+
+            <!-- /#top -->
+
+            <hr />
+            <c:if test="${not empty lista}">
+                <div id="list" class="row">
+                    <div class="col align-self-start">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Orientador</th>
+                                    <th>Nome</th>
+                                    <!-- <th>Numero</th> -->
+                                    <!-- <th class="actions">Ações</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="grupo" items="${lista}">
+                                    <tr>
+                                        <td>
+                                            ${grupo.num}
+                                        </td>
+                                        <td>
+                                            ${grupo.prof.nome}
+                                        </td>
+                                        <td>
+                                            ${grupo.nome}
+                                        </td>
+                                        <!-- <td>
+                                            ${grupo.num}
+                                        </td> -->
+                                        <td class="actions">
+                                            <a class="btn btn-info btn-sm"
+                                                href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Visualizar</a>
+                                            <a class="btn btn-secondary btn-sm"
+                                                href="controller.do?command=EditarGrupo&id=${grupo.id}">Editar</a>
+                                            <button id="btn${grupo.id}%>" type="button" class="btn btn-danger btn-sm"
+                                                data-toggle="modal" data-target="#delete-modal"
+                                                data-grupo="${grupo.id}">Excluir</button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </c:if>
+            <!-- /#bottom -->
+        </form>
     </div>
-    <!-- /#main -->
-    
+
     <!-- Modal -->
     <c:import url="common/delete-modal.jsp" />
     <!-- /.Modal -->

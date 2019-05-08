@@ -53,6 +53,12 @@ body {
     user-select: none;
 }
 
+.container {
+    background-color: #eeeeee;
+    padding: 30px;
+    border-radius: 15px;
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -92,6 +98,8 @@ img[src$="background-usjt.png"]{
     position: relative;
     left: 15%;
 }
+
+
 
 /***BigSlide***/
 /*

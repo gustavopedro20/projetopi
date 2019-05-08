@@ -16,7 +16,7 @@ public class ConnectionFactory {
 	}
 	
 	public static Connection conectar () throws SQLException{
-		String str = "jdbc:mysql://localhost:3306/usjt_pi?useTimezone=true&serverTimezone=UTC";
+		String str = "jdbc:mysql://localhost:3306/usjt_pi2?useTimezone=true&serverTimezone=UTC";
 		return DriverManager.getConnection(str, "root", "root");
 	}
 }

@@ -9,7 +9,7 @@
 </head>
 
 <body class="background-image">
-	<header>
+    <header>
         <c:import url="common/menu.jsp" />
     </header>
     <!-- Container Principal -->
@@ -45,17 +45,17 @@
         <hr />
         <div id="actions" class="row">
             <div class="col-md-12">
-                <a href="controller.do?command=EditarGrupo&id=${grupo.id}" class="btn btn-primary">Editar</a>
+                <a href="controller.do?command=EditarGrupo&id=${grupo.id}" class="btn btn-secondary">Editar</a>
                 <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                 <a href="ListarGrupos.jsp" class="btn btn-default">Voltar</a>
             </div>
         </div>
     </div>
-    ]
-	<!-- Modal -->
+
+    <!-- Modal -->
     <c:import url="common/delete-modal.jsp" />
     <!-- /.Modal -->
-    
+
     <footer>
         <c:import url="common/footer.jsp" />
     </footer>

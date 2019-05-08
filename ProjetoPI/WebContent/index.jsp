@@ -9,21 +9,41 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" autocomplete="off">
-        <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-        <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPassword" class="form-control" style="margin-bottom: 0" placeholder="Senha" required>
+    <div id="main" class="form-signin">
+        <form action="controller.do" method="post">
+            <form class="form-signin" autocomplete="off">
+                <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
 
-        <div class="esqueceu-senha"><a href="#">Esqueci minha senha</a></div>
-        <button class="btn btn-lg btn-success btn-block entrar" type="submit">Entrar</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
-    </form>
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>
 
-    <footer>
-        <c:import url="common/footer.jsp" />
-    </footer>
+                <label for="senha" class="sr-only">Senha</label>
+                <input type="password" name="senha" id="senha" class="form-control" style="margin-bottom: 0"
+                    placeholder="Senha" required>
+
+                <select class="form-control">
+                    <!--<option selected="selected">Sou:</option>-->
+                    <option value="1">Aluno</option>
+                    <option value="2">Professor</option>
+                    <option value="3">Administrador</option>
+                </select>
+
+                <div class="esqueceu-senha">
+                    <a href="#">Esqueci minha senha</a>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-success btn-block entrar" name="command"
+                    value="Login">Entrar</button>
+
+
+                <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+            </form>
+        </form>
+
+        <footer>
+            <c:import url="common/footer.jsp" />
+        </footer>
+    </div>
 </body>
 
 </html>

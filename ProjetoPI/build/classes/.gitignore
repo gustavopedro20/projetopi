@@ -1,4 +1,4 @@
-/model/
 /dao/
-/service/
 /command/
+/model/
+/service/

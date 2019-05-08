@@ -14,18 +14,18 @@
 	<c:import url="common/menu.jsp"/>
     <!-- Container Principal -->
     <div id="main" class="container">
-        <h3 class="page-header">Incluir Grupo</h3>
-        <!-- Formulario para inclusao de clientes -->
-        <form action="controller.do" method="post" autocomplete="off">
+        <h3 class="page-header">Cadastro de Novo Grupo</h3>
+        <!-- Formulario para inclusao de grupos -->
+        <form action="controller.do" method="post">
             <!-- area de campos do form -->
         
+            <br>
             <div class="row">
                 <div class="col-sm-3">
                     <select class="form-control">
-                        <c:forEach var="professor" items="${lista_professor}">
-                        
-                            <option value="${professor.id}">${professor.nome}</option>	
-                            
+                        <!-- <option selected="selected">Professores: </option> -->
+                        <c:forEach var="professor" items="${lista}">                        
+                            <option value="${professor.id}">${professor.nome}</option>                      
                         </c:forEach>
                     </select>
                 </div>
@@ -34,19 +34,17 @@
         
             
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="nome" required maxlength="100" placeholder="nome">
+                    <input type="text" class="form-control" name="nome" id="nome" maxlength="15" placeholder="Nome do grupo (não obrigatório)">
                 </div>
-            </div>
             
-            <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="nome">Numero</label>
-                    <input type="text" class="form-control" name="numero" id="numero" required maxlength="100" placeholder="numero">
+                    <input type="text" class="form-control" name="numero" id="numero" required maxlength="10" placeholder="Número do grupo">
                 </div>
             </div>
-            <hr />
+            <br />
             <div id="actions" class="row">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary" name="command" value="CriarGrupo">Salvar</button>
@@ -54,6 +52,7 @@
                 </div>
             </div>
         </form>
+        
     </div>
     
     <footer>

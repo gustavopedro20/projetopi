@@ -45,14 +45,44 @@ public class GrupoDAO {
 	}
 
 	public void deletar(int id) {
-		String sql = "DELETE FROM grupo WHERE id = ?";
+		
+		String sql_entrega_grupo = "DELETE FROM entrega WHERE grupo_id = ?";
 		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+				PreparedStatement ps = conn.prepareStatement(sql_entrega_grupo);) {
 			ps.setInt(1, id);
 			ps.execute();
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
+		
+		String sql_banca_grupo = "UPDATE turma_aluno SET grupo_id = null WHERE grupo_id = ?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql_banca_grupo);) {
+			ps.setInt(1, id);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		
+		String sql_delete_grupo = "DELETE FROM grupo WHERE id = ?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql_delete_grupo);) {
+			ps.setInt(1, id);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		
+		
+		
+//		String sql = "DELETE FROM grupo WHERE id = ?";
+//		try (Connection conn = ConnectionFactory.conectar();
+//				PreparedStatement ps = conn.prepareStatement(sql);) {
+//			ps.setInt(1, id);
+//			ps.execute();
+//		} catch (Exception e) {
+//			System.out.println(e.getStackTrace());
+//		}
 	}
 
 	public void atualizar(Grupo grupo) {
