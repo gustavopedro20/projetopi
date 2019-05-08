@@ -34,8 +34,5 @@ public class ProfessorService {
 		return dao.listarProfessores();
 	}
 	
-	public Usuario comboBoxProfessor(Professor prof) {
-		return dao.comboBoxProfessor(prof);
-	}
 	
 }

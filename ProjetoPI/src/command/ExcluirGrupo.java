@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Grupo;
-import model.Professor;
 import service.GrupoService;
 
 public class ExcluirGrupo implements Command {
