@@ -12,7 +12,7 @@
     <header>
         <c:import url="common/menu.jsp" />
     </header>
-
+ 
     <img src="assets/background-usjt.png" alt="">
 
     <footer>

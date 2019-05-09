@@ -35,7 +35,7 @@ public class CarregarCriarGrupo implements Command {
 		
 		AlunoService as = new AlunoService();
 		ArrayList<Aluno> listaAluno = new ArrayList<>();
-		listaAluno = as.listarAlunosPorTurma2();
+		listaAluno = as.listarAlunos();
 		session.setAttribute("lista_aluno", listaAluno);
 		
 		RequestDispatcher view = null;
