@@ -33,9 +33,9 @@ public class GrupoService {
 		return dao.listarGrupos();
 	}
 	
-	public ArrayList<Grupo> listarGrupos(String chave){
-		return dao.listarGrupos(chave);
-	}
+//	public ArrayList<Grupo> listarTurmas(){
+//		return dao.listarTurmas();
+//	}
 	
 	
 }

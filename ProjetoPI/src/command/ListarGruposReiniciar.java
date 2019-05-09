@@ -26,5 +26,6 @@ public class ListarGruposReiniciar implements Command {
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("ListarGrupos.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 }

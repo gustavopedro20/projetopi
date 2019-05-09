@@ -49,6 +49,7 @@ public class ExcluirAlunoGrupo implements Command {
 		session.setAttribute("grupo", grupo);
 		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
 		view.forward(request, response);
+		
 
 	}
 

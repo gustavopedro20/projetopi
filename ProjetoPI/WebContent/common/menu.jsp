@@ -3,7 +3,7 @@
 		<li><a href="home.jsp">Home</a></li>
 		<!-- <li><a href="ListarGrupos.jsp">Lista de Grupos</a></li> -->
 		<li><a href="controller.do?command=ListarGruposBuscar">Lista de Grupos</a></li>
-		<li><a href="controller.do?command=CriarGrupo">Cadastro de Grupos</a></li> 
+		<li><a href="controller.do?command=CarregarCriarGrupo">Cadastro de Grupos</a></li> 
 		<!-- <li><a name="command" value="CriarGrupo">Cadastro de Grupos</a></li> -->
 		<li><a href="RealizarEntrega.jsp">Realizar Entrega de Atividade</a></li>
 	</ul>

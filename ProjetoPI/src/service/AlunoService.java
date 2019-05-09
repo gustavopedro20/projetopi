@@ -24,5 +24,14 @@ public class AlunoService {
 	public void deletarAlunoGrupo(int idGrupo, int idAluno) {
 		dao.deletarAlunoGrupo(idGrupo, idAluno);
 	}
+	
+	public Aluno autenticarAluno(Aluno aluno) {
+		return dao.autenticarAluno(aluno);	
+	}
+	
+	public ArrayList<Aluno> listarAlunosPorTurma2(){
+		return dao.listarAlunosPorTurma2();
+	}
+	
 
 }

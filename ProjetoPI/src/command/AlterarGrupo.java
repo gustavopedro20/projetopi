@@ -49,7 +49,7 @@ public class AlterarGrupo implements Command {
 		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
 
 		view.forward(request, response);
-
+		
 	}
 
 	public int busca(Grupo grupo, ArrayList<Grupo> lista) {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Turma;
 
@@ -81,4 +82,28 @@ public class TurmaDAO {
 		}
 		return turma;
 	}
+	
+	public ArrayList<Turma> listarTurmas() {
+		String sql="SELECT * FROM turma";
+		Turma turma;
+		ArrayList<Turma> lista = new ArrayList<>();
+	
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {	
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					turma = new Turma();
+					turma.setId(rs.getInt("id"));
+					turma.setSigla(rs.getString("sigla"));
+					lista.add(turma);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
+	
 }

@@ -21,11 +21,11 @@
                 <input type="password" name="senha" id="senha" class="form-control" style="margin-bottom: 0"
                     placeholder="Senha" required>
 
-                <select class="form-control">
+                <select class="form-control" id="acesso">
                     <!--<option selected="selected">Sou:</option>-->
-                    <option value="1">Aluno</option>
-                    <option value="2">Professor</option>
-                    <option value="3">Administrador</option>
+                    <option value="Aluno">Aluno</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Administrador">Administrador</option>
                 </select>
 
                 <div class="esqueceu-senha">
