@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- <%@ page import="src.* "%> -->
-      <!-- ArrayList<Aluno> listaAluno = new ArrayList<Aluno>(); -->
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -55,8 +52,8 @@
                 </div>
                 <div class="actions form-group">
                     <a class="btn btn-info btn-sm"
-                        href="controller.do?command=AdicionarAlunoNoGrupo&id_aluno=${aluno}">Associar</a>
-                        
+                        href="controller.do?command=AdicionarAlunoNoGrupo&id_aluno=${aluno.getId()}">Associar</a>
+
                 </div>
 
             </div>

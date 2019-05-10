@@ -1,6 +1,5 @@
-/dao/
 /command/
+/controller/
+/dao/
 /model/
 /service/
-/controller/
-/util/

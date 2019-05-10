@@ -16,7 +16,7 @@ public class AlunoDAO {
 		try (Connection conn = ConnectionFactory.conectar(); 
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, aluno.getEmail());
-			ps.setString(2, aluno.getEmail());
+			ps.setString(2, aluno.getSenha());
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
 					aluno.setId(rs.getInt("u.id"));
@@ -45,7 +45,7 @@ public class AlunoDAO {
 		String sql="SELECT u.id, u.nome, u.email, a.ra FROM usuario AS u INNER JOIN aluno AS a ON u.id = a.aluno_id "
 				+ "INNER JOIN turma_aluno as ta ON a.aluno_id = ta.Aluno_id INNER JOIN turma AS t ON ta.turma_id = t.id "
 				+ "WHERE t.sigla=?";
-		
+
 		Aluno aluno;
 		ArrayList<Aluno> lista = new ArrayList<>();
 		
