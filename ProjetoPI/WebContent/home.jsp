@@ -6,7 +6,7 @@
 <head>
     <c:import url="common/meta-link.jsp" />
     <title>USJT - PI</title>
-    
+
 </head>
 
 <body class="text-center background-image">

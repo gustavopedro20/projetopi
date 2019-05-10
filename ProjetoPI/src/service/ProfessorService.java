@@ -26,8 +26,12 @@ public class ProfessorService {
 		dao.deletar(professor);
 	}
 
-	public Usuario carregar(int id) {
-		return dao.carregar(id);
+	public Usuario autenticarProfessor(Professor prof) {
+		return dao.autenticarProfessor(prof);
+	}
+	
+	public Usuario autenticarAdm(Professor prof) {
+		return dao.autenticarAdm(prof);
 	}
 	
 	public ArrayList<Professor> listarProfessores(){

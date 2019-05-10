@@ -73,16 +73,6 @@ public class GrupoDAO {
 			System.out.println(e.getStackTrace());
 		}
 		
-		
-		
-//		String sql = "DELETE FROM grupo WHERE id = ?";
-//		try (Connection conn = ConnectionFactory.conectar();
-//				PreparedStatement ps = conn.prepareStatement(sql);) {
-//			ps.setInt(1, id);
-//			ps.execute();
-//		} catch (Exception e) {
-//			System.out.println(e.getStackTrace());
-//		}
 	}
 
 	public void atualizar(Grupo grupo) {
@@ -100,7 +90,8 @@ public class GrupoDAO {
 	}
 
 	public Grupo carregar(int id) {
-		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
+		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
+				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
 	
 		Grupo grupo = new Grupo();
 		Professor prof = new Professor();
@@ -134,21 +125,11 @@ public class GrupoDAO {
 		Grupo grupo;
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
-
-		/*String sql = "SELECT "
-				+ "g.id, "
-				+ "u.nome, "
-				+ "g.nome, "
-				+ "g.numero "
-				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
-				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";*/
-		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";
-		
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
+				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";
 		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
-			
-			try (ResultSet rs = ps.executeQuery();) {
-				
+				PreparedStatement ps = conn.prepareStatement(sql);) {			
+			try (ResultSet rs = ps.executeQuery();) {				
 				while (rs.next()) {
 					grupo = new Grupo();
 					prof = new Professor();
@@ -165,26 +146,17 @@ public class GrupoDAO {
 			}
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
-		}
-		
+		}		
 		return lista;
 	}
 	
 	public ArrayList<Grupo> listarGrupos(String chave) {
+		
 		Grupo grupo;
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
-		//String sqlSelect = "SELECT id, nome, numero FROM grupo where upper(nome) like ?";
-		/*String sql = "SELECT "
-				+ "g.id, "
-				+ "u.nome, "
-				+ "g.nome, "
-				+ "g.numero "
-				+ "FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
-				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id "
-				+ "WHERE UPPER (g.nome) like";*/
-		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE UPPER (g.nome) LIKE";
-
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
+				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE UPPER (g.nome) LIKE";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, "%" + chave.toUpperCase() + "%");
@@ -208,7 +180,5 @@ public class GrupoDAO {
 		}
 		return lista;
 	}
-
-	
 
 }

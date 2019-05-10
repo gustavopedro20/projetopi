@@ -34,6 +34,12 @@
 
                 <button type="submit" class="btn btn-lg btn-success btn-block entrar" name="command" value="Login">Entrar</button>
 
+                <!-- name="command" value="Login" -->
+
+                <!-- href="controller.do?command=Login" -->
+
+                <!-- <a class="btn btn-info btn-sm" href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Visualizar</a> -->
+
                 <p class="mt-5 mb-3 text-muted">&copy; GRUPO 7 - PI - 2019/01</p>
             </form>
         </form>

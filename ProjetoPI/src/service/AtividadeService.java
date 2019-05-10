@@ -1,15 +1,13 @@
 package service;
 
+import java.util.ArrayList;
+
 import dao.AtividadeDAO;
 import model.Atividade;
 
 public class AtividadeService {
 	
-	AtividadeDAO dao;
-
-	public AtividadeService() {
-		dao = new AtividadeDAO();
-	}
+	AtividadeDAO dao = new AtividadeDAO();;
 
 	public void criar(Atividade atividade) {
 		dao.criar(atividade);
@@ -24,8 +22,11 @@ public class AtividadeService {
 	}
 
 	public Atividade carregar(int id) {
-		Atividade atividade = dao.carregar(id);
-		return atividade;
+		return dao.carregar(id);		
+	}
+	
+	public ArrayList<Atividade> listarAtividades (){
+		return dao.listarAtividades();
 	}
 
 }

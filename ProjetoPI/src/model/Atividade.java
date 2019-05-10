@@ -10,8 +10,8 @@ public class Atividade {
 	private String formatoEntrega;
 	private Date dtInicio;
 	private Date dtFim;
-	//private Tema tema;
 	private int idTema;
+	private String nomeTema;
 	
 	public int getId() {
 		return id;
@@ -68,7 +68,13 @@ public class Atividade {
 	public void setIdTema(int idTema) {
 		this.idTema = idTema;
 	}
-	
 
+	public String getNomeTema() {
+		return nomeTema;
+	}
+
+	public void setNomeTema(String nomeTema) {
+		this.nomeTema = nomeTema;
+	}
 
 }

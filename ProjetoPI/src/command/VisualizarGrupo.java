@@ -26,17 +26,16 @@ public class VisualizarGrupo implements Command {
 		GrupoService cs = new GrupoService();
 		
 		AlunoService as = new AlunoService();
-		ArrayList<Aluno> lista = new ArrayList<>();
-		lista = as.listarAlunosPorGrupo(Integer.parseInt(pId));
+		ArrayList<Aluno> listaGrupo = new ArrayList<>();
+		listaGrupo = as.listarAlunosPorGrupo(Integer.parseInt(pId));
 		HttpSession session = request.getSession();
-		session.setAttribute("lista", lista);
+		session.setAttribute("lista", listaGrupo);
 		
 		grupo = cs.carregar(grupo.getId());
 		request.setAttribute("grupo", grupo);
 		
-		RequestDispatcher view = null;
-		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
-		view.forward(request, response);
+		RequestDispatcher disp = request.getRequestDispatcher("VisualizarGrupo.jsp");
+		disp.forward(request, response);
 
 	}
 
