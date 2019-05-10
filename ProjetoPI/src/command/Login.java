@@ -53,11 +53,10 @@ public class Login implements Command {
 
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("alunoLogado", alunoSession);
-//			request.authenticate(response);
 			
 			System.out.println("ALUNO EMAIL: " + alunoSession.getEmail());
 			System.out.println("ALUNO SENHA: " + alunoSession.getSenha());
-//			System.out.println("SESSAO: "+sessao.equals("alunoLogado"));
+			System.out.println(sessao.getAttribute("alunoLogado"));		
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
