@@ -10,6 +10,10 @@
 </head>
 
 <body class="background-image">
+
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if>
     <!-- Barra superior com os menus de navegação -->
     <c:import url="common/menu.jsp" />
     <!-- Container Principal -->
@@ -42,7 +46,7 @@
             </div>
         </form>
     </div>
-    
+
     <footer>
         <c:import url="common/footer.jsp" />
     </footer>

@@ -13,8 +13,8 @@ public class AtividadeService {
 		dao.criar(atividade);
 	}
 
-	public void atualizar(Atividade atividade) {
-		dao.atualizar(atividade);
+	public void atualizarFormatoEntrega(String formato, int id) {
+		dao.atualizarFormatoEntrega(formato, id);
 	}
 
 	public void deletar(int id) {

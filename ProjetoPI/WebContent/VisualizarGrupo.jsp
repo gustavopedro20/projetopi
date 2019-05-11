@@ -9,6 +9,11 @@
 </head>
 
 <body class="background-image">
+
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if>
+    
     <header>
         <c:import url="common/menu.jsp" />
     </header>

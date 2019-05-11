@@ -11,6 +11,10 @@
 
 <body class="background-image">
 
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if>
+
     <!-- Barra superior com os menus de navegação -->
     <c:import url="common/menu.jsp" />
     <!-- Container Principal -->
@@ -70,28 +74,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="aluno" items="${lista}">
-                                <tr>
-                                    <td>
-                                        ${aluno.nome}
-                                    </td>
-                                    <td>
-                                        ${aluno.email}
-                                    </td>
-                                    <td>
-                                        ${aluno.ra}
-                                    </td>
-                                    <td class="actions">
-                                        <a class="btn btn-info btn-sm"
-                                            href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}&professor=${grupo.prof.nome}&numero=${grupo.num}&nome=${grupo.nome}">Remover</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <c:if test="${not empty lista}">
+                                <c:forEach var="aluno" items="${lista}">
+                                    <tr>
+                                        <td>
+                                            ${aluno.nome}
+                                        </td>
+                                        <td>
+                                            ${aluno.email}
+                                        </td>
+                                        <td>
+                                            ${aluno.ra}
+                                        </td>
+                                        <td class="actions">
+                                            <a class="btn btn-info btn-sm"
+                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}&professor=${grupo.prof.nome}&numero=${grupo.num}&nome=${grupo.nome}">Remover</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
 
                         </tbody>
                     </table>
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="form-group col-md-6">

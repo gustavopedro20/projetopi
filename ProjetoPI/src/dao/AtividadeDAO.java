@@ -47,23 +47,20 @@ public class AtividadeDAO {
 		}
 	}
 
-	public void atualizar(Atividade atividade) {
-		String sqlUpdate = "UPDATE atividade SET tema_id=?, numero=?, descricao=?, "
-				+ "formato_entrega=?, dt_inicio=?, dt_fim=? WHERE id=?";
+	public void atualizarFormatoEntrega(String formato, int id) {
+		String sqlUpdate = "UPDATE atividade SET formato_entrega=? WHERE id=?";
 
-		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
-			ps.setInt(1, atividade.getIdTema());
-			ps.setInt(2, atividade.getNum());
-			ps.setString(3, atividade.getDescricao());
-			ps.setString(4, atividade.getFormatoEntrega());
-			ps.setDate(5, (Date) atividade.getDtInicio());
-			ps.setDate(6, (Date) atividade.getDtFim());
+		try (Connection conn = ConnectionFactory.conectar(); 
+				PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
+			ps.setString(1, formato);
+			ps.setInt(2, id);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
+			System.out.println(e.getMessage());
 		}
 	}
 
+	//UPDATE atividade SET formato_entrega=? WHERE id=?;
 	public Atividade carregar(int id) {
 		String sqlRead = "SELECT tema_id, numero, descricao, formato_entrega, dt_inicio, dt_fim "
 				+ "FROM atividade WHERE id =?";
@@ -78,7 +75,6 @@ public class AtividadeDAO {
 					atividade.setId(rs.getInt("numero"));
 					atividade.setDescricao(rs.getString("descricao"));
 					atividade.setFormatoEntrega(rs.getString("formato_entrega"));
-					;
 					atividade.setDtInicio(rs.getDate("dt_inicio"));
 					atividade.setDtFim(rs.getDate("dt_fim"));
 				} else {

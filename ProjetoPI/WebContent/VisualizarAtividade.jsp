@@ -10,6 +10,10 @@
 
 <body class="background-image">
 
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if>
+
     <header>
         <c:import url="common/menu.jsp" />
     </header>
@@ -57,14 +61,16 @@
                                             ${atividade.dtFim}
                                         </td>
                                         <td class="actions">
-                                            <a class="btn btn-info btn-sm" href="">Realizar Entrega</a>
+                                            <a class="btn btn-info btn-sm"
+                                                href="controller.do?command=EnviarAtividade&id=${atividade.id}"
+                                                data-toggle="modal" data-target="#entregando" data-atividade="${atividade.id}">Realizar Entrega</a>
+                                                <!-- &atividade=${atividade.formatoEntrega} -->
                                         </td>
                                     </tr>
                                 </c:forEach>
 
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </c:if>
@@ -79,9 +85,43 @@
     </div>
 
     <footer>
+
+        <div class="modal fade" id="entregando" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- <h4 class="modal-title" id="modalLabel">Anexar entrega</h4> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4>Entrega de Atividade</h4>
+                        <input class="form-control" type="text" placeholder="Insira o link da atividade"
+                            name="entrega" id="entrega">
+                    </div>
+                    <div class="modal-footer">
+                        <form action="controller.do" method="post">
+                            <input type="hidden" name="id" id="id_entrega" />
+                            <button type="submit" class="btn btn-primary" name="command" value="EnviarAtividade">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <c:import url="common/footer.jsp" />
+
+        <script type="text/javascript">
+            $("#entregando").on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); //botao que disparou a modal
+                var recipient = button.data('atividade');
+                $("#id_entrega").val(recipient);
+            });
+        </script>
     </footer>
 
 </body>
+
 
 </html>

@@ -13,7 +13,7 @@ public class AlunoService {
 		return dao.autenticarAluno(aluno);	
 	}
 	
-	public ArrayList<Aluno> listarAlunosPorTurma(String sigla){
+	public ArrayList<Aluno> listarAlunosPorTurma(int sigla){
 		return dao.listarAlunosPorTurma(sigla);
 	}
 	

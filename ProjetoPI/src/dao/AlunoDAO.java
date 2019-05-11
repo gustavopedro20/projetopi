@@ -41,17 +41,17 @@ public class AlunoDAO {
 	}
 	
 	//BUSCAR ALUNO POR SIGLA DA TURMA
-	public ArrayList<Aluno> listarAlunosPorTurma(String sigla) {
+	public ArrayList<Aluno> listarAlunosPorTurma(int id) {
 		String sql="SELECT u.id, u.nome, u.email, a.ra FROM usuario AS u INNER JOIN aluno AS a ON u.id = a.aluno_id "
 				+ "INNER JOIN turma_aluno as ta ON a.aluno_id = ta.Aluno_id INNER JOIN turma AS t ON ta.turma_id = t.id "
-				+ "WHERE t.sigla=?";
+				+ "WHERE t.id=?";
 
 		Aluno aluno;
 		ArrayList<Aluno> lista = new ArrayList<>();
 		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setString(1, sigla);
+			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
 					aluno = new Aluno();
