@@ -55,7 +55,7 @@ public class Login implements Command {
 		if (alunoSession.getEmail() != null) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("userLogado", alunoSession);
+			sessao.setAttribute("alunoLogado", alunoSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -81,7 +81,7 @@ public class Login implements Command {
 		if (profSession.getId() != -1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("userLogado", profSession);
+			sessao.setAttribute("profLogado", profSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -107,7 +107,7 @@ public class Login implements Command {
 		if (profSession.getAdm() == 1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("userLogado", profSession);
+			sessao.setAttribute("admLogado", profSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);

@@ -14,6 +14,8 @@
     <c:if test="${empty sessionScope['userLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
+    
+    
 
     <c:import url="common/menu.jsp" />
 

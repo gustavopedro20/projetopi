@@ -10,14 +10,19 @@
 
 <body class="text-center">
 
-    <c:if test="${not empty sessionScope['userLogado']}">     
+		<%
+            session.removeAttribute("alunoLogado");
+			session.removeAttribute("profLogado");
+			session.removeAttribute("admLogado");
+        %>
+
+    <c:if test="${not empty sessionScope['alunoLogado'] or not empty sessionScope['profLogado'] or not empty sessionScope['admLogado']}">     
         <c:redirect url="home.jsp" />
     </c:if>
 
     <div id="main" class="form-signin">
-        <form action="controller.do" method="post">
 
-            <form class="form-signin" autocomplete="off" var="user">
+            <form action="controller.do" class="form-signin" autocomplete="off" var="user" method="post">
                 <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
 
                 <label for="email" class="sr-only">Email</label>
@@ -42,7 +47,6 @@
 
                 <p class="mt-5 mb-3 text-muted">&copy; GRUPO 7 - PI - 2019/01</p>
             </form>
-        </form>
 
         <footer>
             <c:import url="common/footer.jsp" />

@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="nome">Número do Grupo</label>
-                    <input type="text" class="form-control" name="numero" id="numero" required maxlength="10"
+                    <input type="number" class="form-control" name="numero" id="numero" required maxlength="10"
                         placeholder="Número do grupo">
                 </div>
             </div>
