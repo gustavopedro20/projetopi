@@ -17,36 +17,30 @@ public class ExcluirGrupo implements Command {
 	@Override
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String pId = request.getParameter("id");
-		int id = -1;
-		try {
-			id = Integer.parseInt(pId);
-		} catch (NumberFormatException e) {
-			System.out.println(e.getStackTrace());
-		}
-
+		
+		String idGrupo = request.getParameter("id");
 		Grupo grupo = new Grupo();
-		grupo.setId(id);
+		grupo.setId(Integer.parseInt(idGrupo));
 		GrupoService gs = new GrupoService();
 		
-		RequestDispatcher view = null;
-		HttpSession session = request.getSession();
+		RequestDispatcher disp = null;
+		HttpSession sessao = request.getSession();
 
 		gs.deletar(grupo.getId());
 		@SuppressWarnings("unchecked")
-		ArrayList<Grupo> lista = (ArrayList<Grupo>) session.getAttribute("lista");
-		lista.remove(busca(grupo, lista));
-		session.setAttribute("lista", lista);
-		view = request.getRequestDispatcher("ListarGrupos.jsp");
-		view.forward(request, response);
+		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) sessao.getAttribute("lista_grupos");
+		listaGrupo.remove(busca(grupo, listaGrupo));
+		sessao.setAttribute("lista_grupos", listaGrupo);
+		disp = request.getRequestDispatcher("ListarGrupos.jsp");
+		disp.forward(request, response);
 
 	}
 
-	public int busca(Grupo grupo, ArrayList<Grupo> lista) {
-		Grupo to;
-		for (int i = 0; i < lista.size(); i++) {
-			to = lista.get(i);
-			if (to.getId() == grupo.getId()) {
+	public int busca(Grupo grupo, ArrayList<Grupo> listaGrupo) {
+		Grupo g;
+		for (int i = 0; i < listaGrupo.size(); i++) {
+			g = listaGrupo.get(i);
+			if (g.getId() == grupo.getId()) {
 				return i;
 			}
 		}

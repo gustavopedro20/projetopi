@@ -25,7 +25,11 @@ public class ProfessorService {
 	public void deletar(Professor professor) {
 		dao.deletar(professor);
 	}
-
+	
+	public Usuario carregar(int id) {
+		return dao.carregar(id);
+	}
+	
 	public Usuario autenticarProfessor(Professor prof) {
 		return dao.autenticarProfessor(prof);
 	}

@@ -21,8 +21,8 @@ public class VisualizarAtividade implements Command{
 		AtividadeService as = new AtividadeService();
 		ArrayList <Atividade> listaAtividade = null;
 		listaAtividade = as.listarAtividades();
-		HttpSession session = request.getSession();
-		session.setAttribute("lista_atividade", listaAtividade);
+		HttpSession sessao = request.getSession();
+		sessao.setAttribute("lista_atividade", listaAtividade);
 		
 		RequestDispatcher disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
 		disp.forward(request, response);

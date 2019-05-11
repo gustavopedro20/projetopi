@@ -11,53 +11,52 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Grupo;
-import model.Professor;
 import service.AlunoService;
+import service.GrupoService;
 
 public class ExcluirAlunoGrupo implements Command {
 
 	@Override
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String pIdAluno = request.getParameter("id_aluno");
-		String pIdGrupo = request.getParameter("id_grupo");
-		String pProfessor = request.getParameter("professor");
-		String pNumero = request.getParameter("numero");
-		String pNome = request.getParameter("nome");
-	
 		
+		String idAluno = request.getParameter("id_aluno");
+		String idGrupo = request.getParameter("id_grupo");
+		
+		//CARREGA ALUNO
 		Aluno aluno = new Aluno();
-		aluno.setId(Integer.parseInt(pIdAluno));
-
-		RequestDispatcher view = null;
-		HttpSession session = request.getSession();
-
 		AlunoService as = new AlunoService();
-		as.deletarAlunoGrupo(Integer.parseInt(pIdGrupo), Integer.parseInt(pIdAluno));
+		aluno.setId(Integer.parseInt(idAluno));
+		aluno = as.carregar(aluno.getId());
 		
+		//CARREGA GRUPO
 		Grupo grupo = new Grupo();
-		Professor prof = new Professor();
-		prof.setNome(pProfessor);
-		grupo.setProf(prof);
-		grupo.setNome(pNome);
-		grupo.setNum(Integer.parseInt(pNumero));
+		GrupoService gs = new GrupoService();
+		grupo.setId(Integer.parseInt(idGrupo));
+		grupo = gs.carregar(grupo.getId());
 		
+		//DELETA ALUNO DO GRUPO ESCOLHIDO
+		as.deletarAlunoGrupo(grupo.getId(), aluno.getId());
+		
+		RequestDispatcher disp = null;
+		HttpSession sessao = request.getSession();
 		@SuppressWarnings("unchecked")
-		ArrayList<Aluno> lista = (ArrayList<Aluno>) session.getAttribute("lista");
-		lista.remove(busca(aluno, lista));
-		session.setAttribute("lista", lista);
-		session.setAttribute("grupo", grupo);
-		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
-		view.forward(request, response);
+		//ATT A LISTA DE ALUNOS
+		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
+		listaAluno.remove(busca(aluno, listaAluno));
+		sessao.setAttribute("lista_alunos", listaAluno);
+		sessao.setAttribute("grupo", grupo);
+		disp = request.getRequestDispatcher("VisualizarGrupo.jsp");
+		disp.forward(request, response);
 		
 
 	}
 
-	public int busca(Aluno aluno, ArrayList<Aluno> lista) {
-		Aluno to;
-		for (int i = 0; i < lista.size(); i++) {
-			to = lista.get(i);
-			if (to.getId() == aluno.getId()) {
+	public int busca(Aluno aluno, ArrayList<Aluno> listaAluno) {
+		Aluno a;
+		for (int i = 0; i < listaAluno.size(); i++) {
+			a = listaAluno.get(i);
+			if (a.getId() == aluno.getId()) {
 				return i;
 			}
 		}

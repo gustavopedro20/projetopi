@@ -23,24 +23,27 @@ public class CarregarCriarGrupo implements Command {
 			throws ServletException, IOException {
 		
 		ProfessorService ps = new ProfessorService();
-		ArrayList<Professor> listaProfessor = new ArrayList<Professor>();
+		ArrayList<Professor> listaProfessor = null;
 		listaProfessor = ps.listarProfessores();
-		HttpSession session = request.getSession();
-		session.setAttribute("lista_professor", listaProfessor);
+		HttpSession sessao = request.getSession();
+		sessao.setAttribute("lista_professor", listaProfessor);
 		
 		TurmaService ts = new TurmaService();
-		ArrayList<Turma> listaTurma = new ArrayList<>();
+		ArrayList<Turma> listaTurma = null;
 		listaTurma = ts.listarTurmas();
-		session.setAttribute("lista_turma", listaTurma);
+		sessao.setAttribute("lista_turma", listaTurma);
 		
 		AlunoService as = new AlunoService();
-		ArrayList<Aluno> listaAluno = new ArrayList<>();
+		ArrayList<Aluno> listaAluno = null;
 		listaAluno = as.listarAlunos();
-		session.setAttribute("lista_aluno", listaAluno);
+		sessao.setAttribute("lista_aluno", listaAluno);
 		
-		RequestDispatcher view = null;
-		view = request.getRequestDispatcher("CriarGrupo.jsp");
-		view.forward(request, response);
+		ArrayList<Aluno> listaAlunoGrid = new ArrayList<Aluno>();
+		sessao.setAttribute("lista_alunos_criar", listaAlunoGrid);
+		
+		RequestDispatcher disp = null;
+		disp = request.getRequestDispatcher("CriarGrupo.jsp");
+		disp.forward(request, response);
 
 	}
 

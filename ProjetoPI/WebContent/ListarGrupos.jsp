@@ -17,37 +17,17 @@
     <header>
         <c:import url="common/menu.jsp" />
     </header>
-    <!-- Container Principal -->
+
     <div id="main" class="container">
         <form action="controller.do" method="post" autocomplete="off">
 
             <div id="top" class="row">
-                <div class="page-header">
+                <div class="col align-self-start">
                     <h4>Lista de todos os Grupos</h4>
                 </div>
-
-                <!-- <div class="col-md-6">
-                    <div class="input-group h2">
-                        <input name="data[search]" class="form-control" id="search" type="text"
-                            placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
-                        <button class="btn btn-primary" type="submit" name="command" value="ListarGruposBuscar">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                
-                <div class="col-md-3">
-                    <a href="CriarGrupo.jsp" class="btn btn-primary pull-right h2">Novo Grupo</a>
-                </div> -->
-
-
             </div>
-
-            <!-- /#top -->
-
-            <hr />
-            <c:if test="${not empty lista}">
+            <br>
+            <c:if test="${not empty lista_grupos}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
                         <table class="table table-striped">
@@ -56,12 +36,10 @@
                                     <th>Número</th>
                                     <th>Orientador</th>
                                     <th>Nome</th>
-                                    <!-- <th>Numero</th> -->
-                                    <!-- <th class="actions">Ações</th> -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="grupo" items="${lista}">
+                                <c:forEach var="grupo" items="${lista_grupos}">
                                     <tr>
                                         <td>
                                             ${grupo.num}
@@ -72,14 +50,11 @@
                                         <td>
                                             ${grupo.nome}
                                         </td>
-                                        <!-- <td>
-                                            ${grupo.num}
-                                        </td> -->
                                         <td class="actions">
                                             <a class="btn btn-info btn-sm"
                                                 href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Visualizar</a>
                                             <a class="btn btn-secondary btn-sm"
-                                                href="controller.do?command=EditarGrupo&id=${grupo.id}">Editar</a>
+                                                href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}">Editar</a>
                                             <button id="btn${grupo.id}%>" type="button" class="btn btn-danger btn-sm"
                                                 data-toggle="modal" data-target="#delete-modal"
                                                 data-grupo="${grupo.id}">Excluir</button>
@@ -93,7 +68,6 @@
                     </div>
                 </div>
             </c:if>
-            <!-- /#bottom -->
         </form>
     </div>
 

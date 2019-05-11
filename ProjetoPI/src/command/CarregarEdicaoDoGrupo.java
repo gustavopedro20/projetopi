@@ -11,32 +11,31 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Grupo;
-import service.AlunoService;
 import service.GrupoService;
 
-public class VisualizarGrupo implements Command {
+public class CarregarEdicaoDoGrupo implements Command {
 
 	@Override
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String idGrupo = request.getParameter("id");
-		Grupo grupo = new Grupo();
-		grupo.setId(Integer.parseInt(idGrupo));
-		GrupoService cs = new GrupoService();
-		
-		AlunoService as = new AlunoService();
-		ArrayList<Aluno> listaAluno = null;
-		listaAluno = as.listarAlunosPorGrupo(grupo.getId());
-		HttpSession sessao = request.getSession();
-		sessao.setAttribute("lista_alunos", listaAluno);
+		String idGrupo = request.getParameter("id_grupo");
 
+		Grupo grupo = new Grupo();
+		GrupoService cs = new GrupoService();
+		grupo.setId(Integer.parseInt(idGrupo));
 		grupo = cs.carregar(grupo.getId());
+
+		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
+		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) session.getAttribute("lista_alunos");
+		request.setAttribute("lista_alunos_editar", listaAluno);
 		request.setAttribute("grupo", grupo);
 		
-		RequestDispatcher disp = request.getRequestDispatcher("VisualizarGrupo.jsp");
+		RequestDispatcher disp = null;
+		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);
-
+		
 	}
 
 }

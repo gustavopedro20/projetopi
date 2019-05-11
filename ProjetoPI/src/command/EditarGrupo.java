@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Grupo;
+import model.Professor;
 import service.GrupoService;
+import service.ProfessorService;
+
 
 public class EditarGrupo implements Command {
 
@@ -18,31 +21,40 @@ public class EditarGrupo implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String pId = request.getParameter("id");
-		String pNome = request.getParameter("nome");
-		String pNumero = request.getParameter("numero");
-		int id = -1;
-		int numero = -1;
-		try {
-			id = Integer.parseInt(pId);
-			numero = Integer.parseInt(pNumero);
-		} catch (NumberFormatException e) {
-
-		}
+		String idGrupo = request.getParameter("id_grupo");
+		String nomeGrupo = request.getParameter("nome_grupo");
+		String numeroGrupo = request.getParameter("numero_grupo");
+		String idProfessor = request.getParameter("id_prof");
 
 		Grupo grupo = new Grupo();
-		grupo.setId(id);
-		grupo.setNome(pNome);
-		grupo.setNum(numero);
+		Professor prof = new Professor();
+		ProfessorService ps = new ProfessorService();
+		//CARREGAR PROFESSOR
+		prof.setId(Integer.parseInt(idProfessor));
+		prof = (Professor) ps.carregar(prof.getId());
+		//CARREGAR GRUPO
+		grupo.setProf(prof);
+		grupo.setId(Integer.parseInt(idGrupo));
+		grupo.setNome(nomeGrupo);
+		grupo.setNum(Integer.parseInt(numeroGrupo));
+		
 		GrupoService gs = new GrupoService();
+		gs.atualizar(grupo);
 		
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
 		
-		grupo = gs.carregar(grupo.getId());
-		request.setAttribute("grupo", grupo);
-		view = request.getRequestDispatcher("AlterarGrupo.jsp");		
+		@SuppressWarnings("unchecked")
+		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) session.getAttribute("lista_grupos");
+		int pos = busca(grupo, listaGrupo);
 		
+		listaGrupo.remove(pos);
+		listaGrupo.add(pos, grupo);
+		
+		session.setAttribute("lista_grupos", listaGrupo);
+		request.setAttribute("grupo", grupo);
+		
+		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
 		view.forward(request, response);
 
 	}

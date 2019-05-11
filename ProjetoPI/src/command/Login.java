@@ -27,10 +27,13 @@ public class Login implements Command {
 
 		if (acesso.equals("Aluno")) {
 			loginAluno(request, response, login, senha);
+			
 		} else if (acesso.equals("Professor")) {
 			loginProfessor(request, response, login, senha);
+			
 		} else if (acesso.equals("Administrador")) {
 			loginAdm(request, response, login, senha);
+			
 		} else {
 			RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
 			disp.forward(request, response);
@@ -53,14 +56,9 @@ public class Login implements Command {
 
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("userLogado", alunoSession);
-			
-			System.out.println("ALUNO EMAIL: " + alunoSession.getEmail());
-			System.out.println("ALUNO SENHA: " + alunoSession.getSenha());
-			System.out.println(sessao.getAttribute("userLogado"));		
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
-			
 
 		} else {
 			RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
@@ -69,57 +67,51 @@ public class Login implements Command {
 
 	}
 
-	public static void loginProfessor(HttpServletRequest request, HttpServletResponse response, String login, String senha) 
-			throws ServletException, IOException {
+	public static void loginProfessor(HttpServletRequest request, HttpServletResponse response, String login,
+			String senha) throws ServletException, IOException {
 
 		Professor prof = new Professor();
 		prof.setEmail(login);
 		prof.setSenha(senha);
-		
+
 		ProfessorService ps = new ProfessorService();
 		Professor profSession = new Professor();
 		profSession = (Professor) ps.autenticarProfessor(prof);
-		
+
 		if (profSession.getId() != -1) {
-			
+
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("userLogado", profSession);
-			
-			System.out.println("PROFESSOR EMAIL: " + profSession.getEmail());
-			System.out.println("PROFESOR SENHA: " + profSession.getSenha());
-			
+
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
-			
+
 		} else {
 			RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
 			disp.forward(request, response);
 		}
-		
+
 	}
-	
-	public static void loginAdm(HttpServletRequest request, HttpServletResponse response, String login, String senha) 
+
+	public static void loginAdm(HttpServletRequest request, HttpServletResponse response, String login, String senha)
 			throws ServletException, IOException {
-		
+
 		Professor prof = new Professor();
 		prof.setEmail(login);
 		prof.setSenha(senha);
-		
+
 		ProfessorService ps = new ProfessorService();
 		Professor profSession = new Professor();
 		profSession = (Professor) ps.autenticarAdm(prof);
-		
+
 		if (profSession.getAdm() == 1) {
-			
+
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("userLogado", profSession);
-			
-			System.out.println("ADM EMAIL: " + profSession.getEmail());
-			System.out.println("ADM SENHA: " + profSession.getSenha());
-			
+
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
-			
+
 		} else {
 			RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
 			disp.forward(request, response);

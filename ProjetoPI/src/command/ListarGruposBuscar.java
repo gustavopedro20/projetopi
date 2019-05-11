@@ -18,21 +18,14 @@ public class ListarGruposBuscar implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-//		String chave = request.getParameter("data[search]");
-		
 		GrupoService gs = new GrupoService();
-		ArrayList<Grupo> lista = null;
-		HttpSession session = request.getSession();
-//		if (chave != null && chave.length() > 0) {
-//			lista = gs.listarGrupos(chave);
-//		} else {
-//			lista = gs.listarGrupos();
-//		}
-		lista = gs.listarGrupos();
-		session.setAttribute("lista", lista);
+		ArrayList<Grupo> listaGrupo = null;
+		HttpSession sessao = request.getSession();
 
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("ListarGrupos.jsp");
-		dispatcher.forward(request, response);
+		listaGrupo = gs.listarGrupos();
+		sessao.setAttribute("lista_grupos", listaGrupo);
+
+		RequestDispatcher disp = request.getRequestDispatcher("ListarGrupos.jsp");
+		disp.forward(request, response);
 	}
 }

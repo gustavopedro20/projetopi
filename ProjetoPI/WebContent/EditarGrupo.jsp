@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <c:import url="common/meta-link.jsp" />
-    <title>USJT - Detalhes do Grupo</title>
+    <title>USJT - Alterar Grupo</title>
 </head>
 
 <body class="background-image">
@@ -13,44 +14,33 @@
     <c:if test="${empty sessionScope['userLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
-
-    <header>
-        <c:import url="common/menu.jsp" />
-    </header>
-    
+    <!-- Barra superior com os menus de navegação -->
+    <c:import url="common/menu.jsp" />
+    <!-- Container Principal -->
     <div id="main" class="container">
+        <h3 class="page-header">Alterar Grupo #${grupo.id }</h3>
+        <!-- Formulario para alteração de clientes -->
         <form action="controller.do" method="post" autocomplete="off">
-            <h4 class="page-header">Grupo: ${grupo.nome}</h4>
-            <br>
+            <!-- area de campos do form -->
+            <input type="hidden" name="id_grupo" value="${grupo.id}" />
+            <input type="hidden" name="id_prof" value="${grupo.prof.id}" />
             <div class="row">
-                <div class="col-md-12">
-                    <p><strong>Número</strong>
-                    </p>
-                    <p>
-                        ${grupo.num}
-                    </p>
+                <div class="form-group col-md-12">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome_grupo" id="nome_grupo" required maxlength="100"
+                        placeholder="nome" value="${grupo.nome}">
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <p><strong>Orientador</strong>
-                    </p>
-                    <p>
-                        ${grupo.prof.nome}
-                    </p>
+                <div class="form-group col-md-12">
+                    <label for="nome">Numero</label>
+                    <input type="text" class="form-control" name="numero_grupo" id="numero_grupo" required
+                        maxlength="100" placeholder="numero" value="${grupo.num}">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p><strong>Nome</strong>
-                    </p>
-                    <p>
-                        ${grupo.nome}
-                    </p>
-                </div>
-            </div>
-            <br />
-            <c:if test="${not empty lista_alunos}">
+            <hr />
+
+            <c:if test="${not empty lista_alunos_editar}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
                         <table class="table table-striped">
@@ -63,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="aluno" items="${lista_alunos}">
+                                <c:forEach var="aluno" items="${lista_alunos_editar}">
                                     <tr>
                                         <td>
                                             ${aluno.nome}
@@ -75,8 +65,8 @@
                                             ${aluno.ra}
                                         </td>
                                         <td class="actions">
-                                            <!-- <a class="btn btn-info btn-sm"
-                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a> -->
+                                            <a class="btn btn-info btn-sm"
+                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -85,22 +75,15 @@
                         </table>
                     </div>
             </c:if>
+            <div id="actions" class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" name="command" value="EditarGrupo">Salvar</button>
+                    <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
         </form>
     </div>
-
-    <div id="actions" class="row">
-        <div class="col-md-12">
-            <a href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}" class="btn btn-secondary">Editar</a>
-            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-            <a href="ListarGrupos.jsp" class="btn btn-default">Voltar</a>
-        </div>
-    </div>
-    </div>
-
-    <!-- Modal -->
-    <c:import url="common/delete-modal.jsp" />
-    <!-- /.Modal -->
-
+    
     <footer>
         <c:import url="common/footer.jsp" />
     </footer>

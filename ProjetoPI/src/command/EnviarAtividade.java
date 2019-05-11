@@ -15,12 +15,12 @@ public class EnviarAtividade implements Command {
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
-		String entrega = request.getParameter("entrega");
+		String idAtividade = request.getParameter("id");
+		String formatoEntrega = request.getParameter("entrega");
 		
-		System.out.println(id+" "+entrega);
+		System.out.println(idAtividade+" "+formatoEntrega);
 		AtividadeService as = new AtividadeService();
-		as.atualizarFormatoEntrega(entrega, Integer.parseInt(id));
+		as.atualizarFormatoEntrega(formatoEntrega, Integer.parseInt(idAtividade));
 		
 		RequestDispatcher disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
 		disp.forward(request, response);

@@ -9,9 +9,14 @@
 </head>
 
 <body class="text-center">
+
+    <c:if test="${not empty sessionScope['userLogado']}">     
+        <c:redirect url="home.jsp" />
+    </c:if>
+
     <div id="main" class="form-signin">
         <form action="controller.do" method="post">
-            <!-- method="post" -->
+
             <form class="form-signin" autocomplete="off" var="user">
                 <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
 
@@ -27,18 +32,13 @@
                     <option value="Professor">Professor</option>
                     <option value="Administrador">Administrador</option>
                 </select>
-                <!--
+
                 <div class="esqueceu-senha">
-                    <a href="#">Esqueci minha senha</a>
-                </div> -->
+                    <a href="">Esqueci minha senha</a>
+                </div>
 
-                <button type="submit" class="btn btn-lg btn-success btn-block entrar" name="command" value="Login">Entrar</button>
-
-                <!-- name="command" value="Login" -->
-
-                <!-- href="controller.do?command=Login" -->
-
-                <!-- <a class="btn btn-info btn-sm" href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Visualizar</a> -->
+                <button type="submit" class="btn btn-lg btn-success btn-block entrar" name="command"
+                    value="Login">Entrar</button>
 
                 <p class="mt-5 mb-3 text-muted">&copy; GRUPO 7 - PI - 2019/01</p>
             </form>

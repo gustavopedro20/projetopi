@@ -9,6 +9,37 @@ import java.util.ArrayList;
 import model.Aluno;
 
 public class AlunoDAO {
+	
+	public Aluno carregar(int id) {
+		String sql = "SELECT  u.id, u.nome, u.email, u.senha, a.ra FROM usuario AS u "
+				+ "INNER JOIN aluno AS a ON u.id = a.aluno_id WHERE u.id=?";
+		Aluno aluno = new Aluno();
+		aluno.setId(id);
+		try (Connection conn = ConnectionFactory.conectar(); 
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, aluno.getId());
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					aluno.setId(rs.getInt("u.id"));
+					aluno.setNome(rs.getString("u.nome"));
+					aluno.setEmail(rs.getString("u.email"));
+					aluno.setSenha(rs.getString("u.senha"));
+					aluno.setRa(rs.getString("a.ra"));
+				} else {
+					aluno.setId(-1);
+					aluno.setNome(null);
+					aluno.setEmail(null);
+					aluno.setSenha(null);
+					aluno.setRa(null);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return aluno;
+	}
 
 	public Aluno autenticarAluno(Aluno aluno) {
 		String sql = "SELECT  u.id, u.nome, u.email, u.senha, a.ra FROM usuario AS u "

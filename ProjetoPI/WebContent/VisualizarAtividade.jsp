@@ -27,7 +27,7 @@
                 </div>
 
             </div> -->
-            <c:if test="${not empty lista}">
+            <c:if test="${not empty lista_atividade}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
                         <h4>Lista de todos as Atividades</h4>

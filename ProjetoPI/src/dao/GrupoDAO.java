@@ -80,8 +80,8 @@ public class GrupoDAO {
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getProf().getId());
-			ps.setInt(1, grupo.getNum());
-			ps.setString(2, grupo.getNome());
+			ps.setInt(2, grupo.getNum());
+			ps.setString(3, grupo.getNome());
 			ps.setInt(4, grupo.getId());
 			ps.execute();
 		} catch (Exception e) {

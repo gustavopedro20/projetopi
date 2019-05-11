@@ -15,9 +15,18 @@ public class Home implements Command {
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Aluno aluno = new Aluno();
-		session.getAttribute("alunoLogado");
+		
+		//TELA N ESTA EM USO
+//		HttpSession sessao = request.getSession();
+//		Aluno aluno = (Aluno) sessao.getAttribute("userLogado");
+		
+		
+		
+		
+		
+		//sessao.getAttribute("alunoLogado");
+		
+		//ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
 		
 		
 	}
