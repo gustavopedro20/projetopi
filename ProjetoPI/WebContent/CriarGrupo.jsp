@@ -11,7 +11,7 @@
 
 <body class="background-image">
 
-    <c:if test="${empty sessionScope['userLogado']}">     
+    <c:if test="${not empty sessionScope['alunoLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
 
