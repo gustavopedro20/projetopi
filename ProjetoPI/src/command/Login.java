@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Professor;
+import model.TurmaAluno;
 import service.AlunoService;
 import service.ProfessorService;
+import service.TurmaAlunoService;
 
 public class Login implements Command {
 
@@ -51,11 +53,16 @@ public class Login implements Command {
 		AlunoService as = new AlunoService();
 		Aluno alunoSession = new Aluno();
 		alunoSession = as.autenticarAluno(aluno);
+		
+		TurmaAlunoService tas = new TurmaAlunoService();
+		TurmaAluno turmaAluno = new TurmaAluno();
+		turmaAluno = tas.carregarAlunoTurmaGrupo(alunoSession.getId());
 
 		if (alunoSession.getEmail() != null) {
 
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("alunoLogado", alunoSession);
+			sessao.setAttribute("turmaAluno", turmaAluno);
 			sessao.setAttribute("userLogado", true);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");

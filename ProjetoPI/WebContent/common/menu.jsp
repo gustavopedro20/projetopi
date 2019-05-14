@@ -10,7 +10,7 @@
 		<c:if test="${not empty sessionScope['alunoLogado'] or not empty sessionScope['admLogado']}">
 		    <li><a href="controller.do?command=VisualizarAtividade">Visualizar Atividades</a></li>
 		</c:if>
-		<li><a href="index.jsp">Sair</a></li>
+		<li><a href="logout.jsp">Sair</a></li>
 	</ul>
 
 	<a href="#menu" class="menu-link">&#9776;</a>

@@ -26,10 +26,10 @@ public class CarregarEdicaoDoGrupo implements Command {
 		grupo.setId(Integer.parseInt(idGrupo));
 		grupo = cs.carregar(grupo.getId());
 
-		HttpSession session = request.getSession();
+		HttpSession sessao = request.getSession();
 		@SuppressWarnings("unchecked")
-		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) session.getAttribute("lista_alunos");
-		request.setAttribute("lista_alunos_editar", listaAluno);
+		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
+		sessao.setAttribute("lista_alunos", listaAluno);
 		request.setAttribute("grupo", grupo);
 		
 		RequestDispatcher disp = null;

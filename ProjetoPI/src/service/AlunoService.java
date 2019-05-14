@@ -28,6 +28,10 @@ public class AlunoService {
 		return dao.listarAlunosPorGrupo(id);
 	}
 	
+	public ArrayList<Aluno> listarAlunosPorTurmaSemGrupo(int id){
+		return dao.listarAlunosPorTurmaSemGrupo(id);
+	}
+
 	public void deletarAlunoGrupo(int idGrupo, int idAluno) {
 		dao.deletarAlunoGrupo(idGrupo, idAluno);
 	}	

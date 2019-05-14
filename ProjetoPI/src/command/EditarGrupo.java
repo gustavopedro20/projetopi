@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Aluno;
 import model.Grupo;
 import model.Professor;
 import service.GrupoService;
@@ -45,13 +46,13 @@ public class EditarGrupo implements Command {
 		HttpSession session = request.getSession();
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) session.getAttribute("lista_grupos");
-		int pos = busca(grupo, listaGrupo);
+		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) session.getAttribute("lista_alunos");
+		//int pos = busca(grupo, listaGrupo);
 		
-		listaGrupo.remove(pos);
-		listaGrupo.add(pos, grupo);
+//		listaAluno.remove(pos);
+//		listaAluno.add(pos, grupo);
 		
-		session.setAttribute("lista_grupos", listaGrupo);
+		session.setAttribute("lista_alunos", listaAluno);
 		request.setAttribute("grupo", grupo);
 		
 		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
@@ -59,15 +60,15 @@ public class EditarGrupo implements Command {
 
 	}
 
-	public int busca(Grupo grupo, ArrayList<Grupo> lista) {
-		Grupo to;
-		for(int i = 0; i < lista.size(); i++){
-			to = lista.get(i);
-			if(to.getId() == grupo.getId()){
-				return i;
-			}
-		}
-		return -1;
-	}
+//	public int busca(Grupo grupo, ArrayList<Grupo> lista) {
+//		Grupo to;
+//		for(int i = 0; i < lista.size(); i++){
+//			to = lista.get(i);
+//			if(to.getId() == grupo.getId()){
+//				return i;
+//			}
+//		}
+//		return -1;
+//	}
 
 }

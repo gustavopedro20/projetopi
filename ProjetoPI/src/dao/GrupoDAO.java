@@ -88,6 +88,19 @@ public class GrupoDAO {
 			System.out.println(e.getStackTrace());
 		}
 	}
+	
+	public void atualizarTurmaAluno(int idGrupo, int idAluno) {
+		String sql = "UPDATE turma_aluno SET grupo_id=? WHERE Aluno_id=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, idGrupo);
+			ps.setInt(2, idAluno);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println("Erro em atualizarTurmaAluno: "+e.getMessage());
+		}
+	}
+
 
 	public Grupo carregar(int id) {
 		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "

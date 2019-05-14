@@ -11,7 +11,11 @@
 
 <body class="background-image">
 
-    <c:if test="${empty sessionScope['admLogado'] or empty sessionScope['profLogado'] }">     
+    <c:if test="${not empty sessionScope['alunoLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if>
+
+    <c:if test="${empty sessionScope['userLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
     <!-- Barra superior com os menus de navegação -->
@@ -40,7 +44,7 @@
             </div>
             <hr />
 
-            <c:if test="${not empty lista_alunos_editar}">
+            <c:if test="${not empty lista_alunos}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
                         <table class="table table-striped">
@@ -53,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="aluno" items="${lista_alunos_editar}">
+                                <c:forEach var="aluno" items="${lista_alunos}">
                                     <tr>
                                         <td>
                                             ${aluno.nome}
@@ -82,6 +86,7 @@
                 </div>
             </div>
         </form>
+        
     </div>
     
     <footer>

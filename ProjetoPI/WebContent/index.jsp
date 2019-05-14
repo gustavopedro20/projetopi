@@ -10,13 +10,7 @@
 
 <body class="text-center">
 
-		<%
-            session.removeAttribute("alunoLogado");
-			session.removeAttribute("profLogado");
-			session.removeAttribute("admLogado");
-        %>
-
-    <c:if test="${not empty sessionScope['alunoLogado'] or not empty sessionScope['profLogado'] or not empty sessionScope['admLogado']}">     
+    <c:if test="${not empty sessionScope['userLogado']}">     
         <c:redirect url="home.jsp" />
     </c:if>
 
