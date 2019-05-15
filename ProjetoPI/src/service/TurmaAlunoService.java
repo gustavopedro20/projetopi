@@ -8,7 +8,7 @@ public class TurmaAlunoService {
 	TurmaAlunoDAO dao = new TurmaAlunoDAO();
 	
 	public TurmaAluno carregarAlunoTurmaGrupo(int id) {
-		return carregarAlunoTurmaGrupo(id);	
+		return dao.carregarAlunoTurmaGrupo(id);	
 	}
 
 }

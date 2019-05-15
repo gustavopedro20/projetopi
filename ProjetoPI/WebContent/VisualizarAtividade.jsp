@@ -63,8 +63,9 @@
                                         <td class="actions">
                                             <a class="btn btn-info btn-sm"
                                                 href="controller.do?command=EnviarAtividade&id=${atividade.id}"
-                                                data-toggle="modal" data-target="#entregando" data-atividade="${atividade.id}">Realizar Entrega</a>
-                                                <!-- &atividade=${atividade.formatoEntrega} -->
+                                                data-toggle="modal" data-target="#entregando"
+                                                data-atividade="${atividade.id}">Realizar Entrega</a>
+                                            <!-- &atividade=${atividade.formatoEntrega} -->
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -90,20 +91,22 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4>Entrega de Atividade</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span
                                 aria-hidden="true">&times;</span>
                         </button>
                         <!-- <h4 class="modal-title" id="modalLabel">Anexar entrega</h4> -->
                     </div>
                     <div class="modal-body">
-                        <h4>Entrega de Atividade</h4>
-                        <input class="form-control" type="text" placeholder="Insira o link da atividade"
-                            name="entrega" id="entrega">
+
+                        <input class="form-control" type="text" placeholder="Insira o link da atividade" name="entrega"
+                            id="entrega">
                     </div>
                     <div class="modal-footer">
                         <form action="controller.do" method="post">
                             <input type="hidden" name="id" id="id_entrega" />
-                            <button type="submit" class="btn btn-primary" name="command" value="EnviarAtividade">Enviar</button>
+                            <button type="submit" class="btn btn-primary" name="command"
+                                value="EnviarAtividade">Enviar</button>
                         </form>
                     </div>
                 </div>

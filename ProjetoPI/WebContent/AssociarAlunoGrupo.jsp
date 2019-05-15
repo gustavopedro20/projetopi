@@ -34,10 +34,12 @@
                             <option value="${aluno.id}">${aluno.nome}</option>
                         </c:forEach>
                     </select>
-                </div>
-                <div id="actions" class="row">
+                    <hr>
                     <button class="btn btn-info" name="command" value="AdicionarAlunoNoGrupo">Associar</button>
                 </div>
+                <!-- <div id="actions" class="row">
+                    <button class="btn btn-info" name="command" value="AdicionarAlunoNoGrupo">Associar</button>
+                </div> -->
             </div>
             <div id="lista" class="row">
                 <div class="table-responsive col-md-12">

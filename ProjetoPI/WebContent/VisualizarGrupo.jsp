@@ -98,7 +98,7 @@
                 class="btn btn-outline-dark">Editar</a>
             <button id="btn${grupo.id}%>" type="button" class="btn btn-outline-danger" data-toggle="modal"
                 data-target="#delete-modal" data-grupo="${grupo.id}">Excluir</button>
-            <a href="ListarGrupos.jsp" class="btn btn-default">Voltar</a>
+            <a href="controller.do?command=ListarGruposBuscar" class="btn btn-default">Voltar</a>
         </div>
 
     </div>
