@@ -61,9 +61,9 @@ public class Login implements Command {
 		if (alunoSession.getEmail() != null) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("alunoLogado", alunoSession);
+			sessao.setAttribute("alunoLogado", true);
 			sessao.setAttribute("turmaAluno", turmaAluno);
-			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("userLogado", alunoSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -89,8 +89,8 @@ public class Login implements Command {
 		if (profSession.getId() != -1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("profLogado", profSession);
-			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("profLogado", true);
+			sessao.setAttribute("userLogado", profSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -110,14 +110,14 @@ public class Login implements Command {
 		prof.setSenha(senha);
 
 		ProfessorService ps = new ProfessorService();
-		Professor profSession = new Professor();
-		profSession = (Professor) ps.autenticarAdm(prof);
+		Professor admSession = new Professor();
+		admSession = (Professor) ps.autenticarAdm(prof);
 
-		if (profSession.getAdm() == 1) {
+		if (admSession.getAdm() == 1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("admLogado", profSession);
-			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("admLogado", true);
+			sessao.setAttribute("userLogado", admSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);

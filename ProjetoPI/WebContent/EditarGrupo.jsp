@@ -11,44 +11,54 @@
 
 <body class="background-image">
 
-    <c:if test="${not empty sessionScope['alunoLogado']}">     
+    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
 
     <c:if test="${empty sessionScope['userLogado']}">     
         <c:redirect url="index.jsp" />
-    </c:if>
-    <!-- Barra superior com os menus de navegação -->
-    <c:import url="common/menu.jsp" />
-    <!-- Container Principal -->
+    </c:if> -->
+
+    <header>
+        <c:import url="common/menu.jsp" />
+    </header>
+
     <div id="main" class="container">
-        <h3 class="page-header">Alterar Grupo #${grupo.id }</h3>
-        <!-- Formulario para alteração de clientes -->
         <form action="controller.do" method="post" autocomplete="off">
-            <!-- area de campos do form -->
-            <input type="hidden" name="id_grupo" value="${grupo.id}" />
-            <input type="hidden" name="id_prof" value="${grupo.prof.id}" />
+
+            <input type="hidden" name="id_grupo" value="${grupo.id}"/>
+            <input type="hidden" name="id_prof" value="${grupo.prof.id}"/>
+            <!-- IMPLEMENTAR A TURMA AINDA -->
+            <input type="hidden" name="id_turma" value="${turma.id}"/>
+            <!-- ATE AQUI -->
+
+            <div id="top" class="row">
+                <div class="col align-self-start">
+                    <h4 class="page-header">Alterar ${grupo.nome}</h4>
+                </div>
+            </div>
+            <br>
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label for="nome">Nome</label>
+                    <label for="nome">Nome do Grupo</label>
                     <input type="text" class="form-control" name="nome_grupo" id="nome_grupo" required maxlength="100"
                         placeholder="nome" value="${grupo.nome}">
                 </div>
             </div>
+
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label for="nome">Numero</label>
+                    <label for="nome">Número do Grupo</label>
                     <input type="text" class="form-control" name="numero_grupo" id="numero_grupo" required
                         maxlength="100" placeholder="numero" value="${grupo.num}">
                 </div>
             </div>
-            <hr />
 
             <c:if test="${not empty lista_alunos}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
+                        <table class="table table-hover">
+                            <thead>
                                 <tr>
                                     <th>Aluno</th>
                                     <th>Email</th>
@@ -78,17 +88,23 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
             </c:if>
+
+            <hr>
             <div id="actions" class="row">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary" name="command" value="EditarGrupo">Salvar</button>
-                    <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a>
+                    <button type="submit" class="btn btn-default" name="command"
+                        value="ListarGruposBuscar">Cancelar</button>
+                    <!-- <a href="controller.do?command=ListarGruposBuscar" class="btn btn-default">Cancelar</a> -->
                 </div>
             </div>
+
         </form>
-        
+
     </div>
-    
+
     <footer>
         <c:import url="common/footer.jsp" />
     </footer>

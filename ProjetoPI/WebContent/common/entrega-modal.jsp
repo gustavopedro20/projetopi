@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div class="modal fade" id="entrega-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Entrega de Atividade</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span 
+                    aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input class="form-control" type="text" placeholder="Insira o link da atividade" name="entrega"
+                    id="entrega">
+                </input>
+            </div>
+            <div class="modal-footer">
+                <form action="controller.do" method="post">
+                    <input type="hidden" name="id" id="id_entrega" />
+                    <button type="submit" class="btn btn-primary" name="command" value="EnviarAtividade">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

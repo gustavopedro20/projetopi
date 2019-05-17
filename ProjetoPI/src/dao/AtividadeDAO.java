@@ -11,6 +11,8 @@ import model.Atividade;
 
 public class AtividadeDAO {
 
+	
+
 	public void criar(Atividade atividade) {
 
 		String sqlCreate = "INSERT INTO atividade (tema_id, numero, descricao, formato_entrega, dt_inicio, dt_fim) "
@@ -47,20 +49,19 @@ public class AtividadeDAO {
 		}
 	}
 
-	public void atualizarFormatoEntrega(String formato, int id) {
-		String sqlUpdate = "UPDATE atividade SET formato_entrega=? WHERE id=?";
+//	public void atualizarFormatoEntrega(String formato, int id) {
+//		String sqlUpdate = "UPDATE atividade SET formato_entrega=? WHERE id=?";
+//
+//		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
+//			ps.setString(1, formato);
+//			ps.setInt(2, id);
+//			ps.execute();
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 
-		try (Connection conn = ConnectionFactory.conectar(); 
-				PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
-			ps.setString(1, formato);
-			ps.setInt(2, id);
-			ps.execute();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	//UPDATE atividade SET formato_entrega=? WHERE id=?;
+	// UPDATE atividade SET formato_entrega=? WHERE id=?;
 	public Atividade carregar(int id) {
 		String sqlRead = "SELECT tema_id, numero, descricao, formato_entrega, dt_inicio, dt_fim "
 				+ "FROM atividade WHERE id =?";
@@ -92,6 +93,52 @@ public class AtividadeDAO {
 			System.out.print(e1.getStackTrace());
 		}
 		return atividade;
+	}
+
+	public ArrayList<Atividade> listarAtividadesPorAluno(int id) {
+
+		Atividade atividade;
+		ArrayList<Atividade> lista = new ArrayList<>();
+		String sql = "SELECT te.titulo, a.id, te.id, a.descricao, a.formato_entrega, a.numero, a.dt_inicio, a.dt_fim FROM turma_aluno AS ta "
+				+ "INNER JOIN turma AS t ON ta.turma_id = t.id INNER JOIN tema AS te ON t.tema_id = te.id "
+				+ "INNER JOIN atividade AS a ON te.id = a.tema_id WHERE ta.Aluno_id=?";
+
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					atividade = new Atividade();
+					atividade.setId(rs.getInt("a.id"));
+					atividade.setIdTema(rs.getInt("te.id"));
+					atividade.setNomeTema(rs.getString("te.titulo"));
+					atividade.setNum(rs.getInt("a.numero"));
+					atividade.setDescricao(rs.getString("a.descricao"));
+					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
+					//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
+					atividade.setDtFim(rs.getDate("a.dt_fim"));
+					lista.add(atividade);
+
+					/*
+					 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); Date
+					 * date = new Date(); 
+					 * System.out.println(dateFormat.format(date));
+					 * 
+					 * java.util.Date dt = new java.util.Date();
+					 * 
+					 * java.text.SimpleDateFormat sdf = new
+					 * java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					 * 
+					 * String currentTime = sdf.format(dt);
+					 */
+				}
+			} catch (SQLException e) {
+				System.out.println("Lista atividade erro: " + e.getMessage());
+			}
+		} catch (SQLException e1) {
+			System.out.println("Conexao atividade erro: " + e1.getMessage());
+		}
+		return lista;
 	}
 
 	public ArrayList<Atividade> listarAtividades() {

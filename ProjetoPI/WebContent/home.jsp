@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<c:if test="${empty sessionScope['userLogado']}">     
+<!-- <c:if test="${empty sessionScope['userLogado']}">     
     <c:redirect url="index.jsp" />
-</c:if>
+</c:if> -->
 
 <head>
     <c:import url="common/meta-link.jsp" />

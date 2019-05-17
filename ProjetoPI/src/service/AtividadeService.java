@@ -13,9 +13,9 @@ public class AtividadeService {
 		dao.criar(atividade);
 	}
 
-	public void atualizarFormatoEntrega(String formato, int id) {
-		dao.atualizarFormatoEntrega(formato, id);
-	}
+//	public void atualizarFormatoEntrega(String formato, int id) {
+//		dao.atualizarFormatoEntrega(formato, id);
+//	}
 
 	public void deletar(int id) {
 		dao.deletar(id);
@@ -25,8 +25,11 @@ public class AtividadeService {
 		return dao.carregar(id);		
 	}
 	
-	public ArrayList<Atividade> listarAtividades (){
-		return dao.listarAtividades();
+	public ArrayList<Atividade> listarAtividadesPorAluno(int id){
+		return dao.listarAtividadesPorAluno(id);
 	}
 
+	public ArrayList<Atividade> listarAtividades(){
+		return dao.listarAtividades();
+	}
 }

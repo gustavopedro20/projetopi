@@ -6,10 +6,9 @@ public class Entrega {
 	
 	private int id;
 	private Date dtCadastro;
-	//private ArrayList<Avaliacao> avaliacao = new ArrayList<>();
+	private String linkAtividade;
 	private Grupo grupo;
 	private Atividade atividade;
-	
 	
 	public int getId() {
 		return id;
@@ -27,13 +26,13 @@ public class Entrega {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	/*public ArrayList<Avaliacao> getAvaliacao() {
-		return avaliacao;
+	public String getLinkAtividade() {
+		return linkAtividade;
 	}
 	
-	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
-		this.avaliacao = avaliacao;
-	}*/
+	public void setLinkAtividade(String linkAtividade) {
+		this.linkAtividade = linkAtividade;
+	}
 	
 	public Grupo getGrupo() {
 		return grupo;
@@ -42,17 +41,13 @@ public class Entrega {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
-
+	
 	public Atividade getAtividade() {
 		return atividade;
 	}
-
+	
 	public void setAtividade(Atividade atividade) {
 		this.atividade = atividade;
 	}
-
-
-
-
-
+	
 }
