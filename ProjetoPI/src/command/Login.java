@@ -57,6 +57,8 @@ public class Login implements Command {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("alunoLogado", alunoSession);
 			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("nameUserLogado", alunoSession.getNome());
+			sessao.setAttribute("emailUserLogado", alunoSession.getEmail());
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -84,6 +86,8 @@ public class Login implements Command {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("profLogado", profSession);
 			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("nameUserLogado", profSession.getNome());
+			sessao.setAttribute("emailUserLogado", profSession.getEmail());
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -111,6 +115,8 @@ public class Login implements Command {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("admLogado", profSession);
 			sessao.setAttribute("userLogado", true);
+			sessao.setAttribute("nameUserLogado", profSession.getNome());
+			sessao.setAttribute("emailUserLogado", profSession.getEmail());
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);

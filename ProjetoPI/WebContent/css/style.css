@@ -93,6 +93,29 @@ img {
     background-image: url("../assets/azul.jpg");
 }
 
+.email-user{
+    font-size: 12px;
+    color: #b7b7b7;
+}
+
+.name-user{
+	font-size: 23px;
+    color: #bddbfb;
+    font-weight: 600;
+}
+
+#menu h1{
+	color: #bddbfb;
+}
+
+#menu .box{
+	background: rgba(0, 123, 255, 0.25);
+    position: relative;
+    top: -51px;
+    padding: 17px;
+}
+
+
 img[src$="background-usjt.png"]{
     width: 70%;
     position: relative;
@@ -109,7 +132,7 @@ Menu
 
 #menu .menu-link {
     position: relative;
-    top: -9em;
+    top: .4em;
     left: 11em;
     font-size: 1.5em;
     max-width: 18.5%;
@@ -136,6 +159,8 @@ Menu
 
 #menu ul{
     padding: 0;
+    top: -52px;
+    position: relative;
 }
 
 /*
