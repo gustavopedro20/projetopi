@@ -5,8 +5,8 @@
 <nav id="menu" class="panel" role="navigation">
 	<a href="#menu" class="menu-link">&#9776;</a>
 	<div class="box">
-			<div class="name-user">${nameUserLogado}</div>
-			<div class="email-user">${emailUserLogado}</div>
+			<div class="name-user">${userLogado.nome}</div>
+			<div class="email-user">${userLogado.email}</div>
 		</div>
 	<ul>
 		<li><a href="home.jsp">Home</a></li>
