@@ -11,17 +11,21 @@
 
 <body class="background-image">
 
-    <c:if test="${empty sessionScope['admlogado'] or empty sessionScope['profLogado']}">     
+    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
-    
-    
+
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if> -->
 
     <c:import url="common/menu.jsp" />
 
     <div id="main" class="container">
         <h4 class="page-header">Associar Alunos</h4>
         <form action="controller.do" method="post">
+            <input type="hidden" name="id_grupo" value="${grupo.id}" />
+
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label for="aluno">Selecione um Aluno</label>
@@ -30,10 +34,12 @@
                             <option value="${aluno.id}">${aluno.nome}</option>
                         </c:forEach>
                     </select>
+                    <hr>
+                    <button class="btn btn-info" name="command" value="AdicionarAlunoNoGrupo">Associar</button>
                 </div>
-                <div id="actions" class="row">
-                    <a class="btn btn-info" href="">Associar</a>
-                </div>
+                <!-- <div id="actions" class="row">
+                    <button class="btn btn-info" name="command" value="AdicionarAlunoNoGrupo">Associar</button>
+                </div> -->
             </div>
             <div id="lista" class="row">
                 <div class="table-responsive col-md-12">
@@ -70,8 +76,10 @@
             </div>
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" name="command" value="CriarGrupo">Salvar</button>
-                    <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a>
+                    <!-- <button type="submit" class="btn btn-primary" name="command" value="CriarGrupoAssociarAluno">Salvar</button> -->
+                    <a class="btn btn-primary"href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Salvar</a>
+                    <a href="controller.do?command=ExcluirGrupo&id=${grupo.id}" class="btn btn-default">Cancelar</a>
+                    <!-- <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a> -->
                 </div>
             </div>
         </form>

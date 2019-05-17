@@ -11,9 +11,13 @@
 
 <body class="background-image">
 
-    <c:if test="${not empty sessionScope['alunoLogado']}">     
+    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
         <c:redirect url="index.jsp" />
     </c:if>
+
+    <c:if test="${empty sessionScope['userLogado']}">     
+        <c:redirect url="index.jsp" />
+    </c:if> -->
 
     <c:import url="common/menu.jsp" />
 
@@ -54,7 +58,7 @@
             <div id="actions" class="row">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary" name="command" value="CriarGrupo">Próximo</button>
-                    <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a>
+                    <a href="home.jsp" class="btn btn-default">Cancelar</a>
                 </div>
             </div>
         </form>

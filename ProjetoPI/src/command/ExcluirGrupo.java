@@ -19,6 +19,7 @@ public class ExcluirGrupo implements Command {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		String idGrupo = request.getParameter("id");
+		System.out.println(idGrupo);
 		Grupo grupo = new Grupo();
 		grupo.setId(Integer.parseInt(idGrupo));
 		GrupoService gs = new GrupoService();

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Atividade;
+import model.TurmaAluno;
 import service.AtividadeService;
 
 public class VisualizarAtividade implements Command{
@@ -19,14 +20,27 @@ public class VisualizarAtividade implements Command{
 			throws ServletException, IOException {
 		
 		AtividadeService as = new AtividadeService();
+		TurmaAluno turmaAluno = new TurmaAluno();
 		ArrayList <Atividade> listaAtividade = null;
-		listaAtividade = as.listarAtividades();
+		
 		HttpSession sessao = request.getSession();
-		sessao.setAttribute("lista_atividade", listaAtividade);
+		RequestDispatcher disp;
+		turmaAluno = (TurmaAluno) sessao.getAttribute("turmaAluno");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
-		disp.forward(request, response);
-		
+		if (turmaAluno == null) {
+			listaAtividade = as.listarAtividades();
+			sessao.setAttribute("lista_atividade", listaAtividade);
+			disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
+			disp.forward(request, response);
+		} else {
+			listaAtividade = as.
+					listarAtividadesPorAluno(turmaAluno.getAluno().getId());
+			sessao.setAttribute("lista_atividade", listaAtividade);
+			disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
+			disp.forward(request, response);
+			
+		}
+			
 	}
 
 }

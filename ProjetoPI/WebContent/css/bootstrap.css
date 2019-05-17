@@ -577,6 +577,13 @@ pre code {
   }
 }
 
+/*CRIADO PARA TELA DE ATIVIDADE*/
+@media (min-width: 1500px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+
 .container-fluid {
   width: 100%;
   padding-right: 15px;

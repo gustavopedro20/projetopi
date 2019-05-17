@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Professor;
+import model.TurmaAluno;
 import service.AlunoService;
 import service.ProfessorService;
+import service.TurmaAlunoService;
 
 public class Login implements Command {
 
@@ -51,14 +53,17 @@ public class Login implements Command {
 		AlunoService as = new AlunoService();
 		Aluno alunoSession = new Aluno();
 		alunoSession = as.autenticarAluno(aluno);
+		
+		TurmaAlunoService tas = new TurmaAlunoService();
+		TurmaAluno turmaAluno = new TurmaAluno();
+		turmaAluno = tas.carregarAlunoTurmaGrupo(alunoSession.getId());
 
 		if (alunoSession.getEmail() != null) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("alunoLogado", alunoSession);
-			sessao.setAttribute("userLogado", true);
-			sessao.setAttribute("nameUserLogado", alunoSession.getNome());
-			sessao.setAttribute("emailUserLogado", alunoSession.getEmail());
+			sessao.setAttribute("alunoLogado", true);
+			sessao.setAttribute("turmaAluno", turmaAluno);
+			sessao.setAttribute("userLogado", alunoSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -84,10 +89,8 @@ public class Login implements Command {
 		if (profSession.getId() != -1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("profLogado", profSession);
-			sessao.setAttribute("userLogado", true);
-			sessao.setAttribute("nameUserLogado", profSession.getNome());
-			sessao.setAttribute("emailUserLogado", profSession.getEmail());
+			sessao.setAttribute("profLogado", true);
+			sessao.setAttribute("userLogado", profSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -107,16 +110,14 @@ public class Login implements Command {
 		prof.setSenha(senha);
 
 		ProfessorService ps = new ProfessorService();
-		Professor profSession = new Professor();
-		profSession = (Professor) ps.autenticarAdm(prof);
+		Professor admSession = new Professor();
+		admSession = (Professor) ps.autenticarAdm(prof);
 
-		if (profSession.getAdm() == 1) {
+		if (admSession.getAdm() == 1) {
 
 			HttpSession sessao = request.getSession();
-			sessao.setAttribute("admLogado", profSession);
-			sessao.setAttribute("userLogado", true);
-			sessao.setAttribute("nameUserLogado", profSession.getNome());
-			sessao.setAttribute("emailUserLogado", profSession.getEmail());
+			sessao.setAttribute("admLogado", true);
+			sessao.setAttribute("userLogado", admSession);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);

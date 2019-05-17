@@ -3,7 +3,6 @@ package model;
 public class Aluno extends Usuario {
 	
 	private String ra;
-	//private Turma turma;
 	private String turma;
 	private Grupo grupo;
 	
@@ -22,14 +21,6 @@ public class Aluno extends Usuario {
 	public void setRa(String ra) {
 		this.ra = ra;
 	}
-	
-	/*public Turma getTurma() {
-		return turma;
-	}
-	
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}*/
 	
 	public String getTurma() {
 		return turma;

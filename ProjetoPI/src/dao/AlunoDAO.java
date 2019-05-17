@@ -101,6 +101,39 @@ public class AlunoDAO {
 		return lista;
 	}
 	
+	//BUSCAR ALUNO POR TURMA E SEM GRUPO
+	public ArrayList<Aluno> listarAlunosPorTurmaSemGrupo(int id) {
+		String sql="SELECT u.id, u.nome, u.email, a.ra "
+				+ "FROM usuario AS u "
+				+ "INNER JOIN aluno AS a ON u.id = a.aluno_id "
+				+ "INNER JOIN turma_aluno AS ta ON a.aluno_id = ta.Aluno_id "
+				+ "INNER JOIN turma AS t ON ta.turma_id = t.id "
+				+ "WHERE t.id=? AND ta.grupo_id IS NULL;";
+
+		Aluno aluno;
+		ArrayList<Aluno> lista = new ArrayList<>();
+		
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					aluno = new Aluno();
+					aluno.setId(rs.getInt("u.id"));
+					aluno.setNome(rs.getString("u.nome"));
+					aluno.setEmail(rs.getString("u.email"));
+					aluno.setRa(rs.getString("a.ra"));
+					lista.add(aluno);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
+	
 	//BUSCAR TODOS OS ALUNOS
 	public ArrayList<Aluno> listarAlunos() {
 		String sql="SELECT u.id, u.nome, u.email, a.ra FROM usuario AS u INNER JOIN aluno AS a ON u.id = a.aluno_id "

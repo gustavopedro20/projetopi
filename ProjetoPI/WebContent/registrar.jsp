@@ -12,7 +12,7 @@
     <div id="main" class="form-signin">
         <form action="controller.do" method="post">
             <!-- method="post" -->
-            <form class="form-signin" autocomplete="off" var="user">
+            <form class="form-signin" autocomplete="off" name="user">
                 <img class="mb-4 img-login" src="assets/logo-usjt.png" alt="" width="72" height="72">
 
             </form>

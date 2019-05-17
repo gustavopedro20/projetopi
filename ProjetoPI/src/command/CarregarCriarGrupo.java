@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
 import model.Professor;
 import model.Turma;
-import service.AlunoService;
 import service.ProfessorService;
 import service.TurmaService;
 
@@ -22,24 +20,18 @@ public class CarregarCriarGrupo implements Command {
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		// CARREGAR PROFESSOR -- TELA CRIAR GRUPO --
 		ProfessorService ps = new ProfessorService();
 		ArrayList<Professor> listaProfessor = null;
 		listaProfessor = ps.listarProfessores();
 		HttpSession sessao = request.getSession();
 		sessao.setAttribute("lista_professor", listaProfessor);
 		
+		// CARREGAR TURMA -- TELA CRIAR GRUPO --
 		TurmaService ts = new TurmaService();
 		ArrayList<Turma> listaTurma = null;
 		listaTurma = ts.listarTurmas();
 		sessao.setAttribute("lista_turma", listaTurma);
-		
-		AlunoService as = new AlunoService();
-		ArrayList<Aluno> listaAluno = null;
-		listaAluno = as.listarAlunos();
-		sessao.setAttribute("lista_aluno", listaAluno);
-		
-		ArrayList<Aluno> listaAlunoGrid = new ArrayList<Aluno>();
-		sessao.setAttribute("lista_alunos_criar", listaAlunoGrid);
 		
 		RequestDispatcher disp = null;
 		disp = request.getRequestDispatcher("CriarGrupo.jsp");

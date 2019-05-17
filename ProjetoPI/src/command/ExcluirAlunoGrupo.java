@@ -43,10 +43,11 @@ public class ExcluirAlunoGrupo implements Command {
 		@SuppressWarnings("unchecked")
 		//ATT A LISTA DE ALUNOS
 		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
-		listaAluno.remove(busca(aluno, listaAluno));
+		int pos = busca(aluno, listaAluno);
+		listaAluno.remove(pos);
 		sessao.setAttribute("lista_alunos", listaAluno);
-		sessao.setAttribute("grupo", grupo);
-		disp = request.getRequestDispatcher("VisualizarGrupo.jsp");
+		request.setAttribute("grupo", grupo);
+		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);
 		
 

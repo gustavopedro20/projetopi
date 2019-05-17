@@ -6,8 +6,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import service.AtividadeService;
+import model.Entrega;
+import model.TurmaAluno;
+import service.EntregaService;
 
 public class EnviarAtividade implements Command {
 
@@ -15,14 +18,24 @@ public class EnviarAtividade implements Command {
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		HttpSession sessao = request.getSession();
+		RequestDispatcher disp;
+		
 		String idAtividade = request.getParameter("id");
-		String formatoEntrega = request.getParameter("entrega");
+		String linkEntrega = request.getParameter("entrega");
 		
-		System.out.println(idAtividade+" "+formatoEntrega);
-		AtividadeService as = new AtividadeService();
-		as.atualizarFormatoEntrega(formatoEntrega, Integer.parseInt(idAtividade));
+		TurmaAluno turmaAluno = new TurmaAluno();	
+		turmaAluno = (TurmaAluno) sessao.getAttribute("turmaAluno");
+		Entrega entrega = new Entrega();
+		entrega.getAtividade().setId(Integer.parseInt(idAtividade));
+		entrega.getGrupo().setId(turmaAluno.getGrupo().getId());
+		entrega.setLinkAtividade(linkEntrega);
 		
-		RequestDispatcher disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
+		EntregaService entregaService = new EntregaService();
+		entregaService.criar(entrega);
+		
+		System.out.println(idAtividade+" "+linkEntrega+" "+turmaAluno.getGrupo().getId());
+		disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
 		disp.forward(request, response);
 
 	}

@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Aluno;
+import model.Grupo;
+import model.Turma;
 import service.AlunoService;
+import service.GrupoService;
 
 public class AdicionarAlunoNoGrupo implements Command {
 
@@ -18,26 +21,41 @@ public class AdicionarAlunoNoGrupo implements Command {
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// PEGAR ALUNO DA COMBO E JOGAR NA LISTA
-		String idAluno = request.getParameter("id_aluno");
-		System.out.println("ALUNO COMBO: " + idAluno);
-		Aluno aluno = new Aluno();
-		AlunoService as = new AlunoService();
-		aluno.setId(Integer.parseInt(idAluno));
-		aluno = as.carregar(aluno.getId());
-
 		HttpSession sessao = request.getSession();
 		RequestDispatcher disp = null;
-
-//		ArrayList<Aluno> listaAluno = new ArrayList<Aluno>();
-		//@SuppressWarnings("unchecked")
-		ArrayList<Aluno> listaAluno = null;
+		
+		// PEGAR ALUNO DA COMBO E JOGAR NA LISTA
+		String idAluno = request.getParameter("aluno_combo");
+		System.out.println("ID ALUNO COMBO: "+idAluno);
+		
+		Aluno aluno = new Aluno();
+		aluno.setId(Integer.parseInt(idAluno));
+		
+		AlunoService as = new AlunoService();
+		aluno = as.carregar(aluno.getId());
+		
+		Grupo grupo;
+		grupo = (Grupo) sessao.getAttribute("grupo");
+		
+		GrupoService gs = new GrupoService();
+		gs.atualizarTurmaAluno(grupo.getId(), aluno.getId());
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>)sessao.getAttribute("lista_alunos_criar");
 		//int pos = busca(aluno, listaAluno);
 		//listaAluno.remove(pos);
 		listaAluno.add(aluno);
 		sessao.setAttribute("lista_alunos_criar", listaAluno);
-
-		disp = request.getRequestDispatcher("CriarGrupo.jsp");
+		
+		// CARREGAR ALUNO COMBO BOX -- TELA ADICINAR ALUNO NO GRUPO -- 
+		//AlunoService as = new AlunoService();
+		Turma turma = new Turma();
+		turma = (Turma) sessao.getAttribute("turma");
+		ArrayList<Aluno> listaAlunoCombo = null;
+		listaAlunoCombo = as.listarAlunosPorTurmaSemGrupo(turma.getId());
+		sessao.setAttribute("lista_aluno", listaAlunoCombo);
+		
+		disp = request.getRequestDispatcher("AssociarAlunoGrupo.jsp");
 		disp.forward(request, response);
 
 	}

@@ -23,7 +23,7 @@
 			<li><a href="controller.do?command=VisualizarAtividade">Visualizar
 					Atividades</a></li>
 		</c:if>
-		<li><a href="index.jsp">Sair</a></li>
+		<li><a href="logout.jsp">Sair</a></li>
 	</ul>
 
 	

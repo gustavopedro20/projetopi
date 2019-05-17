@@ -9,17 +9,17 @@ import model.Grupo;
 public class GrupoService {
 	
 	GrupoDAO dao = new GrupoDAO();
-
-	/*public GrupoService() {
-		dao = new GrupoDAO();
-	}*/
-
+	
 	public int criar(Grupo grupo) {
 		return dao.criar(grupo);
 	}
 
 	public void atualizar(Grupo grupo) {
 		dao.atualizar(grupo);
+	}
+	
+	public void atualizarTurmaAluno(int idGrupo, int idAluno) {
+		dao.atualizarTurmaAluno(idGrupo, idAluno);
 	}
 
 	public void deletar(int id) {
@@ -32,10 +32,5 @@ public class GrupoService {
 	public ArrayList<Grupo> listarGrupos(){
 		return dao.listarGrupos();
 	}
-	
-//	public ArrayList<Grupo> listarTurmas(){
-//		return dao.listarTurmas();
-//	}
-	
 	
 }
