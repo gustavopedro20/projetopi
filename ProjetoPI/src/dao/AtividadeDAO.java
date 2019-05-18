@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import model.Atividade;
@@ -101,7 +103,9 @@ public class AtividadeDAO {
 		ArrayList<Atividade> lista = new ArrayList<>();
 		String sql = "SELECT te.titulo, a.id, te.id, a.descricao, a.formato_entrega, a.numero, a.dt_inicio, a.dt_fim FROM turma_aluno AS ta "
 				+ "INNER JOIN turma AS t ON ta.turma_id = t.id INNER JOIN tema AS te ON t.tema_id = te.id "
-				+ "INNER JOIN atividade AS a ON te.id = a.tema_id WHERE ta.Aluno_id=?";
+				+ "INNER JOIN atividade AS a ON te.id = a.tema_id "
+				+ "LEFT JOIN entrega AS e ON a.id = e.atividade_id "
+				+ "WHERE ta.Aluno_id=? AND e.id IS NULL";
 
 		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
@@ -115,6 +119,7 @@ public class AtividadeDAO {
 					atividade.setDescricao(rs.getString("a.descricao"));
 					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
 					//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					//Date data = dateFormat.format(rs.getDate("a.dt_inicio"));
 					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
 					atividade.setDtFim(rs.getDate("a.dt_fim"));
 					lista.add(atividade);

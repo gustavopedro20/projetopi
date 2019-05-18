@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Atividade;
-import model.Atividade;
 import model.Entrega;
 import model.Grupo;
 import model.TurmaAluno;
@@ -44,13 +43,7 @@ public class EnviarAtividade implements Command {
 		entrega.setLinkAtividade(linkEntrega);
 		
 		EntregaService entregaService = new EntregaService();
-		entregaService.criar(entrega);
-		
-		disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
-		disp.forward(request, response);
-		
-		
-		
+		entregaService.criar(entrega);		
 		
 		@SuppressWarnings("unchecked")
 		//ATT A LISTA DE atividade
