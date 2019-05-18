@@ -63,7 +63,7 @@
                                         <td class="actions">
                                             <button id="btn${atividade.id}" type="button" entrega="entrega"
                                                 class="btn btn-info btn-sm" data-toggle= "modal"
-                                                data-target="#entrega-modal" data-entrega="${atividade.id}" >Realizar Entrega</button>
+                                                data-target="#entrega-modal" data-atividade="${atividade.id}" >Realizar Entrega</button>
                                             <!-- &atividade=${atividade.formatoEntrega} -->
                                         </td>
                                     </tr>
