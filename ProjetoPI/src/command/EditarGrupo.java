@@ -43,32 +43,15 @@ public class EditarGrupo implements Command {
 		gs.atualizar(grupo);
 		
 		RequestDispatcher view = null;
-		HttpSession session = request.getSession();
+		HttpSession sessao = request.getSession();
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) session.getAttribute("lista_alunos");
-		//int pos = busca(grupo, listaGrupo);
-		
-//		listaAluno.remove(pos);
-//		listaAluno.add(pos, grupo);
-		
-		session.setAttribute("lista_alunos", listaAluno);
-		request.setAttribute("grupo", grupo);
-		
+//		@SuppressWarnings("unchecked")
+//		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
+//		sessao.setAttribute("lista_alunos", listaAluno);
+		sessao.setAttribute("grupo", grupo);		
 		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
 		view.forward(request, response);
 
 	}
-
-//	public int busca(Grupo grupo, ArrayList<Grupo> lista) {
-//		Grupo to;
-//		for(int i = 0; i < lista.size(); i++){
-//			to = lista.get(i);
-//			if(to.getId() == grupo.getId()){
-//				return i;
-//			}
-//		}
-//		return -1;
-//	}
 
 }

@@ -26,6 +26,7 @@ public class Login implements Command {
 		login = request.getParameter("email");
 		senha = request.getParameter("senha");
 		acesso = request.getParameter("acesso");
+		
 
 		if (acesso.equals("Aluno")) {
 			loginAluno(request, response, login, senha);
@@ -38,7 +39,7 @@ public class Login implements Command {
 			
 		} else {
 			RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-			disp.forward(request, response);
+			disp.include(request, response);
 		}
 
 	}
@@ -58,7 +59,7 @@ public class Login implements Command {
 		TurmaAluno turmaAluno = new TurmaAluno();
 		turmaAluno = tas.carregarAlunoTurmaGrupo(alunoSession.getId());
 
-		if (alunoSession.getEmail() != null) {
+		if (alunoSession.getEmail() != null && turmaAluno.getId() != -1) {
 
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("alunoLogado", true);

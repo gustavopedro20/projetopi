@@ -70,9 +70,9 @@ public class TurmaAlunoDAO {
 //					turmaAluno.getTurma().setId(rs.getInt("turma_id"));
 				} else {
 					turmaAluno.setId(-1);
-					turmaAluno.getAluno().setId(-1);
-					turmaAluno.getGrupo().setId(-1);
-					turmaAluno.getTurma().setId(-1);
+					turmaAluno.setAluno(null);
+					turmaAluno.setGrupo(null);
+					turmaAluno.setGrupo(null);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

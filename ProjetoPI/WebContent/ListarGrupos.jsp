@@ -22,7 +22,7 @@
         <c:import url="common/menu.jsp" />
     </header>
 
-    <div id="main" class="container" role="main">
+    <div id="main" class="container">
         <form action="controller.do" method="post" autocomplete="off">
 
             <div id="top" class="row">

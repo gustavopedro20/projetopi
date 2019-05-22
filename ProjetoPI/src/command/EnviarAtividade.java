@@ -26,8 +26,6 @@ public class EnviarAtividade implements Command {
 		
 		String idAtividade = request.getParameter("id");
 		String linkEntrega = request.getParameter("entrega");
-		
-		System.out.println("idAtividade: "+idAtividade+" *********** linkEntrega: "+linkEntrega);
 
 		TurmaAluno turmaAluno = new TurmaAluno();	
 		turmaAluno = (TurmaAluno) sessao.getAttribute("turmaAluno");
