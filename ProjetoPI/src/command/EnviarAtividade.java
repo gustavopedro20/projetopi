@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Atividade;
-import model.Atividade;
 import model.Entrega;
 import model.Grupo;
 import model.TurmaAluno;
