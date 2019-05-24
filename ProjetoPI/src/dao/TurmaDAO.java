@@ -58,7 +58,7 @@ public class TurmaDAO {
 	}
 
 	public Turma carregar(int id) {
-		String sqlSelect = "SELECT semestreLetivo, anoLetivo, sigla FROM turma WHERE id=?";
+		String sqlSelect = "SELECT semestre_letivo, ano_letivo, sigla FROM turma WHERE id=?";
 		Turma turma = new Turma();
 		turma.setId(id);
 		try (Connection conn = ConnectionFactory.conectar();
@@ -66,8 +66,8 @@ public class TurmaDAO {
 			stm.setInt(1, turma.getId());
 			try (ResultSet rs = stm.executeQuery();) {
 				if (rs.next()) {
-					turma.setSemestreLetivo(rs.getInt("semestreLetivo"));
-					turma.setAnoLetivo(rs.getInt("anoLetivo"));
+					turma.setSemestreLetivo(rs.getInt("semestre_letivo"));
+					turma.setAnoLetivo(rs.getInt("ano_letivo"));
 					turma.setSigla(rs.getString("sigla"));
 				} else {
 					turma.setId(-1);

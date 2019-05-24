@@ -13,7 +13,7 @@
 		
 		<c:if
 			test="${not empty sessionScope['profLogado'] or not empty sessionScope['admLogado']}">
-			<li><a href="controller.do?command=ListarGruposBuscar">Lista
+			<li><a href="controller.do?command=ListarGruposReiniciar">Lista
 					de Grupos</a></li>
 			<li><a href="controller.do?command=CarregarCriarGrupo">Cadastro
 					de Grupos</a></li>

@@ -17,10 +17,6 @@ public class GrupoService {
 	public void atualizar(Grupo grupo) {
 		dao.atualizar(grupo);
 	}
-	
-	public void atualizarTurmaAluno(int idGrupo, int idAluno) {
-		dao.atualizarTurmaAluno(idGrupo, idAluno);
-	}
 
 	public void deletar(int id) {
 		dao.deletar(id);
@@ -31,6 +27,14 @@ public class GrupoService {
 	}
 	public ArrayList<Grupo> listarGrupos(){
 		return dao.listarGrupos();
+	}
+	
+	public ArrayList<Grupo> listarGrupos(String chave){
+		return dao.listarGrupos(chave);
+	}
+	
+	public ArrayList<Grupo> listarGrupos(int turma){
+		return dao.listarGrupos(turma);
 	}
 	
 }

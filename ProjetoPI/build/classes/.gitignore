@@ -1,6 +1,6 @@
 /command/
 /controller/
 /dao/
+/filter/
 /model/
 /service/
-/filter/

@@ -28,10 +28,10 @@
 
             </div> -->
             <c:if test="${not empty lista_atividade}">
-                <div id="list" class="row">
+                <div id="list" class="pre-scrollable">
                     <div class="col align-self-start">
-                        <h4>Lista de todos as Atividades</h4>
-                        <table class="table table-striped">
+                        <h4>Lista de Atividade pendentes</h4>                      
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <!-- <th>Tema</th> -->
@@ -61,10 +61,12 @@
                                             ${atividade.dtFim}
                                         </td>
                                         <td class="actions">
-                                            <button id="btn${atividade.id}" type="button" entrega="entrega"
-                                                class="btn btn-info btn-sm" data-toggle= "modal"
-                                                data-target="#entrega-modal" data-atividade="${atividade.id}" >Realizar Entrega</button>
-                                            <!-- &atividade=${atividade.formatoEntrega} -->
+                                            <c:if test="${not empty sessionScope['alunoLogado']}">
+                                                <button id="btn${atividade.id}" type="button" entrega="entrega"
+                                                    class="btn btn-outline-info btn-sm" data-toggle= "modal"
+                                                    data-target="#entrega-modal" data-atividade="${atividade.id}" >Realizar Entrega
+                                                </button>
+                                            </c:if>                                 
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -74,10 +76,10 @@
                     </div>
                 </div>
             </c:if>
-
+            <hr>
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <a href="" class="btn btn-secondary">Voltar</a>
+                    <a href="home.jsp" class="btn btn-outline-primary">Voltar</a>
                 </div>
             </div>
         </form>

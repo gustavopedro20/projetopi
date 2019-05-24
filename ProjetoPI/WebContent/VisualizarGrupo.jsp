@@ -5,8 +5,8 @@
 <html lang="pt-br">
 
 <head>
-<c:import url="common/meta-link.jsp" />
-<title>USJT - Detalhes do Grupo</title>
+	<c:import url="common/meta-link.jsp" />
+	<title>USJT - Detalhes do Grupo</title>
 </head>
 
 <body class="background-image">
@@ -61,7 +61,7 @@
 									<th>Aluno</th>
 									<th>Email</th>
 									<th>RA</th>
-									<th></th>
+									<!-- <th></th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -70,35 +70,29 @@
 										<td>${aluno.nome}</td>
 										<td>${aluno.email}</td>
 										<td>${aluno.ra}</td>
-										<td class="actions">
+										<!-- <td class="actions"> -->
 											<!-- <a class="btn btn-info btn-sm"
                                                 href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a> -->
-										</td>
+										<!-- </td> -->
 									</tr>
 								</c:forEach>
 
 							</tbody>
 						</table>
 					</div>
-				
+				</div>
 			</c:if>
+			<div id="actions" class="row">
+				<div class="col-md-12">
+					<a href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}&id_turma=${grupo.turma.id}"
+						class="btn btn-outline-dark">Editar</a>
+					<button id="btn${grupo.id}%>" type="button" class="btn btn-outline-danger" data-toggle="modal"
+						data-target="#delete-modal" data-grupo="${grupo.id}">Excluir</button>
+					<a href="controller.do?command=ListarGruposReiniciar" class="btn btn-default">Voltar</a>
+				</div>
+			</div>
 		</form>
 	</div>
-
-	<div id="actions" class="row">
-		<div class="col-md-12">
-			<a
-				href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}"
-				class="btn btn-outline-dark">Editar</a>
-			<button id="btn${grupo.id}%>" type="button"
-				class="btn btn-outline-danger" data-toggle="modal"
-				data-target="#delete-modal" data-grupo="${grupo.id}">Excluir</button>
-			<a href="controller.do?command=ListarGruposBuscar"
-				class="btn btn-default">Voltar</a>
-		</div>
-
-	</div>
-
 
 	<!-- Modal -->
 	<c:import url="common/delete-modal.jsp" />
@@ -108,7 +102,7 @@
 		<c:import url="common/footer.jsp" />
 
 		<script type="text/javascript">
-			$("#delete-modal").on('show.bs.modal', function(event) {
+			$("#delete-modal").on('show.bs.modal', function (event) {
 				var button = $(event.relatedTarget); //botao que disparou a modal
 				var recipient = button.data('grupo');
 				$("#id_excluir").val(recipient);

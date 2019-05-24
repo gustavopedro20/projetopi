@@ -26,8 +26,6 @@ public class EnviarAtividade implements Command {
 		
 		String idAtividade = request.getParameter("id");
 		String linkEntrega = request.getParameter("entrega");
-		
-		System.out.println("idAtividade: "+idAtividade+" *********** linkEntrega: "+linkEntrega);
 
 		TurmaAluno turmaAluno = new TurmaAluno();	
 		turmaAluno = (TurmaAluno) sessao.getAttribute("turmaAluno");
@@ -43,13 +41,7 @@ public class EnviarAtividade implements Command {
 		entrega.setLinkAtividade(linkEntrega);
 		
 		EntregaService entregaService = new EntregaService();
-		entregaService.criar(entrega);
-		
-		disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
-		disp.forward(request, response);
-		
-		
-		
+		entregaService.criar(entrega);		
 		
 		@SuppressWarnings("unchecked")
 		//ATT A LISTA DE atividade

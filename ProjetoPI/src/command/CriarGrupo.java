@@ -37,6 +37,7 @@ public class CriarGrupo implements Command {
 		grupo.setProf(prof);
 		grupo.setNome(nomeGrupo);
 		grupo.setNum(Integer.parseInt(numeroGrupo));
+		grupo.setTurma(turma);
 		
 		GrupoService cs = new GrupoService();
 		TurmaService ts = new TurmaService();
@@ -57,6 +58,12 @@ public class CriarGrupo implements Command {
 		ArrayList<Aluno> listaAlunoGrid = new ArrayList<Aluno>();
 		sessao.setAttribute("lista_alunos_criar", listaAlunoGrid);
 		
+		//JOGAR O GRUPO NA LISTA DE GRUPOS NA TELA DE LISTAR
+		ArrayList<Grupo> listaGrupo = null;
+		GrupoService gs = new GrupoService();
+		listaGrupo = gs.listarGrupos(Integer.parseInt(idTurma));
+		
+		sessao.setAttribute("lista_grupos", listaGrupo);
 		sessao.setAttribute("grupo", grupo);
 		sessao.setAttribute("turma", turma);
 		

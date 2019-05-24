@@ -21,13 +21,14 @@ public class GrupoDAO {
     }
 	
 	public int criar(Grupo grupo) {
-		String sql = "INSERT INTO grupo (orientador_id, numero, nome) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO grupo (orientador_id, numero, nome, turma_id) VALUES (?, ?, ?, ?)";
 		
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getProf().getId());
 			ps.setInt(2, grupo.getNum());
 			ps.setString(3, grupo.getNome());
+			ps.setInt(4, grupo.getTurma().getId());
 			ps.execute();
 			String sqlQuery = "SELECT LAST_INSERT_ID()";
 			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery);
@@ -89,19 +90,6 @@ public class GrupoDAO {
 		}
 	}
 	
-	public void atualizarTurmaAluno(int idGrupo, int idAluno) {
-		String sql = "UPDATE turma_aluno SET grupo_id=? WHERE Aluno_id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
-			ps.setInt(1, idGrupo);
-			ps.setInt(2, idAluno);
-			ps.execute();
-		} catch (Exception e) {
-			System.out.println("Erro em atualizarTurmaAluno: "+e.getMessage());
-		}
-	}
-
-
 	public Grupo carregar(int id) {
 		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
@@ -183,6 +171,37 @@ public class GrupoDAO {
 					grupo.setId(rs.getInt("g.id"));
 					grupo.setNome(rs.getString("nome"));
 					grupo.setNum(rs.getInt("numero"));
+					lista.add(grupo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
+	
+	public ArrayList<Grupo> listarGrupos(int turma) {
+		
+		Grupo grupo;
+		Professor prof;
+		ArrayList<Grupo> lista = new ArrayList<>();
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
+				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.turma_id=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, turma);
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					grupo = new Grupo();
+					prof = new Professor();
+					prof.setId(rs.getInt("u.id"));
+					prof.setNome(rs.getString("u.nome"));
+					grupo.setProf(prof);
+					grupo.setId(rs.getInt("g.id"));
+					grupo.setNome(rs.getString("g.nome"));
+					grupo.setNum(rs.getInt("g.numero"));
 					lista.add(grupo);
 				}
 			} catch (SQLException e) {

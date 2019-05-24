@@ -10,10 +10,7 @@
 
 <body>
     <%
-    session.removeAttribute("alunoLogado");
-    session.removeAttribute("profLogado");
-    session.removeAttribute("admLogado");
-    session.removeAttribute("userLogado");
+    session.invalidate();
     %>
     <c:redirect url="index.jsp" />
 </body>

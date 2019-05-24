@@ -27,7 +27,7 @@ public class LogFilter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
-		Usuario usuario = (Usuario)session.getAttribute("logado");
+		Usuario usuario = (Usuario)session.getAttribute("userLogado");
 		
 		if(usuario == null){
 			System.out.println(req.getParameter("command"));
