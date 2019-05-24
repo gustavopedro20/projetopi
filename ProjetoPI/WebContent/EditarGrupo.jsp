@@ -39,15 +39,12 @@
             </div>
             <br>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="nome">Nome do Grupo</label>
                     <input type="text" class="form-control" name="nome_grupo" id="nome_grupo" required maxlength="100"
                         placeholder="nome" value="${grupo.nome}">
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     <label for="nome">Número do Grupo</label>
                     <input type="text" class="form-control" name="numero_grupo" id="numero_grupo" required
                         maxlength="100" placeholder="numero" value="${grupo.num}">
@@ -79,7 +76,7 @@
                                             ${aluno.ra}
                                         </td>
                                         <td class="actions">
-                                            <a class="btn btn-info btn-sm"
+                                            <a class="btn btn-outline-info btn-sm"
                                                 href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a>
                                         </td>
                                     </tr>
@@ -94,9 +91,9 @@
             <hr>
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" name="command" value="EditarGrupo">Salvar</button>
+                    <button type="submit" class="btn btn-outline-primary" name="command" value="EditarGrupo">Salvar</button>
                     <button type="submit" class="btn btn-default" name="command"
-                        value="ListarGruposBuscar">Cancelar</button>
+                        value="ListarGruposReiniciar">Cancelar</button>
                     <!-- <a href="controller.do?command=ListarGruposBuscar" class="btn btn-default">Cancelar</a> -->
                 </div>
             </div>

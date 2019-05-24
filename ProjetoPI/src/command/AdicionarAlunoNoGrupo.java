@@ -13,7 +13,7 @@ import model.Aluno;
 import model.Grupo;
 import model.Turma;
 import service.AlunoService;
-import service.GrupoService;
+import service.TurmaAlunoService;
 
 public class AdicionarAlunoNoGrupo implements Command {
 
@@ -37,8 +37,8 @@ public class AdicionarAlunoNoGrupo implements Command {
 		Grupo grupo;
 		grupo = (Grupo) sessao.getAttribute("grupo");
 		
-		GrupoService gs = new GrupoService();
-		gs.atualizarTurmaAluno(grupo.getId(), aluno.getId());
+		TurmaAlunoService tas = new TurmaAlunoService();
+		tas.atualizarTurmaAluno(grupo.getId(), aluno.getId());
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>)sessao.getAttribute("lista_alunos_criar");

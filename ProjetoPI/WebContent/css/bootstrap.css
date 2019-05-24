@@ -541,7 +541,7 @@ pre code {
 }
 
 .pre-scrollable {
-  max-height: 340px;
+  max-height: 550px;
   overflow-y: scroll;
 }
 
@@ -578,11 +578,11 @@ pre code {
 }
 
 /*CRIADO PARA TELA DE ATIVIDADE*/
-@media (min-width: 1400px) {
+/* @media (min-width: 1700px) {
   .container {
-    max-width: 1340px;
+    max-width: 1640px;
   }
-}
+} */
 
 .container-fluid {
   width: 100%;

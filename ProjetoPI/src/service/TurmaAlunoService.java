@@ -10,5 +10,9 @@ public class TurmaAlunoService {
 	public TurmaAluno carregarAlunoTurmaGrupo(int id) {
 		return dao.carregarAlunoTurmaGrupo(id);	
 	}
+	
+	public void atualizarTurmaAluno(int idGrupo, int idAluno) {
+		dao.atualizarTurmaAluno(idGrupo, idAluno);
+	}
 
 }

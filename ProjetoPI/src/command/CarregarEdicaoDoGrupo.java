@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Grupo;
+import service.AlunoService;
 import service.GrupoService;
 
 public class CarregarEdicaoDoGrupo implements Command {
@@ -20,6 +21,7 @@ public class CarregarEdicaoDoGrupo implements Command {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		String idGrupo = request.getParameter("id_grupo");
+		String idTurma = request.getParameter("id_turma");
 
 		Grupo grupo = new Grupo();
 		GrupoService cs = new GrupoService();
@@ -32,6 +34,12 @@ public class CarregarEdicaoDoGrupo implements Command {
 		sessao.setAttribute("lista_alunos", listaAluno);
 		request.setAttribute("grupo", grupo);
 		
+		/*COMBO BOX DOS ALUNOS NA EDICAO DE GRUPO*/
+//		AlunoService as = new AlunoService();
+//		ArrayList<Aluno> listaAlunoCombo = null;
+//		listaAlunoCombo = as.listarAlunosPorTurmaSemGrupo(Integer.parseInt(idTurma));
+//		sessao.setAttribute("listaAlunoCombo", listaAlunoCombo);	
+		/*****************************************/
 		RequestDispatcher disp = null;
 		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Turma {
 	
 	private int id;
@@ -8,6 +10,7 @@ public class Turma {
 	private String sigla;
 	private int temaId;
 	private String temaTitulo;
+	private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
 
 	public int getId() {
 		return id;
@@ -55,6 +58,14 @@ public class Turma {
 
 	public void setTemaTitulo(String temaTitulo) {
 		this.temaTitulo = temaTitulo;
+	}
+
+	public ArrayList<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(ArrayList<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 
 

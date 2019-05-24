@@ -24,8 +24,10 @@ public class AtividadeDAO {
 			ps.setInt(2, atividade.getNum());
 			ps.setString(3, atividade.getDescricao());
 			ps.setString(4, atividade.getFormatoEntrega());
-			ps.setDate(5, (Date) atividade.getDtInicio());
-			ps.setDate(6, (Date) atividade.getDtFim());
+//			ps.setDate(5, (Date) atividade.getDtInicio());
+//			ps.setDate(6, (Date) atividade.getDtFim());
+			ps.setString(5, atividade.getDtInicio());
+			ps.setString(6, atividade.getDtFim());
 			ps.executeUpdate();
 			String sqlQuery = "SELECT LAST_INSERT_ID()";
 			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery); ResultSet rs = ps2.executeQuery();) {
@@ -77,9 +79,22 @@ public class AtividadeDAO {
 					atividade.setIdTema(rs.getInt("tema_id"));
 					atividade.setId(rs.getInt("numero"));
 					atividade.setDescricao(rs.getString("descricao"));
-					atividade.setFormatoEntrega(rs.getString("formato_entrega"));
-					atividade.setDtInicio(rs.getDate("dt_inicio"));
-					atividade.setDtFim(rs.getDate("dt_fim"));
+					atividade.setFormatoEntrega(rs.getString("formato_entrega"));	
+					
+					SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+					Date dataInicio = rs.getDate("dt_inicio");
+					Date dataFim = rs.getDate("dt_fim");
+					atividade.setDtInicio(formatDate.format(dataInicio));
+					atividade.setDtFim(formatDate.format(dataFim));
+					
+//					atividade.setDtInicio(rs.getDate("dt_inicio"));
+//					atividade.setDtFim(rs.getDate("dt_fim"));
+					
+					
+					/*
+					 *   Date date = Calendar.getInstance().getTime();
+    					DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+    					String strDate = dateFormat.format(date);*/
 				} else {
 					atividade.setIdTema(-1);
 					atividade.setNum(-1);
@@ -120,8 +135,13 @@ public class AtividadeDAO {
 					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
 					//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					//Date data = dateFormat.format(rs.getDate("a.dt_inicio"));
-					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
-					atividade.setDtFim(rs.getDate("a.dt_fim"));
+//					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
+//					atividade.setDtFim(rs.getDate("a.dt_fim"));
+					SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+					Date dataInicio = rs.getDate("dt_inicio");
+					Date dataFim = rs.getDate("dt_fim");
+					atividade.setDtInicio(formatDate.format(dataInicio));
+					atividade.setDtFim(formatDate.format(dataFim));
 					lista.add(atividade);
 
 					/*
@@ -163,8 +183,13 @@ public class AtividadeDAO {
 					atividade.setNum(rs.getInt("a.numero"));
 					atividade.setDescricao(rs.getString("a.descricao"));
 					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
-					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
-					atividade.setDtFim(rs.getDate("a.dt_fim"));
+//					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
+//					atividade.setDtFim(rs.getDate("a.dt_fim"));
+					SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+					Date dataInicio = rs.getDate("dt_inicio");
+					Date dataFim = rs.getDate("dt_fim");
+					atividade.setDtInicio(formatDate.format(dataInicio));
+					atividade.setDtFim(formatDate.format(dataFim));
 					lista.add(atividade);
 				}
 			} catch (SQLException e) {

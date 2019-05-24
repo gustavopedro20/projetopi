@@ -28,7 +28,7 @@
 
             </div> -->
             <c:if test="${not empty lista_atividade}">
-                <div id="list" class="row">
+                <div id="list" class="pre-scrollable">
                     <div class="col align-self-start">
                         <h4>Lista de Atividade pendentes</h4>                      
                         <table class="table table-hover">
