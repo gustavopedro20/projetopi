@@ -18,7 +18,7 @@
         <c:import url="common/menu.jsp" />
     </header>
 
-    <div id="main" class="container">
+    <div id="main" class="container visualizar-atividade">
         <form action="controller.do" method="POST">
             <!-- <div id="top" class="row">
 

@@ -35,47 +35,49 @@
                             <option value="${aluno.id}">${aluno.nome}</option>
                         </c:forEach>
                     </select>
+                    
                 </div>
-                
-                <div class="col-md-6">
+                <div class="col-md-6 botao-selecione-aluno">
                     <button class="btn btn-outline-success" name="command" value="AdicionarAlunoNoGrupo">Associar</button>
                 </div>
-                
             </div>
 
-            <div id="lista" class="row">
-                <div class="table-responsive col-md-12">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Aluno</th>
-                                <th>Email</th>
-                                <th>RA</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="aluno" items="${lista_alunos_criar}">
+            <c:if test="${not empty lista_alunos_criar}">     
+                <div id="lista" class="row">
+                    <div class="table-responsive col-md-12">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        ${aluno.nome}
-                                    </td>
-                                    <td>
-                                        ${aluno.email}
-                                    </td>
-                                    <td>
-                                        ${aluno.ra}
-                                    </td>
-                                    <td class="actions">
-                                        <a class="btn btn-outline-info btn-sm"
-                                            href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}&professor=${grupo.prof.nome}&numero=${grupo.num}&nome=${grupo.nome}">Remover</a>
-                                    </td>
+                                    <th>Aluno</th>
+                                    <th>Email</th>
+                                    <th>RA</th>
+                                    <th></th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="aluno" items="${lista_alunos_criar}">
+                                    <tr>
+                                        <td>
+                                            ${aluno.nome}
+                                        </td>
+                                        <td>
+                                            ${aluno.email}
+                                        </td>
+                                        <td>
+                                            ${aluno.ra}
+                                        </td>
+                                        <td class="actions">
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}&professor=${grupo.prof.nome}&numero=${grupo.num}&nome=${grupo.nome}">Remover</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </c:if>
+
             <div id="actions" class="row">
                 <div class="col-md-12">
                     <!-- <button type="submit" class="btn btn-primary" name="command" value="CriarGrupoAssociarAluno">Salvar</button> -->

@@ -91,6 +91,9 @@ img {
 .grupo-list,
 .background-image{
     background-image: url("../assets/azul.jpg");
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
 }
 
 .email-user{
@@ -163,6 +166,12 @@ Menu
     position: relative;
 }
 
+.botao-selecione-aluno{
+    position: relative;
+    left: -20px;
+    top: 32px;
+}
+
 /*
 Nav Panel
 ======================================
@@ -203,3 +212,9 @@ Nav Panel
 }
 
 /***BigSlide***/
+
+@media (min-width: 1700px) {
+    .container.visualizar-atividade {
+        max-width: 1640px;
+    }
+} 

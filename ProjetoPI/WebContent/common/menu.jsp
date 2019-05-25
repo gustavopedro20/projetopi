@@ -4,7 +4,7 @@
 
 <nav id="menu" class="panel" role="navigation">
 	<a href="#menu" class="menu-link">&#9776;</a>
-	<div class="box">
+	<div class="text-center box">
 			<div class="name-user">${userLogado.nome}</div>
 			<div class="email-user">${userLogado.email}</div>
 		</div>
