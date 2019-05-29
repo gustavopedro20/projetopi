@@ -44,26 +44,40 @@ public class GrupoDAO {
 		}
 		return grupo.getId();
 	}
+	
+	public void deletarEntregaGrupo(int id) {
+		String sql = "DELETE FROM entrega WHERE grupo_id=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);){
+			ps.setInt(1, id);
+			ps.execute();			
+		} catch (Exception e) {
+			System.out.println("Erro em Delete Entrega Grupo: " + e.getMessage());
+		}
+	}
+	
+	public void deletarGrupoTurmaAluno(int id) {
+		String sql = "UPDATE turma_aluno SET grupo_id = null WHERE grupo_id=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);){
+			ps.setInt(1, id);
+			ps.execute();			
+		} catch (Exception e) {
+			System.out.println("Erro em Delete Grupo Turma Aluno: " + e.getMessage());
+		}
+	}
 
 	public void deletar(int id) {
-		
-		String sqlEntregaGrupo = "DELETE FROM entrega WHERE grupo_id=?";
-		String sqlBancaGrupo = "UPDATE turma_aluno SET grupo_id = null WHERE grupo_id=?";
-		String sqlDeleteGrupo = "DELETE FROM grupo WHERE id=?";
+		deletarEntregaGrupo(id);
+		deletarGrupoTurmaAluno(id);
+		String sql = "DELETE FROM grupo WHERE id=?";
 		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sqlEntregaGrupo);
-				PreparedStatement ps1 = conn.prepareStatement(sqlBancaGrupo);
-				PreparedStatement ps2 = conn.prepareStatement(sqlDeleteGrupo);) {
+				PreparedStatement ps = conn.prepareStatement(sql);){
 			ps.setInt(1, id);
-			ps1.setInt(1, id);
-			ps2.setInt(1, id);
-			ps.execute();
-			ps1.execute();
-			ps2.execute();
+			ps.execute();			
 		} catch (Exception e) {
 			System.out.println("Erro em Delete Grupo: " + e.getMessage());
 		}
-
 	}
 
 	public void atualizar(Grupo grupo) {

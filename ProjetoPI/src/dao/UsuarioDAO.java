@@ -58,6 +58,18 @@ public class UsuarioDAO {
 			System.out.println(e.getStackTrace());
 		}
 	}
+	
+	public void atualizarSenha(String senha, String email) {
+		String sql = "UPDATE usuario SET senha=? WHERE email=?";
+		try (Connection conn = ConnectionFactory.conectar();
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, senha);
+			ps.setString(2, email);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
 
 	public Usuario carregar(int id, Usuario usuario) {
 		String sqlSelect = "SELECT nome, email, senha FROM usuario WHERE id =?";

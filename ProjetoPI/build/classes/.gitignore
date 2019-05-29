@@ -1,1 +1,7 @@
-/mail/
+/command/
+/controller/
+/dao/
+/filter/
+/model/
+/service/
+/util/

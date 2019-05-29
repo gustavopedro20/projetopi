@@ -5,11 +5,7 @@ import model.Usuario;
 
 public class UsuarioService {
 
-	UsuarioDAO dao;
-
-	public UsuarioService() {
-		dao = new UsuarioDAO();
-	}
+	UsuarioDAO dao = new UsuarioDAO();
 
 	public void create(Usuario usuario) {
 		dao.salvar(usuario);
@@ -19,6 +15,9 @@ public class UsuarioService {
 		dao.atualizar(usuario);
 	}
 
+	public void atualizarSenha(String senha, String email) {
+		dao.atualizarSenha(senha, email);
+	}
 	public void delete(Usuario usuario) {
 		dao.deletar(usuario);
 	}

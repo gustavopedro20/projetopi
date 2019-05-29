@@ -33,7 +33,7 @@
                 </select>
 
                 <div class="esqueceu-senha">
-                    <a href="https://trocasenha.animaeducacao.com.br/EsqueciMinhaSenha/Index">Esqueci minha senha</a>
+                    <a href="RecuperarSenha.jsp">Esqueci minha senha</a>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-success btn-block entrar" name="command"

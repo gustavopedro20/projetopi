@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Aluno;
 import model.Atividade;
 import model.Entrega;
 import model.Grupo;
 import model.TurmaAluno;
 import service.EntregaService;
+import util.EnviarEmailAtividade;
 
 public class EnviarAtividade implements Command {
 
@@ -41,7 +43,13 @@ public class EnviarAtividade implements Command {
 		entrega.setLinkAtividade(linkEntrega);
 		
 		EntregaService entregaService = new EntregaService();
-		entregaService.criar(entrega);		
+		entregaService.criar(entrega);
+		
+		//ENVIAR NOTIFICAÇÃO POR EMAIL
+		Aluno aluno = (Aluno) sessao.getAttribute("userLogado");
+		String alunoEmail = aluno.getEmail();
+		EnviarEmailAtividade EnviarEmail = new EnviarEmailAtividade();
+		EnviarEmail.enviar(alunoEmail);
 		
 		@SuppressWarnings("unchecked")
 		//ATT A LISTA DE atividade
