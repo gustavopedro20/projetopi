@@ -7,24 +7,28 @@ public class UsuarioService {
 
 	UsuarioDAO dao = new UsuarioDAO();
 
-	public void create(Usuario usuario) {
-		dao.salvar(usuario);
+	public void criar(Usuario usuario) {
+		dao.criar(usuario);
 	}
 
-	public void update(Usuario usuario) {
+	public void atualizar(Usuario usuario) {
 		dao.atualizar(usuario);
 	}
 
 	public void atualizarSenha(String senha, String email) {
 		dao.atualizarSenha(senha, email);
 	}
-	public void delete(Usuario usuario) {
+
+	public void deletar(Usuario usuario) {
 		dao.deletar(usuario);
 	}
 
-	public Usuario read(int id, Usuario usuario) {
-		Usuario u = dao.carregar(id, usuario);
-		return u;
+	public Usuario carregar(int id, Usuario usuario) {
+		return dao.carregar(id, usuario);
+	}
+
+	public boolean verificarEmail(String email) {
+		return dao.verificarEmail(email);
 	}
 
 }

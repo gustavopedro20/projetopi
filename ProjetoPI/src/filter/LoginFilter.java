@@ -21,8 +21,8 @@ public class LoginFilter implements Filter {
 	public void destroy() {
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// place your code here
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -32,12 +32,12 @@ public class LoginFilter implements Filter {
 		String path = req.getContextPath();
 		String uri = req.getRequestURI();
 		String comando = req.getParameter("command");
-		if(comando == null){
+		if (comando == null) {
 			comando = "";
 		}
 
-		if (userLogado == null && !uri.equals(path + "/index.jsp")
-				&& !comando.equals("Login")) {
+		if (userLogado == null && !uri.equals(path + "/index.jsp") && !comando.equals("Login")
+				&& !uri.equals(path + "/RecuperarSenha.jsp") && !comando.equals("RecuperarSenha")) {
 			((HttpServletResponse) response).sendRedirect(path + "/index.jsp");
 		} else {
 			// pass the request along the filter chain

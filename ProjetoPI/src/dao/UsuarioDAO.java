@@ -9,7 +9,7 @@ import model.Usuario;
 
 public class UsuarioDAO {
 	
-	public int salvar(Usuario usuario) {
+	public int criar(Usuario usuario) {
 		String sql = "INSERT INTO usuario (id, nome, email, senha) "
 				+ "VALUES (?, ?, ?, ?)";
 		try (Connection conn = ConnectionFactory.conectar();
@@ -96,26 +96,25 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	/*public Usuario getSingle (String email) {
-		String sql = "SELECT id, nome, email, senha FROM usuario WHERE email =?";
-		Usuario usuario = new Usuario() {
-		};
+	public boolean verificarEmail(String email) {
+		String sql = "SELECT email FROM usuario WHERE email=?";
 		try (Connection conn = ConnectionFactory.conectar();
 				PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, email);
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
-					usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha")) {};
-					return usuario;
-				} 
+					return true;
+				} else {
+					return false;
+				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				e.getMessage();
 			}
 		} catch (SQLException e1) {
-			System.out.print(e1.getStackTrace());
+			e1.getMessage();
 		}
-		return usuario;
-	}*/
-
+		return false;
+	}
+	
 	
 }
