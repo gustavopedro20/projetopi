@@ -186,6 +186,26 @@ public class ProfessorDAO {
 		return lista;
 	}
 	
+	public boolean verificarMatricula(String matricula) {
+		String sql = "SELECT * FROM professor WHERE matricula=?";
+		try (Connection conn = ConnectionFactory.conectar(); 
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, matricula);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+		} catch (SQLException e1) {
+			e1.getMessage();
+		}
+		return false;
+	}
+	
 }
 
 

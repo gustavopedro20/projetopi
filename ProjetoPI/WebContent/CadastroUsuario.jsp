@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="nome">Nome completo</label>
                 <input type="text" class="form-control" name="nome" placeholder="Nome completo do aluno ou professor"
-                    maxlength="50"required>
+                    maxlength="50" required>
                 <div class="valid-feedback">Tudo certo!</div>
                 <!-- pattern="[a-z\s]+$"  -->
                 <!-- <div class="invalid-feedback">Por favor, esse campo é obrigatório e aceita apenas letras!</div> -->
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tipo">Professor ou aluno?</label>
-                    <select class="form-control" id="tipo" name="tipo">
+                    <select class="form-control" name="tipo">
                         <option value="Professor">Professor</option>
                         <option value="Aluno">Aluno</option>
                     </select>
@@ -53,7 +53,8 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" name="senha" placeholder="Senha" maxlength="15" required>
+                    <input type="password" class="form-control" name="senha" placeholder="Senha" maxlength="15"
+                        required>
                     <div class="valid-feedback">Tudo certo!</div>
                     <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
                 </div>
@@ -77,6 +78,10 @@
                 }, false);
             })();
         </script>
+
+        <c:if test="${not empty erroCadastro}">
+            <script>window.alert('Email, ra ou matricula já existem!')</script>
+        </c:if>
     </div>
 
     <footer>

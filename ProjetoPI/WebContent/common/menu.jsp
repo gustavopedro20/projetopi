@@ -21,7 +21,7 @@
 			<li><a href="controller.do?command=VisualizarAtividade">Visualizar
 					Atividades</a></li>
 		</c:if>
-		<c:if test="${not empty sessionScope['admLogado']}">
+		<c:if test="${not empty admLogado}">
 			<li><a href="CadastroUsuario.jsp">Cadastrar Usuário</a></li>
 		</c:if>
 		<li><a href="logout.jsp">Sair</a></li>

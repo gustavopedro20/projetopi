@@ -8,15 +8,7 @@ import model.Usuario;
 
 public class ProfessorService {
 
-	ProfessorDAO dao;
-
-	public ProfessorService() {
-		dao = new ProfessorDAO();
-	}
-
-//	public void criar(Professor professor, Usuario usuario) {
-//		dao.criar(professor, usuario);
-//	}
+	ProfessorDAO dao = new ProfessorDAO();
 
 	public void atualizar(Professor professor) {
 		dao.atualizar(professor);
@@ -42,5 +34,8 @@ public class ProfessorService {
 		return dao.listarProfessores();
 	}
 	
+	public boolean verificarMatricula(String matricula) {
+		return dao.verificarMatricula(matricula);
+	}
 	
 }

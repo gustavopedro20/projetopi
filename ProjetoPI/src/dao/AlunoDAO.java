@@ -204,4 +204,24 @@ public class AlunoDAO {
 			System.out.println(e.getStackTrace());
 		}
 	}
+	
+	public boolean verificarRa(String ra) {
+		String sql = "SELECT * FROM aluno WHERE ra=?";
+		try (Connection conn = ConnectionFactory.conectar(); 
+				PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, ra);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+		} catch (SQLException e1) {
+			e1.getMessage();
+		}
+		return false;
+	}
 }

@@ -35,5 +35,9 @@ public class AlunoService {
 	public void deletarAlunoGrupo(int idGrupo, int idAluno) {
 		dao.deletarAlunoGrupo(idGrupo, idAluno);
 	}	
+	
+	public boolean verificarRa(String ra) {
+		return dao.verificarRa(ra);
+	}
 
 }

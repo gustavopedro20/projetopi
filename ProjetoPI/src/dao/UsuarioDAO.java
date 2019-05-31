@@ -133,7 +133,7 @@ public class UsuarioDAO {
 	}
 
 	public boolean verificarEmail(String email) {
-		String sql = "SELECT email FROM usuario WHERE email=?";
+		String sql = "SELECT * FROM usuario WHERE email=?";
 		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, email);
 			try (ResultSet rs = ps.executeQuery();) {
