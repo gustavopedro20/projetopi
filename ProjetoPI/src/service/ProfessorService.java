@@ -14,9 +14,9 @@ public class ProfessorService {
 		dao = new ProfessorDAO();
 	}
 
-	public void criar(Professor professor) {
-		dao.criar(professor);
-	}
+//	public void criar(Professor professor, Usuario usuario) {
+//		dao.criar(professor, usuario);
+//	}
 
 	public void atualizar(Professor professor) {
 		dao.atualizar(professor);

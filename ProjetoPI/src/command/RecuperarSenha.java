@@ -7,8 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mail.EnviarEmailRecuperarSenha;
 import service.UsuarioService;
-import util.EnviarEmailRecuperarSenha;
+import util.GerarSenha;
 
 public class RecuperarSenha implements Command {
 
@@ -17,37 +18,22 @@ public class RecuperarSenha implements Command {
 			throws ServletException, IOException {
 
 		String email = request.getParameter("email");
-		UsuarioService us = new UsuarioService();
+		UsuarioService service = new UsuarioService();
 		EnviarEmailRecuperarSenha enviarEmail = new EnviarEmailRecuperarSenha();
+		GerarSenha gerar = new GerarSenha();
 		RequestDispatcher disp = null;
 
-		if (email == null || !us.verificarEmail(email)) {
+		if (email == null || !service.verificarEmail(email)) {
+			request.setAttribute("invalido", true);
 			disp = request.getRequestDispatcher("RecuperarSenha.jsp");
 			disp.forward(request, response);
 		} else {
-			String novaSenha = gerarSenha();
-			us.atualizarSenha(novaSenha, email);
+			String novaSenha = gerar.gerarSenha();
+			service.atualizarSenha(novaSenha, email);
 			enviarEmail.enviar(email, novaSenha);
-			disp = request.getRequestDispatcher("index.jsp");
+			request.setAttribute("valido", true);
+			disp = request.getRequestDispatcher("RecuperarSenha.jsp");
 			disp.forward(request, response);
 		}
-
 	}
-
-	public String gerarSenha() {
-
-		String[] carct = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
-				"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C",
-				"D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
-				"Y", "Z" };
-
-		String senha = "";
-
-		for (int i = 0; i < 10; i++) {
-			int j = (int) (Math.random() * carct.length);
-			senha += carct[j];
-		}
-		return senha;
-	}
-
 }

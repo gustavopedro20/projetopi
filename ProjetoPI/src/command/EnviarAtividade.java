@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mail.EnviarEmailAtividade;
 import model.Aluno;
 import model.Atividade;
 import model.Entrega;
 import model.Grupo;
 import model.TurmaAluno;
 import service.EntregaService;
-import util.EnviarEmailAtividade;
 
 public class EnviarAtividade implements Command {
 

@@ -14,43 +14,71 @@
     <c:import url="common/menu.jsp" />
 
     <div id="main" class="container">
-        <h4 class="page-header">Cadastro de Usuário</h4>
-        <form action="controller.do" method="post">
+        <h3 class="page-header">Cadastro de Usuário</h3>
+        <hr>
+        <form class="needs-validation" novalidate action="controller.do" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome completo</label>
+                <input type="text" class="form-control" name="nome" placeholder="Nome completo do aluno ou professor"
+                    maxlength="50"required>
+                <div class="valid-feedback">Tudo certo!</div>
+                <!-- pattern="[a-z\s]+$"  -->
+                <!-- <div class="invalid-feedback">Por favor, esse campo é obrigatório e aceita apenas letras!</div> -->
+                <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
+            </div>
             <div class="row">
-                <div class="col-md-6 form-group">
-                    <label for="tipo">Selecione o Tipo de Usuário</label>
+                <div class="form-group col-md-6">
+                    <label for="raOuMatricula">RA/Matrícula</label>
+                    <input type="text" class="form-control" name="raOuMatricula" placeholder="RA ou Matrícula"
+                        maxlength="15" required>
+                    <div class="valid-feedback">Tudo certo!</div>
+                    <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tipo">Professor ou aluno?</label>
                     <select class="form-control" id="tipo" name="tipo">
-                        <option value="aluno">Aluno</option>
-                        <option value="professor">Professor</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Aluno">Aluno</option>
                     </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="num">RA / Matrícula</label>
-                    <input type="text" class="form-control" name="num" id="num" maxlength="15"
-                        placeholder="RA / Matrícula">
+                    <div class="valid-feedback">Tudo certo!</div>
+                    <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="nome" maxlength="15"
-                        placeholder="Digite o nome do usuário">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Email" maxlength="30" required>
+                    <div class="valid-feedback">Tudo certo!</div>
+                    <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="email">E-mail</label>
-                    <input type="number" class="form-control" name="email" id="email" required maxlength="10"
-                        placeholder="E-mail">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" name="senha" placeholder="Senha" maxlength="15" required>
+                    <div class="valid-feedback">Tudo certo!</div>
+                    <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
                 </div>
             </div>
-            <br />
-            <div id="actions" class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" name="command" value="CriarUsuario">Próximo</button>
-                    <a href="home.jsp" class="btn btn-default">Cancelar</a>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary" name="command" value="CadastrarUsuario">Cadastrar</button>
         </form>
+        <script>
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    var forms = document.getElementsByClassName('needs-validation');
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
     </div>
+
     <footer>
         <c:import url="common/footer.jsp" />
     </footer>
