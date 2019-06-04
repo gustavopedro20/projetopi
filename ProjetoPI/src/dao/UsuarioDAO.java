@@ -34,7 +34,7 @@ public class UsuarioDAO {
 
 	public int criarProfessor(Usuario usuario, Professor professor) {
 		String sql = "INSERT INTO professor (professor_id, matricula) VALUES (?, ?) ";
-		criarUsuario(usuario);
+		this.criarUsuario(usuario);
 		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, usuario.getId());
 			ps.setString(2, professor.getMatricula());
@@ -55,7 +55,8 @@ public class UsuarioDAO {
 	
 	public int criarAluno(Usuario usuario, Aluno aluno) {
 		String sql = "INSERT INTO aluno (aluno_id, ra) VALUES (?, ?) ";
-		criarUsuario(usuario);
+		this.criarUsuario(usuario);
+		
 		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, usuario.getId());
 			ps.setString(2, aluno.getRa());

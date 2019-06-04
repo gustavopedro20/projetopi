@@ -25,6 +25,7 @@
 
 	<div id="main" class="container">
 		<form action="controller.do" method="post" autocomplete="off">
+			<input type="hidden" name="idGrupo" value="${grupo.id}" />
 			<h4 class="page-header">Visualizar ${grupo.nome}</h4>
 			<hr>
 			<div class="row">
@@ -52,31 +53,27 @@
 				</div>
 			</div>
 			<br />
-			<c:if test="${not empty lista_alunos}">
-				<div id="list" class="row">
+			<c:if test="${not empty listaAlunos}">
+				<div id="list" class="pre-scrollable">
 					<div class="col align-self-start">
 						<table class="table table-hover">
 							<thead>
 								<tr>
+									<th>#</th>
 									<th>Aluno</th>
 									<th>Email</th>
 									<th>RA</th>
-									<!-- <th></th> -->
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="aluno" items="${lista_alunos}">
+								<c:forEach var="aluno" items="${listaAlunos}">
 									<tr>
+										<td>${aluno.id}</td>
 										<td>${aluno.nome}</td>
 										<td>${aluno.email}</td>
 										<td>${aluno.ra}</td>
-										<!-- <td class="actions"> -->
-											<!-- <a class="btn btn-info btn-sm"
-                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a> -->
-										<!-- </td> -->
 									</tr>
 								</c:forEach>
-
 							</tbody>
 						</table>
 					</div>
@@ -84,8 +81,9 @@
 			</c:if>
 			<div id="actions" class="row">
 				<div class="col-md-12">
-					<a href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}&id_turma=${grupo.turma.id}"
-						class="btn btn-outline-dark">Editar</a>
+					<!-- <a href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}&id_turma=${grupo.turma.id}"
+						class="btn btn-outline-dark">Editar</a> -->
+					<button name="command" value="CarregarEdicaoDoGrupo" class="btn btn-outline-dark">Editar</button>
 					<button id="btn${grupo.id}%>" type="button" class="btn btn-outline-danger" data-toggle="modal"
 						data-target="#delete-modal" data-grupo="${grupo.id}">Excluir</button>
 					<a href="controller.do?command=ListarGruposReiniciar" class="btn btn-default">Voltar</a>

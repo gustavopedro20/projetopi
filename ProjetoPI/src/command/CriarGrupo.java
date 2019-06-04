@@ -39,31 +39,30 @@ public class CriarGrupo implements Command {
 		grupo.setNum(Integer.parseInt(numeroGrupo));
 		grupo.setTurma(turma);
 		
-		GrupoService cs = new GrupoService();
-		TurmaService ts = new TurmaService();
+		GrupoService grupoService = new GrupoService();
+		TurmaService turmaService = new TurmaService();
 		
-		cs.criar(grupo);
-		turma = ts.carregar(turma.getId());
+		grupoService.criar(grupo);
+		turma = turmaService.carregar(turma.getId());
 		
 		RequestDispatcher disp = null;
 		HttpSession sessao = request.getSession();
 		
 		// CARREGAR ALUNO COMBO BOX -- TELA ADICINAR ALUNO NO GRUPO -- 
 		AlunoService as = new AlunoService();
-		ArrayList<Aluno> listaAluno = null;
-		listaAluno = as.listarAlunosPorTurmaSemGrupo(turma.getId());
-		sessao.setAttribute("lista_aluno", listaAluno);
+		ArrayList<Aluno> comboAlunos = null;
+		comboAlunos = as.listarAlunosPorTurmaSemGrupo(turma.getId());
+		sessao.setAttribute("comboAlunoSemGrupo", comboAlunos);
 		
 		// CRIAR UMA LISTA DE ALUNOS -- TELA ADICINAR ALUNO NO GRUPO --
-		ArrayList<Aluno> listaAlunoGrid = new ArrayList<Aluno>();
-		sessao.setAttribute("lista_alunos_criar", listaAlunoGrid);
+		ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();
+		sessao.setAttribute("listaAlunosCriar", listaAlunos);
 		
 		//JOGAR O GRUPO NA LISTA DE GRUPOS NA TELA DE LISTAR
-		ArrayList<Grupo> listaGrupo = null;
-		GrupoService gs = new GrupoService();
-		listaGrupo = gs.listarGrupos(Integer.parseInt(idTurma));
-		
-		sessao.setAttribute("lista_grupos", listaGrupo);
+//		ArrayList<Grupo> listaGrupo = null;
+//		listaGrupo = grupoService.listarGrupos(Integer.parseInt(idTurma));
+//		
+//		sessao.setAttribute("lista_grupos", listaGrupo);
 		sessao.setAttribute("grupo", grupo);
 		sessao.setAttribute("turma", turma);
 		

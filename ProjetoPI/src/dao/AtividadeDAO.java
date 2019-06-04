@@ -133,29 +133,12 @@ public class AtividadeDAO {
 					atividade.setNum(rs.getInt("a.numero"));
 					atividade.setDescricao(rs.getString("a.descricao"));
 					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
-					//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-					//Date data = dateFormat.format(rs.getDate("a.dt_inicio"));
-//					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
-//					atividade.setDtFim(rs.getDate("a.dt_fim"));
 					SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 					Date dataInicio = rs.getDate("dt_inicio");
 					Date dataFim = rs.getDate("dt_fim");
 					atividade.setDtInicio(formatDate.format(dataInicio));
 					atividade.setDtFim(formatDate.format(dataFim));
 					lista.add(atividade);
-
-					/*
-					 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); Date
-					 * date = new Date(); 
-					 * System.out.println(dateFormat.format(date));
-					 * 
-					 * java.util.Date dt = new java.util.Date();
-					 * 
-					 * java.text.SimpleDateFormat sdf = new
-					 * java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					 * 
-					 * String currentTime = sdf.format(dt);
-					 */
 				}
 			} catch (SQLException e) {
 				System.out.println("Lista atividade erro: " + e.getMessage());

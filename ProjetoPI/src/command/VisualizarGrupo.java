@@ -20,18 +20,19 @@ public class VisualizarGrupo implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String idGrupo = request.getParameter("id");
-		Grupo grupo = new Grupo();
-		grupo.setId(Integer.parseInt(idGrupo));
-		GrupoService cs = new GrupoService();
+		String idGrupo = request.getParameter("idGrupo");
 		
-		AlunoService as = new AlunoService();
-		ArrayList<Aluno> listaAluno = null;
-		listaAluno = as.listarAlunosPorGrupo(grupo.getId());
+		Grupo grupo = new Grupo();
+		GrupoService grupoService = new GrupoService();
+		grupo.setId(Integer.parseInt(idGrupo));
+		grupo = grupoService.carregar(grupo.getId());
+		
+		AlunoService alunoService = new AlunoService();
+		ArrayList<Aluno> listaAlunos = null;
+		listaAlunos = alunoService.listarAlunosPorGrupo(grupo.getId());
+		
 		HttpSession sessao = request.getSession();
-		sessao.setAttribute("lista_alunos", listaAluno);
-
-		grupo = cs.carregar(grupo.getId());
+		sessao.setAttribute("listaAlunos", listaAlunos);	
 		request.setAttribute("grupo", grupo);
 		
 		RequestDispatcher disp = request.getRequestDispatcher("VisualizarGrupo.jsp");

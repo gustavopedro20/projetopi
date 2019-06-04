@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Grupo;
+import model.Turma;
 import service.GrupoService;
 
 public class ListarGruposBuscar implements Command {
@@ -18,14 +19,21 @@ public class ListarGruposBuscar implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String idTurma = request.getParameter("id_turma");
-		GrupoService gs = new GrupoService();
+		String sigla = request.getParameter("sigla");
+		String ano = request.getParameter("ano");
+		String semestre = request.getParameter("semestre");
+		
+		GrupoService grupoService = new GrupoService();
 		ArrayList<Grupo> listaGrupo = null;
-		HttpSession sessao = request.getSession();
 
-//		listaGrupo = gs.listarGrupos();
-		listaGrupo = gs.listarGrupos(Integer.parseInt(idTurma));
-		sessao.setAttribute("lista_grupos", listaGrupo);
+		Turma turma = new Turma();
+		turma.setSigla(sigla);
+		turma.setAnoLetivo(Integer.parseInt(ano));
+		turma.setSemestreLetivo(Integer.parseInt(semestre));
+
+		listaGrupo = grupoService.listarGruposPorTurma(turma);
+		HttpSession sessao = request.getSession();
+		sessao.setAttribute("listaGrupos", listaGrupo);
 
 		RequestDispatcher disp = request.getRequestDispatcher("ListarGrupos.jsp");
 		disp.forward(request, response);

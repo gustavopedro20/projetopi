@@ -20,26 +20,19 @@ public class CarregarEdicaoDoGrupo implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String idGrupo = request.getParameter("id_grupo");
-		String idTurma = request.getParameter("id_turma");
-
+		String idGrupo = request.getParameter("idGrupo");
 		Grupo grupo = new Grupo();
 		GrupoService cs = new GrupoService();
 		grupo.setId(Integer.parseInt(idGrupo));
 		grupo = cs.carregar(grupo.getId());
-
-		HttpSession sessao = request.getSession();
-		@SuppressWarnings("unchecked")
-		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
-		sessao.setAttribute("lista_alunos", listaAluno);
-		request.setAttribute("grupo", grupo);
 		
-		/*COMBO BOX DOS ALUNOS NA EDICAO DE GRUPO*/
-//		AlunoService as = new AlunoService();
-//		ArrayList<Aluno> listaAlunoCombo = null;
-//		listaAlunoCombo = as.listarAlunosPorTurmaSemGrupo(Integer.parseInt(idTurma));
-//		sessao.setAttribute("listaAlunoCombo", listaAlunoCombo);	
-		/*****************************************/
+		HttpSession sessao = request.getSession();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>) sessao.getAttribute("listaAlunos");
+		sessao.setAttribute("listaAlunos", listaAlunos);
+		request.setAttribute("grupo", grupo);
+	
 		RequestDispatcher disp = null;
 		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);

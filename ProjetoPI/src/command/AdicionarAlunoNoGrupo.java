@@ -25,50 +25,34 @@ public class AdicionarAlunoNoGrupo implements Command {
 		RequestDispatcher disp = null;
 		
 		// PEGAR ALUNO DA COMBO E JOGAR NA LISTA
-		String idAluno = request.getParameter("aluno_combo");
-		System.out.println("ID ALUNO COMBO: "+idAluno);
+		String idAluno = request.getParameter("idAluno");
 		
 		Aluno aluno = new Aluno();
 		aluno.setId(Integer.parseInt(idAluno));
 		
-		AlunoService as = new AlunoService();
-		aluno = as.carregar(aluno.getId());
+		AlunoService alunoService = new AlunoService();
+		aluno = alunoService.carregar(aluno.getId());
 		
-		Grupo grupo;
-		grupo = (Grupo) sessao.getAttribute("grupo");
+		Grupo grupo = (Grupo) sessao.getAttribute("grupo");
 		
-		TurmaAlunoService tas = new TurmaAlunoService();
-		tas.atualizarTurmaAluno(grupo.getId(), aluno.getId());
+		TurmaAlunoService turmaAlunoService = new TurmaAlunoService();
+		turmaAlunoService.atualizarTurmaAluno(grupo.getId(), aluno.getId());
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>)sessao.getAttribute("lista_alunos_criar");
-		//int pos = busca(aluno, listaAluno);
-		//listaAluno.remove(pos);
-		listaAluno.add(aluno);
-		sessao.setAttribute("lista_alunos_criar", listaAluno);
+		ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>)sessao.getAttribute("listaAlunosCriar");
+		listaAlunos.add(aluno);
+		sessao.setAttribute("listaAlunosCriar", listaAlunos);
 		
 		// CARREGAR ALUNO COMBO BOX -- TELA ADICINAR ALUNO NO GRUPO -- 
-		//AlunoService as = new AlunoService();
 		Turma turma = new Turma();
 		turma = (Turma) sessao.getAttribute("turma");
-		ArrayList<Aluno> listaAlunoCombo = null;
-		listaAlunoCombo = as.listarAlunosPorTurmaSemGrupo(turma.getId());
-		sessao.setAttribute("lista_aluno", listaAlunoCombo);
+		ArrayList<Aluno> comboAlunos = null;
+		comboAlunos = alunoService.listarAlunosPorTurmaSemGrupo(turma.getId());
+		sessao.setAttribute("comboAlunoSemGrupo", comboAlunos);
 		
 		disp = request.getRequestDispatcher("AssociarAlunoGrupo.jsp");
 		disp.forward(request, response);
 
-	}
-
-	public int busca(Aluno aluno, ArrayList<Aluno> listaAluno) {
-		Aluno a;
-		for (int i = 0; i < listaAluno.size(); i++) {
-			a = listaAluno.get(i);
-			if (a.getId() == aluno.getId()) {
-				return i;
-			}
-		}
-		return -1;
 	}
 
 }

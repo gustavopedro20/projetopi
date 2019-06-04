@@ -18,7 +18,7 @@ public class ExcluirGrupo implements Command {
 	public void executar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String idGrupo = request.getParameter("id");
+		String idGrupo = request.getParameter("idGrupo");
 		Grupo grupo = new Grupo();
 		grupo.setId(Integer.parseInt(idGrupo));
 		GrupoService gs = new GrupoService();
@@ -28,9 +28,9 @@ public class ExcluirGrupo implements Command {
 
 		gs.deletar(grupo.getId());
 		@SuppressWarnings("unchecked")
-		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) sessao.getAttribute("lista_grupos");
+		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) sessao.getAttribute("listaGrupos");
 		listaGrupo.remove(busca(grupo, listaGrupo));
-		sessao.setAttribute("lista_grupos", listaGrupo);
+		sessao.setAttribute("listaGrupos", listaGrupo);
 		disp = request.getRequestDispatcher("ListarGrupos.jsp");
 		disp.forward(request, response);
 

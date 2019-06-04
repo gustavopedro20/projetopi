@@ -26,14 +26,55 @@
         <footer>
             <c:import url="common/footer.jsp" />
         </footer>
+        
+        <!-- MODAL MENSAGEM VALIDO -->
+        <div class="modal fade" id="valido" tabindex="-1" role="dialog" aria-labelledby="valido" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="valido">Mensagem do sistema:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Foi lhe enviado um emal com uma nova senha!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <c:if test="${not empty invalido}">
-            <script>window.alert('Esse email não consta no sistema!')</script>
-        </c:if>
-        <c:if test="${not empty valido}">
-            <script>window.alert('Foi lhe enviado um emal com uma nova senha!')</script>
-        </c:if>
+        <!-- MODAL MENSAGEM INVALIDO -->
+        <div class="modal fade" id="invalido" tabindex="-1" role="dialog" aria-labelledby="valido" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="valido">Mensagem do sistema:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Esse email não consta no sistema!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <c:if test="${not empty invalido}">
+        <script>$('#invalido').modal('show')</script>
+    </c:if>
+    <c:if test="${not empty valido}">
+        <script>$('#valido').modal('show')</script>
+    </c:if>
+
 </body>
 
 </html>

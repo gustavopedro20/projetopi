@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import dao.GrupoDAO;
 import model.Grupo;
+import model.Turma;
 
 public class GrupoService {
 	
@@ -35,6 +36,10 @@ public class GrupoService {
 	
 	public ArrayList<Grupo> listarGrupos(int turma){
 		return dao.listarGrupos(turma);
+	}
+	
+	public ArrayList<Grupo> listarGruposPorTurma(Turma turma){
+		return dao.listarGruposPorTurma(turma);
 	}
 	
 }

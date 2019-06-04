@@ -11,14 +11,6 @@
 
 <body class="background-image">
 
-    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if>
-
-    <c:if test="${empty sessionScope['userLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if> -->
-
     <c:import url="common/menu.jsp" />
 
     <div id="main" class="container">
@@ -28,7 +20,7 @@
                 <div class="col-md-6 form-group">
                     <label for="professor">Selecione um Professor</label>
                     <select class="form-control" id="professor" name="professor">
-                        <c:forEach var="professor" items="${lista_professor}">
+                        <c:forEach var="professor" items="${comboProfessor}">
                             <option value="${professor.id}">${professor.nome}</option>
                         </c:forEach>
                     </select>
@@ -36,7 +28,7 @@
                 <div class="col-md-6 form-group">
                     <label for="turma">Selecione uma Turma</label>
                     <select class="form-control" id="turma" name="turma">
-                        <c:forEach var="turma" items="${lista_turma}">
+                        <c:forEach var="turma" items="${comboTurma}">
                             <option value="${turma.id}">${turma.sigla}</option>
                         </c:forEach>
                     </select>

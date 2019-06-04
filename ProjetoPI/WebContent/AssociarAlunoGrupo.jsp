@@ -24,14 +24,13 @@
     <div id="main" class="container">
         <h4 class="page-header">Associar Alunos</h4>
         <form action="controller.do" method="post">
-            <input type="hidden" name="id_grupo" value="${grupo.id}" />
-
+            <input type="hidden" name="idGrupo" value="${grupo.id}" />
             <div id="top" class="row">
                 
                 <div class="col-md-6 form-group">
                     <label for="aluno">Selecione um Aluno</label>
-                    <select class="form-control" id="aluno_combo" name="aluno_combo">
-                        <c:forEach var="aluno" items="${lista_aluno}">
+                    <select class="form-control" id="idAluno" name="idAluno">
+                        <c:forEach var="aluno" items="${comboAlunoSemGrupo}">
                             <option value="${aluno.id}">${aluno.nome}</option>
                         </c:forEach>
                     </select>
@@ -42,8 +41,8 @@
                 </div>
             </div>
 
-            <c:if test="${not empty lista_alunos_criar}">     
-                <div id="lista" class="row">
+            <c:if test="${not empty listaAlunosCriar}">     
+                <div id="lista" class="pre-scrollable">
                     <div class="table-responsive col-md-12">
                         <table class="table table-striped">
                             <thead>
@@ -55,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="aluno" items="${lista_alunos_criar}">
+                                <c:forEach var="aluno" items="${listaAlunosCriar}">
                                     <tr>
                                         <td>
                                             ${aluno.nome}
@@ -81,7 +80,8 @@
             <div id="actions" class="row">
                 <div class="col-md-12">
                     <!-- <button type="submit" class="btn btn-primary" name="command" value="CriarGrupoAssociarAluno">Salvar</button> -->
-                    <a class="btn btn-outline-primary" href="controller.do?command=VisualizarGrupo&id=${grupo.id}">Salvar</a>
+                    <!-- <a class="btn btn-outline-primary" href="controller.do?command=VisualizarGrupo&idGrupo=${grupo.id}">Salvar</a> -->
+                    <button class="btn btn-outline-primary" name="command" value="VisualizarGrupo">Salvar</button>
                     <a href="controller.do?command=ExcluirGrupo&id=${grupo.id}" class="btn btn-default">Cancelar</a>
                     <!-- <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a> -->
                 </div>

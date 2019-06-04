@@ -8,31 +8,31 @@ import java.util.ArrayList;
 
 import model.Grupo;
 import model.Professor;
+import model.Turma;
 
 public class GrupoDAO {
-	
-    Connection conn;
 
-    public GrupoDAO(Connection conn) {
-        this.conn = conn;
-    }
-    public GrupoDAO() {
-    	
-    }
-	
+	Connection conn;
+
+	public GrupoDAO(Connection conn) {
+		this.conn = conn;
+	}
+
+	public GrupoDAO() {
+
+	}
+
 	public int criar(Grupo grupo) {
 		String sql = "INSERT INTO grupo (orientador_id, numero, nome, turma_id) VALUES (?, ?, ?, ?)";
-		
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getProf().getId());
 			ps.setInt(2, grupo.getNum());
 			ps.setString(3, grupo.getNome());
 			ps.setInt(4, grupo.getTurma().getId());
 			ps.execute();
 			String sqlQuery = "SELECT LAST_INSERT_ID()";
-			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery);
-					ResultSet rs = ps2.executeQuery();) {
+			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery); ResultSet rs = ps2.executeQuery();) {
 				if (rs.next()) {
 					grupo.setId(rs.getInt(1));
 				}
@@ -44,24 +44,22 @@ public class GrupoDAO {
 		}
 		return grupo.getId();
 	}
-	
+
 	public void deletarEntregaGrupo(int id) {
 		String sql = "DELETE FROM entrega WHERE grupo_id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);){
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
-			ps.execute();			
+			ps.execute();
 		} catch (Exception e) {
 			System.out.println("Erro em Delete Entrega Grupo: " + e.getMessage());
 		}
 	}
-	
+
 	public void deletarGrupoTurmaAluno(int id) {
 		String sql = "UPDATE turma_aluno SET grupo_id = null WHERE grupo_id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);){
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
-			ps.execute();			
+			ps.execute();
 		} catch (Exception e) {
 			System.out.println("Erro em Delete Grupo Turma Aluno: " + e.getMessage());
 		}
@@ -71,10 +69,9 @@ public class GrupoDAO {
 		deletarEntregaGrupo(id);
 		deletarGrupoTurmaAluno(id);
 		String sql = "DELETE FROM grupo WHERE id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);){
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, id);
-			ps.execute();			
+			ps.execute();
 		} catch (Exception e) {
 			System.out.println("Erro em Delete Grupo: " + e.getMessage());
 		}
@@ -82,8 +79,7 @@ public class GrupoDAO {
 
 	public void atualizar(Grupo grupo) {
 		String sql = "UPDATE grupo SET orientador_id=?, numero=?, nome=? WHERE id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getProf().getId());
 			ps.setInt(2, grupo.getNum());
 			ps.setString(3, grupo.getNome());
@@ -93,16 +89,15 @@ public class GrupoDAO {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public Grupo carregar(int id) {
 		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
-	
+
 		Grupo grupo = new Grupo();
 		Professor prof = new Professor();
-		grupo.setId(id);		
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+		grupo.setId(id);
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getId());
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
@@ -124,24 +119,23 @@ public class GrupoDAO {
 		}
 		return grupo;
 	}
-	
+
 	public ArrayList<Grupo> listarGrupos() {
-		
+
 		Grupo grupo;
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {			
-			try (ResultSet rs = ps.executeQuery();) {				
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
 					grupo = new Grupo();
 					prof = new Professor();
 					prof.setId(rs.getInt("u.id"));
 					prof.setNome(rs.getString("u.nome"));
 					grupo.setId(rs.getInt("g.id"));
-					grupo.setProf(prof);					
+					grupo.setProf(prof);
 					grupo.setNome(rs.getString("g.nome"));
 					grupo.setNum(rs.getInt("g.numero"));
 					lista.add(grupo);
@@ -151,19 +145,18 @@ public class GrupoDAO {
 			}
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
-		}		
+		}
 		return lista;
 	}
-	
+
 	public ArrayList<Grupo> listarGrupos(String chave) {
-		
+
 		Grupo grupo;
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE UPPER (g.nome) LIKE";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setString(1, "%" + chave.toUpperCase() + "%");
 			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
@@ -185,17 +178,50 @@ public class GrupoDAO {
 		}
 		return lista;
 	}
-	
+
 	public ArrayList<Grupo> listarGrupos(int turma) {
-		
+
 		Grupo grupo;
 		Professor prof;
 		ArrayList<Grupo> lista = new ArrayList<>();
 		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.turma_id=?";
-		try (Connection conn = ConnectionFactory.conectar();
-				PreparedStatement ps = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, turma);
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					grupo = new Grupo();
+					prof = new Professor();
+					prof.setId(rs.getInt("u.id"));
+					prof.setNome(rs.getString("u.nome"));
+					grupo.setProf(prof);
+					grupo.setId(rs.getInt("g.id"));
+					grupo.setNome(rs.getString("g.nome"));
+					grupo.setNum(rs.getInt("g.numero"));
+					lista.add(grupo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
+
+	public ArrayList<Grupo> listarGruposPorTurma(Turma turma) {
+
+		Grupo grupo;
+		Professor prof;
+		ArrayList<Grupo> lista = new ArrayList<>();
+		String sql = "SELECT u.id, u.nome, g.id, g.nome, g.numero "
+				+ "FROM usuario u JOIN professor p ON u.id = p.professor_id "
+				+ "JOIN grupo g ON p.professor_id = g.orientador_id " + "JOIN turma t ON g.turma_id = t.id "
+				+ "WHERE t.sigla=? AND t.ano_letivo=? AND semestre_letivo=?";
+		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, turma.getSigla());
+			ps.setInt(2, turma.getAnoLetivo());
+			ps.setInt(3, turma.getSemestreLetivo());
 			try (ResultSet rs = ps.executeQuery();) {
 				while (rs.next()) {
 					grupo = new Grupo();

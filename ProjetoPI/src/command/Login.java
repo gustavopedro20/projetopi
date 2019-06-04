@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,11 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Aluno;
+import model.Atividade;
+import model.Grupo;
 import model.Professor;
+import model.Turma;
 import model.TurmaAluno;
 import service.AlunoService;
+import service.AtividadeService;
+import service.GrupoService;
 import service.ProfessorService;
 import service.TurmaAlunoService;
+import service.TurmaService;
 
 public class Login implements Command {
 
@@ -51,20 +58,25 @@ public class Login implements Command {
 		aluno.setEmail(login);
 		aluno.setSenha(senha);
 
-		AlunoService as = new AlunoService();
-		Aluno alunoSession = new Aluno();
-		alunoSession = as.autenticarAluno(aluno);
+		AlunoService alunoService = new AlunoService();
+		Aluno alunoSessao = new Aluno();
+		alunoSessao = alunoService.autenticarAluno(aluno);
 		
-		TurmaAlunoService tas = new TurmaAlunoService();
-		TurmaAluno turmaAluno = new TurmaAluno();
-		turmaAluno = tas.carregarAlunoTurmaGrupo(alunoSession.getId());
 
-		if (alunoSession.getEmail() != null && turmaAluno.getId() != -1) {
+		if (alunoSessao.getEmail() != null) { // && turmaAluno.getId() != -1
 
+			TurmaAlunoService turmaAlunoService = new TurmaAlunoService();
+			TurmaAluno turmaAluno = new TurmaAluno();
+			turmaAluno = turmaAlunoService.carregarAlunoTurmaGrupo(alunoSessao.getId());
+			
+			AtividadeService atividadeService = new AtividadeService();
+			ArrayList<Atividade> listaAtividade = atividadeService.listarAtividadesPorAluno(alunoSessao.getId());;
+			
 			HttpSession sessao = request.getSession();
+			sessao.setAttribute("listaAtividade", listaAtividade);
 			sessao.setAttribute("alunoLogado", true);
 			sessao.setAttribute("turmaAluno", turmaAluno);
-			sessao.setAttribute("userLogado", alunoSession);
+			sessao.setAttribute("userLogado", alunoSessao);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -83,15 +95,32 @@ public class Login implements Command {
 		prof.setEmail(login);
 		prof.setSenha(senha);
 
-		ProfessorService ps = new ProfessorService();
-		Professor profSession = new Professor();
-		profSession = (Professor) ps.autenticarProfessor(prof);
+		ProfessorService professorService = new ProfessorService();
+		Professor profSessao = new Professor();
+		profSessao = (Professor) professorService.autenticarProfessor(prof);
+		
 
-		if (profSession.getId() != -1) {
+		if (profSessao.getId() != -1) {
+			
+			// CARREGAR TELA CRIAR GRUPO //
+			ArrayList<Professor> comboProfessor = null;
+			comboProfessor = professorService.listarProfessores();
 
+			TurmaService turmaService = new TurmaService();
+			ArrayList<Turma> comboTurma = null;
+			comboTurma = turmaService.listarTurmas();
+			
+			//PRE CARREGAR TODOS OS GRUPOS
+			GrupoService grupoService = new GrupoService();
+			ArrayList<Grupo> listaGrupo = null;
+			listaGrupo = grupoService.listarGrupos();
+			
 			HttpSession sessao = request.getSession();
+			sessao.setAttribute("comboProfessor", comboProfessor);
+			sessao.setAttribute("comboTurma", comboTurma);
+			sessao.setAttribute("listaGrupos", listaGrupo);
 			sessao.setAttribute("profLogado", true);
-			sessao.setAttribute("userLogado", profSession);
+			sessao.setAttribute("userLogado", profSessao);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);
@@ -110,15 +139,36 @@ public class Login implements Command {
 		prof.setEmail(login);
 		prof.setSenha(senha);
 
-		ProfessorService ps = new ProfessorService();
-		Professor admSession = new Professor();
-		admSession = (Professor) ps.autenticarAdm(prof);
+		ProfessorService professorService = new ProfessorService();
+		Professor admSessao = new Professor();
+		admSessao = (Professor) professorService.autenticarAdm(prof);
 
-		if (admSession.getAdm() == 1) {
+		if (admSessao.getAdm() == 1) {
+			
+			// CARREGAR TELA CRIAR GRUPO //
+			ArrayList<Professor> comboProfessor = null;
+			comboProfessor = professorService.listarProfessores();
+
+			TurmaService turmaService = new TurmaService();
+			ArrayList<Turma> comboTurma = null;
+			comboTurma = turmaService.listarTurmas();
+			
+			// CARREGAR TELA LISTAR ATIVIDADES
+			AtividadeService atividadeService = new AtividadeService();
+			ArrayList<Atividade> listaAtividade = atividadeService.listarAtividades();
+			
+			//PRE CARREGAR TODOS OS GRUPOS
+			GrupoService grupoService = new GrupoService();
+			ArrayList<Grupo> listaGrupo = null;
+			listaGrupo = grupoService.listarGrupos();			
 
 			HttpSession sessao = request.getSession();
+			sessao.setAttribute("comboProfessor", comboProfessor);
+			sessao.setAttribute("comboTurma", comboTurma);
+			sessao.setAttribute("listaAtividade", listaAtividade);
+			sessao.setAttribute("listaGrupos", listaGrupo);
 			sessao.setAttribute("admLogado", true);
-			sessao.setAttribute("userLogado", admSession);
+			sessao.setAttribute("userLogado", admSessao);
 
 			RequestDispatcher disp = request.getRequestDispatcher("home.jsp");
 			disp.forward(request, response);

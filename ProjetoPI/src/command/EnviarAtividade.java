@@ -45,18 +45,23 @@ public class EnviarAtividade implements Command {
 		EntregaService entregaService = new EntregaService();
 		entregaService.criar(entrega);
 		
-		//ENVIAR NOTIFICAÇÃO POR EMAIL
-		Aluno aluno = (Aluno) sessao.getAttribute("userLogado");
-		String alunoEmail = aluno.getEmail();
-		EnviarEmailAtividade EnviarEmail = new EnviarEmailAtividade();
-		EnviarEmail.enviar(alunoEmail);
+		try {
+			//ENVIAR NOTIFICAÇÃO POR EMAIL
+			Aluno aluno = (Aluno) sessao.getAttribute("userLogado");
+			String alunoEmail = aluno.getEmail();
+			EnviarEmailAtividade EnviarEmail = new EnviarEmailAtividade();
+			EnviarEmail.enviar(alunoEmail);
+		} catch (Exception e) {
+			request.setAttribute("msgErro", true);
+			System.out.println("Erro tentar enviar notificação por email - atividade: " + e.getMessage());
+		}
 		
 		@SuppressWarnings("unchecked")
 		//ATT A LISTA DE atividade
-		ArrayList<Atividade> listaAtividade = (ArrayList<Atividade>) sessao.getAttribute("lista_atividade");
+		ArrayList<Atividade> listaAtividade = (ArrayList<Atividade>) sessao.getAttribute("listaAtividade");
 		int pos = busca(atividade, listaAtividade);
 		listaAtividade.remove(pos);
-		sessao.setAttribute("lista_atividade", listaAtividade);
+		sessao.setAttribute("listaAtividade", listaAtividade);
 		disp = request.getRequestDispatcher("VisualizarAtividade.jsp");
 		disp.forward(request, response);
 

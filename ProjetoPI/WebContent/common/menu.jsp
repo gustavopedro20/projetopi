@@ -12,13 +12,13 @@
 		<li><a href="home.jsp">Home</a></li>
 
 		<c:if test="${not empty sessionScope['profLogado'] or not empty sessionScope['admLogado']}">
-			<li><a href="controller.do?command=ListarGruposReiniciar">Lista
+			<li><a href="ListarGrupos.jsp">Lista
 					de Grupos</a></li>
-			<li><a href="controller.do?command=CarregarCriarGrupo">Cadastro
+			<li><a href="CriarGrupo.jsp">Cadastro <!-- CriarGrupo.jsp controller.do?command=CarregarCriarGrupo-->
 					de Grupos</a></li>
 		</c:if>
 		<c:if test="${not empty sessionScope['alunoLogado'] or not empty sessionScope['admLogado']}">
-			<li><a href="controller.do?command=VisualizarAtividade">Visualizar
+			<li><a href="VisualizarAtividade.jsp">Visualizar
 					Atividades</a></li>
 		</c:if>
 		<c:if test="${not empty admLogado}">

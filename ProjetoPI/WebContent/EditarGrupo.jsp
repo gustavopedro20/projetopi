@@ -26,10 +26,10 @@
     <div id="main" class="container">
         <form action="controller.do" method="post" autocomplete="off">
 
-            <input type="hidden" name="id_grupo" value="${grupo.id}"/>
-            <input type="hidden" name="id_prof" value="${grupo.prof.id}"/>
+            <input type="hidden" name="id_grupo" value="${grupo.id}" />
+            <input type="hidden" name="id_prof" value="${grupo.prof.id}" />
             <!-- IMPLEMENTAR A TURMA AINDA -->
-            <input type="hidden" name="id_turma" value="${turma.id}"/>
+            <input type="hidden" name="id_turma" value="${turma.id}" />
             <!-- ATE AQUI -->
 
             <div id="top" class="row">
@@ -51,12 +51,13 @@
                 </div>
             </div>
 
-            <c:if test="${not empty lista_alunos}">
-                <div id="list" class="row">
+            <c:if test="${not empty listaAlunos}">
+                <div id="list" class="pre-scrollable">
                     <div class="col align-self-start">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Aluno</th>
                                     <th>Email</th>
                                     <th>RA</th>
@@ -64,20 +65,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="aluno" items="${lista_alunos}">
+                                <c:forEach var="aluno" items="${listaAlunos}">
                                     <tr>
-                                        <td>
-                                            ${aluno.nome}
-                                        </td>
-                                        <td>
-                                            ${aluno.email}
-                                        </td>
-                                        <td>
-                                            ${aluno.ra}
-                                        </td>
+                                        <td>${aluno.id}</td>
+                                        <td>${aluno.nome}</td>
+                                        <td>${aluno.email}</td>
+                                        <td>${aluno.ra} </td>
                                         <td class="actions">
                                             <a class="btn btn-outline-info btn-sm"
-                                                href="controller.do?command=ExcluirAlunoGrupo&id_aluno=${aluno.id}&id_grupo=${grupo.id}">Remover</a>
+                                                href="controller.do?command=ExcluirAlunoGrupo&idAluno=${aluno.id}&idGrupo=${grupo.id}">Remover
+                                            </a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -87,11 +84,11 @@
                     </div>
                 </div>
             </c:if>
-
             <hr>
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-outline-primary" name="command" value="EditarGrupo">Salvar</button>
+                    <button type="submit" class="btn btn-outline-primary" name="command"
+                        value="EditarGrupo">Salvar</button>
                     <button type="submit" class="btn btn-default" name="command"
                         value="ListarGruposReiniciar">Cancelar</button>
                     <!-- <a href="controller.do?command=ListarGruposBuscar" class="btn btn-default">Cancelar</a> -->

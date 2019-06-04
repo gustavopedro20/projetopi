@@ -17,51 +17,49 @@ import service.GrupoService;
 public class ExcluirAlunoGrupo implements Command {
 
 	@Override
-	public void executar(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-		String idAluno = request.getParameter("id_aluno");
-		String idGrupo = request.getParameter("id_grupo");
-		
-		//CARREGA ALUNO
+	public void executar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String idAluno = request.getParameter("idAluno");
+		String idGrupo = request.getParameter("idGrupo");
+
+		// CARREGA ALUNO
 		Aluno aluno = new Aluno();
-		AlunoService as = new AlunoService();
+		AlunoService alunoService = new AlunoService();
 		aluno.setId(Integer.parseInt(idAluno));
-		aluno = as.carregar(aluno.getId());
-		
-		//CARREGA GRUPO
+		aluno = alunoService.carregar(aluno.getId());
+
+		// CARREGA GRUPO
 		Grupo grupo = new Grupo();
-		GrupoService gs = new GrupoService();
+		GrupoService grupoService = new GrupoService();
 		grupo.setId(Integer.parseInt(idGrupo));
-		grupo = gs.carregar(grupo.getId());
-		
-		//DELETA ALUNO DO GRUPO ESCOLHIDO
-		as.deletarAlunoGrupo(grupo.getId(), aluno.getId());
-		
+		grupo = grupoService.carregar(grupo.getId());
+
+		// DELETA ALUNO DO GRUPO ESCOLHIDO
+		alunoService.deletarAlunoGrupo(grupo.getId(), aluno.getId());
+
 		RequestDispatcher disp = null;
 		HttpSession sessao = request.getSession();
 		@SuppressWarnings("unchecked")
-		//ATT A LISTA DE ALUNOS
-		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
-		int pos = busca(aluno, listaAluno);
-		listaAluno.remove(pos);
-		sessao.setAttribute("lista_alunos", listaAluno);
-		request.setAttribute("grupo", grupo);
+		// ATT A LISTA DE ALUNOS
+		ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>) sessao.getAttribute("listaAlunos");
+		listaAlunos.remove(busca(aluno, listaAlunos));
+		sessao.setAttribute("listaAlunos", listaAlunos);
+		sessao.setAttribute("grupo", grupo);
 		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);
-		
 
 	}
 
-	public int busca(Aluno aluno, ArrayList<Aluno> listaAluno) {
+	public int busca(Aluno aluno, ArrayList<Aluno> listaAlunos) {
 		Aluno a;
-		for (int i = 0; i < listaAluno.size(); i++) {
-			a = listaAluno.get(i);
+		for (int i = 0; i < listaAlunos.size(); i++) {
+			a = listaAlunos.get(i);
 			if (a.getId() == aluno.getId()) {
 				return i;
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 }

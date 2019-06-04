@@ -18,7 +18,7 @@
         <hr>
         <form class="needs-validation" novalidate action="controller.do" method="POST">
             <div class="form-group">
-                <label for="nome">Nome completo</label>
+                <label for="nome">Nome completo *</label>
                 <input type="text" class="form-control" name="nome" placeholder="Nome completo do aluno ou professor"
                     maxlength="50" required>
                 <div class="valid-feedback">Tudo certo!</div>
@@ -28,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="raOuMatricula">RA/Matrícula</label>
+                    <label for="raOuMatricula">RA/Matrícula *</label>
                     <input type="text" class="form-control" name="raOuMatricula" placeholder="RA ou Matrícula"
                         maxlength="15" required>
                     <div class="valid-feedback">Tudo certo!</div>
@@ -46,13 +46,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="email">Email</label>
+                    <label for="email">Email *</label>
                     <input type="email" class="form-control" name="email" placeholder="Email" maxlength="30" required>
                     <div class="valid-feedback">Tudo certo!</div>
                     <div class="invalid-feedback">Por favor, esse campo é obrigatório!</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="senha">Senha</label>
+                    <label for="senha">Senha *</label>
                     <input type="password" class="form-control" name="senha" placeholder="Senha" maxlength="15"
                         required>
                     <div class="valid-feedback">Tudo certo!</div>
