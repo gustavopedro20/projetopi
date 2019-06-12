@@ -21,15 +21,21 @@ public class ExcluirGrupo implements Command {
 		String idGrupo = request.getParameter("idGrupo");
 		Grupo grupo = new Grupo();
 		grupo.setId(Integer.parseInt(idGrupo));
-		GrupoService gs = new GrupoService();
+		GrupoService grupoService = new GrupoService();
 		
 		RequestDispatcher disp = null;
 		HttpSession sessao = request.getSession();
 
-		gs.deletar(grupo.getId());
+		grupoService.deletar(grupo.getId());
+
 		@SuppressWarnings("unchecked")
 		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) sessao.getAttribute("listaGrupos");
-		listaGrupo.remove(busca(grupo, listaGrupo));
+		try {
+			listaGrupo.remove(busca(grupo, listaGrupo));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		listaGrupo = grupoService.listarGrupos();
 		sessao.setAttribute("listaGrupos", listaGrupo);
 		disp = request.getRequestDispatcher("ListarGrupos.jsp");
 		disp.forward(request, response);

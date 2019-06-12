@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome do Grupo</label>
-                    <input type="text" class="form-control" name="nome" id="nome" maxlength="15"
-                        placeholder="Nome do grupo (não obrigatório)">
+                    <input type="text" class="form-control" name="nome" id="nome" required maxlength="15" minlength="5"
+                        placeholder="Nome do grupo">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="nome">Número do Grupo</label>

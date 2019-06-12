@@ -49,6 +49,17 @@
                     <input type="text" class="form-control" name="numero_grupo" id="numero_grupo" required
                         maxlength="100" placeholder="numero" value="${grupo.num}">
                 </div>
+                <div class="col-md-6 form-group">
+                    <label for="aluno">Selecione um Aluno</label>
+                    <select class="form-control" id="idAluno" name="idAluno">
+                        <c:forEach var="aluno" items="${comboAlunoSemGrupo}">
+                            <option value="${aluno.id}">${aluno.nome}</option>
+                        </c:forEach>
+                    </select> 
+                </div>
+                <div class="col-md-6 botao-selecione-aluno">
+                    <button class="btn btn-outline-success" name="command" value="">Associar</button>
+                </div>
             </div>
 
             <c:if test="${not empty listaAlunos}">

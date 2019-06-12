@@ -1,11 +1,13 @@
 package command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Professor;
@@ -32,6 +34,8 @@ public class CadastrarUsuario implements Command {
 
 		Usuario usuario = new Usuario() {
 		};
+		
+		HttpSession sessao = request.getSession();
 		
 		// VER SE EMAIL, RA E MATRICULA JÁ EXISTEM
 		if (tipo.equals("Aluno")) {
@@ -66,11 +70,17 @@ public class CadastrarUsuario implements Command {
 			usuario.setSenha(senha);
 			professor.setMatricula(raOuMatricula);
 			usuarioService.criarProfessor(usuario, professor);
+			/// SETAR NA SESSAO UMA NOVA LISTA COM O PROFESSOR NOVO
+			ProfessorService professorService = new ProfessorService();
+			ArrayList<Professor> comboProfessor = null;
+			comboProfessor = professorService.listarProfessores();
+			sessao.setAttribute("comboProfessor", comboProfessor);
+			//**//
 			request.setAttribute("criado", true);
 			RequestDispatcher disp = request.getRequestDispatcher("CadastroUsuario.jsp");
 			disp.forward(request, response);
 			
-		} else { // SE NÃO FOR NEM ALUNO SEM PROFESSOR N FAZ NADA
+		} else { // SE NÃO FOR NEM ALUNO NEM PROFESSOR N FAZ NADA
 			request.setAttribute("erroCadastro", true);
 			RequestDispatcher disp = request.getRequestDispatcher("CadastroUsuario.jsp");
 			disp.forward(request, response);

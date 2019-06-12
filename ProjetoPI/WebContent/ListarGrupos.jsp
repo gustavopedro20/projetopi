@@ -17,40 +17,42 @@
     <div id="main" class="container">
         <form action="controller.do" method="POST" autocomplete="off">
             <input type="hidden" name="id_turma" value="${grupo.turma.id}" />
-            <div id="top" class="row">
-                <div class="col align-self-start">
-                    <h4>Lista de Grupos</h4>
-                </div>
-                <div class="col-md-3 form-group">
-                    <select class="form-control" id="sigla" name="sigla">
-                        <c:forEach var="turma" items="${comboTurma}">
-                            <option value="${turma.sigla}">${turma.sigla}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="col-md-3 form-group">
-                    <select class="form-control" name="ano" id="ano">
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                        <option value="2017">2017</option>
-                    </select>
-                </div>
-                <div class="col-md-3 form-group">
-                    <select class="form-control" name="semestre" id="semestre">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div class="col-md-1-group">
-                    <button class="form-control" name="command" value="ListarGruposBuscar">Buscar</button>
-                </div>
+            <div id="top" class="col align-self-start">
+                <h4>Lista de Grupos</h4>
             </div>
-            <br>
+            <hr>
+            <div class="col align-self-start">
+                <dix class="row">
+                    <div class="col-md-3 form-group">
+                        <select class="form-control" id="sigla" name="sigla">
+                            <c:forEach var="turma" items="${comboTurma}">
+                                <option value="${turma.sigla}">${turma.sigla}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <select class="form-control" name="semestre" id="semestre">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1-group">
+                        <button class="form-control" name="command" value="ListarGruposBuscar">Buscar</button>
+                    </div>
+                </dix>
+            </div>
             <c:if test="${not empty listaGrupos}">
                 <div id="list" class="row">
                     <div class="col align-self-start">
                         <table class="table table-hover">
-                            <thead>
+                            <thead class="text-center">
                                 <tr>
                                     <th>#</th>
                                     <th>Número</th>
@@ -61,7 +63,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="grupo" items="${listaGrupos}">
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>${grupo.id}</td>
                                         <td>${grupo.num}</td>
                                         <td>${grupo.prof.nome}</td>
