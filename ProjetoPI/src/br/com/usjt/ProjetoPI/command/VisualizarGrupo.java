@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
-import model.Grupo;
-import service.AlunoService;
-import service.GrupoService;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.service.AlunoService;
+import br.com.usjt.ProjetoPI.service.GrupoService;
 
 public class VisualizarGrupo implements Command {
 

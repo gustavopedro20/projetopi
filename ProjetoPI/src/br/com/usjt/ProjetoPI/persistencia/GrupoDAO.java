@@ -1,4 +1,4 @@
-package dao;
+package br.com.usjt.ProjetoPI.persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,25 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Grupo;
-import model.Professor;
-import model.Turma;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.model.Turma;
 
 public class GrupoDAO {
 
-	Connection conn;
-
-	public GrupoDAO(Connection conn) {
-		this.conn = conn;
-	}
-
-	public GrupoDAO() {
-
-	}
-
 	public int criar(Grupo grupo) {
 		String sql = "INSERT INTO grupo (orientador_id, numero, nome, turma_id) VALUES (?, ?, ?, ?)";
-
 		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sql);) {
 			ps.setInt(1, grupo.getProf().getId());
 			ps.setInt(2, grupo.getNum());
@@ -91,9 +80,9 @@ public class GrupoDAO {
 	}
 
 	public Grupo carregar(int id) {
-		String sql = "SELECT u.id, u.nome, g.nome, g.numero FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
+		String sql = "SELECT u.id, u.nome, g.nome, g.numero, g.turma_id FROM usuario AS u INNER JOIN professor AS p ON u.id = p.professor_id "
 				+ "INNER JOIN grupo AS g ON p.professor_id = g.orientador_id WHERE g.id=?";
-
+		Turma turma = new Turma();
 		Grupo grupo = new Grupo();
 		Professor prof = new Professor();
 		grupo.setId(id);
@@ -103,10 +92,13 @@ public class GrupoDAO {
 				if (rs.next()) {
 					prof.setId(rs.getInt("u.id"));
 					prof.setNome(rs.getString("u.nome"));
+					turma.setId(rs.getInt("g.turma_id"));
+					grupo.setTurma(turma);
 					grupo.setProf(prof);
 					grupo.setNome(rs.getString("g.nome"));
 					grupo.setNum(rs.getInt("g.numero"));
 				} else {
+					grupo.setTurma(null);
 					grupo.setProf(null);
 					grupo.setNum(-1);
 					grupo.setNome(null);

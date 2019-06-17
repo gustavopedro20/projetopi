@@ -1,4 +1,4 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 import java.util.Date;
 
@@ -48,6 +48,12 @@ public class Entrega {
 	
 	public void setAtividade(Atividade atividade) {
 		this.atividade = atividade;
+	}
+
+	@Override
+	public String toString() {
+		return "Entrega [id=" + id + ", dtCadastro=" + dtCadastro + ", linkAtividade=" + linkAtividade + ", grupo="
+				+ grupo + ", atividade=" + atividade + "]";
 	}
 	
 }

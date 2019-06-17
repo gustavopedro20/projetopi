@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 
@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mail.EnviarEmailRecuperarSenha;
-import service.UsuarioService;
-import util.GerarSenha;
+import br.com.usjt.ProjetoPI.mail.EnviarEmailRecuperarSenha;
+import br.com.usjt.ProjetoPI.service.UsuarioService;
+import br.com.usjt.ProjetoPI.util.GerarSenha;
 
 public class RecuperarSenha implements Command {
 

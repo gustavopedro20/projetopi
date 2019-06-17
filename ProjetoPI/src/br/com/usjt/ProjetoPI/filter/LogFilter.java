@@ -1,4 +1,4 @@
-package filter;
+package br.com.usjt.ProjetoPI.filter;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.Usuario;
+import br.com.usjt.ProjetoPI.model.Usuario;
 
 @WebFilter("/*")
 public class LogFilter implements Filter {

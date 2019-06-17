@@ -1,9 +1,9 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
 import java.util.ArrayList;
 
-import dao.AtividadeDAO;
-import model.Atividade;
+import br.com.usjt.ProjetoPI.model.Atividade;
+import br.com.usjt.ProjetoPI.persistencia.AtividadeDAO;
 
 public class AtividadeService {
 	
@@ -12,10 +12,6 @@ public class AtividadeService {
 	public void criar(Atividade atividade) {
 		dao.criar(atividade);
 	}
-
-//	public void atualizarFormatoEntrega(String formato, int id) {
-//		dao.atualizarFormatoEntrega(formato, id);
-//	}
 
 	public void deletar(int id) {
 		dao.deletar(id);
@@ -32,4 +28,5 @@ public class AtividadeService {
 	public ArrayList<Atividade> listarAtividades(){
 		return dao.listarAtividades();
 	}
+	
 }

@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 

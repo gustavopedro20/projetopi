@@ -1,4 +1,4 @@
-package mail;
+package br.com.usjt.ProjetoPI.mail;
 
 import java.util.Properties;
 

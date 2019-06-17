@@ -13,53 +13,45 @@ import br.com.usjt.ProjetoPI.model.Aluno;
 import br.com.usjt.ProjetoPI.model.Grupo;
 import br.com.usjt.ProjetoPI.service.AlunoService;
 import br.com.usjt.ProjetoPI.service.GrupoService;
+import br.com.usjt.ProjetoPI.service.TurmaAlunoService;
 
-public class ExcluirAlunoGrupo implements Command {
+public class AdicionarAlunoNoGrupoEditar implements Command {
 
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String idAluno = request.getParameter("idAluno");
-		String idGrupo = request.getParameter("idGrupo");
-
-		// CARREGA ALUNO
-		Aluno aluno = new Aluno();
-		AlunoService alunoService = new AlunoService();
-		aluno.setId(Integer.parseInt(idAluno));
-		aluno = alunoService.carregar(aluno.getId());
-
-		// CARREGA GRUPO
-		Grupo grupo = new Grupo();
-		GrupoService grupoService = new GrupoService();
-		grupo.setId(Integer.parseInt(idGrupo));
-		grupo = grupoService.carregar(grupo.getId());
-
-		// DELETA ALUNO DO GRUPO ESCOLHIDO
-		alunoService.deletarAlunoGrupo(grupo.getId(), aluno.getId());
-
-		RequestDispatcher disp = null;
+		
 		HttpSession sessao = request.getSession();
-		@SuppressWarnings("unchecked")
-		// ATT A LISTA DE ALUNOS
-		ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>) sessao.getAttribute("listaAlunos");
-		listaAlunos.remove(busca(aluno, listaAlunos));
-		sessao.setAttribute("listaAlunos", listaAlunos);
+		RequestDispatcher disp = null;
+		
+		String idAluno = request.getParameter("idAluno");
+		String idGrupo = request.getParameter("id_grupo");
+		
+		Aluno aluno = new Aluno();
+		aluno.setId(Integer.parseInt(idAluno));
+		
+		AlunoService alunoService = new AlunoService();
+		aluno = alunoService.carregar(aluno.getId());
+		
+		GrupoService grupoService = new GrupoService();
+		Grupo grupo = grupoService.carregar(Integer.parseInt(idGrupo));
 		sessao.setAttribute("grupo", grupo);
+		
+		TurmaAlunoService turmaAlunoService = new TurmaAlunoService();
+		turmaAlunoService.atualizarTurmaAluno(grupo.getId(), aluno.getId());
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>)sessao.getAttribute("listaAlunos");
+		listaAlunos.add(aluno);
+		sessao.setAttribute("listaAlunos", listaAlunos);
+		
+		ArrayList<Aluno> comboAlunos = alunoService.listarAlunosPorTurmaSemGrupo(grupo.getTurma().getId());
+		System.out.println("ID DA TURMA: "+grupo.getTurma().getId());
+		sessao.setAttribute("comboAlunoSemGrupo", comboAlunos);
+		
 		disp = request.getRequestDispatcher("EditarGrupo.jsp");
 		disp.forward(request, response);
 
-	}
-
-	public int busca(Aluno aluno, ArrayList<Aluno> listaAlunos) {
-		Aluno a;
-		for (int i = 0; i < listaAlunos.size(); i++) {
-			a = listaAlunos.get(i);
-			if (a.getId() == aluno.getId()) {
-				return i;
-			}
-		}
-		return -1;
 	}
 
 }

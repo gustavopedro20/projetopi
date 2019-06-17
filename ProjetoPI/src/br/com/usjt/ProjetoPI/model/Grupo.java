@@ -1,4 +1,4 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 import java.util.ArrayList;
 
@@ -10,16 +10,6 @@ public class Grupo {
 	private Professor prof;
 	private Turma turma;
 	private ArrayList<Aluno> aluno;	
-	
-	public Grupo(Professor prof, int num, String nome) {
-		this.num = num;
-		this.nome = nome;
-		this.prof = prof;
-	}
-	
-	public Grupo () {
-		
-	}
 	
 	public int getId() {
 		return id;
@@ -67,6 +57,12 @@ public class Grupo {
 
 	public void setAluno(ArrayList<Aluno> aluno) {
 		this.aluno = aluno;
+	}
+
+	@Override
+	public String toString() {
+		return "Grupo [id=" + id + ", num=" + num + ", nome=" + nome + ", prof=" + prof + ", turma=" + turma
+				+ ", aluno=" + aluno + "]";
 	}	
 
 }

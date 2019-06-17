@@ -1,19 +1,16 @@
-package dao;
+package br.com.usjt.ProjetoPI.persistencia;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import model.Atividade;
+import br.com.usjt.ProjetoPI.model.Atividade;
 
 public class AtividadeDAO {
-
-	
 
 	public void criar(Atividade atividade) {
 
@@ -24,8 +21,6 @@ public class AtividadeDAO {
 			ps.setInt(2, atividade.getNum());
 			ps.setString(3, atividade.getDescricao());
 			ps.setString(4, atividade.getFormatoEntrega());
-//			ps.setDate(5, (Date) atividade.getDtInicio());
-//			ps.setDate(6, (Date) atividade.getDtFim());
 			ps.setString(5, atividade.getDtInicio());
 			ps.setString(6, atividade.getDtFim());
 			ps.executeUpdate();
@@ -53,18 +48,6 @@ public class AtividadeDAO {
 		}
 	}
 
-//	public void atualizarFormatoEntrega(String formato, int id) {
-//		String sqlUpdate = "UPDATE atividade SET formato_entrega=? WHERE id=?";
-//
-//		try (Connection conn = ConnectionFactory.conectar(); PreparedStatement ps = conn.prepareStatement(sqlUpdate);) {
-//			ps.setString(1, formato);
-//			ps.setInt(2, id);
-//			ps.execute();
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//	}
-
 	// UPDATE atividade SET formato_entrega=? WHERE id=?;
 	public Atividade carregar(int id) {
 		String sqlRead = "SELECT tema_id, numero, descricao, formato_entrega, dt_inicio, dt_fim "
@@ -86,15 +69,6 @@ public class AtividadeDAO {
 					Date dataFim = rs.getDate("dt_fim");
 					atividade.setDtInicio(formatDate.format(dataInicio));
 					atividade.setDtFim(formatDate.format(dataFim));
-					
-//					atividade.setDtInicio(rs.getDate("dt_inicio"));
-//					atividade.setDtFim(rs.getDate("dt_fim"));
-					
-					
-					/*
-					 *   Date date = Calendar.getInstance().getTime();
-    					DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-    					String strDate = dateFormat.format(date);*/
 				} else {
 					atividade.setIdTema(-1);
 					atividade.setNum(-1);
@@ -166,8 +140,6 @@ public class AtividadeDAO {
 					atividade.setNum(rs.getInt("a.numero"));
 					atividade.setDescricao(rs.getString("a.descricao"));
 					atividade.setFormatoEntrega(rs.getString("a.formato_entrega"));
-//					atividade.setDtInicio(rs.getDate("a.dt_inicio"));
-//					atividade.setDtFim(rs.getDate("a.dt_fim"));
 					SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 					Date dataInicio = rs.getDate("dt_inicio");
 					Date dataFim = rs.getDate("dt_fim");

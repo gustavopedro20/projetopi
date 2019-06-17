@@ -1,17 +1,16 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 public class Aluno extends Usuario {
 	
 	private String ra;
 	private String turma;
 	private Grupo grupo;
+
+	public Aluno() {	
+	}
 	
 	public Aluno(int id, String nome, String email, String senha) {
 		super(id, nome, email, senha);
-	}
-
-	public Aluno() {
-		
 	}
 
 	public String getRa() {
@@ -36,6 +35,11 @@ public class Aluno extends Usuario {
 	
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
+	}
+
+	@Override
+	public String toString() {
+		return "Aluno [ra=" + ra + ", turma=" + turma + ", grupo=" + grupo + "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 public class Atividade {
 	
@@ -8,6 +8,7 @@ public class Atividade {
 	private String formatoEntrega;
 	private String dtInicio;
 	private String dtFim;
+	//ATRIBUTOS CRIADOS PARA SIMULAR A ENTIDADE TEMA, QUE NÃO É DO NOSSO INTERESSE
 	private int idTema;
 	private String nomeTema;
 	
@@ -73,6 +74,13 @@ public class Atividade {
 
 	public void setNomeTema(String nomeTema) {
 		this.nomeTema = nomeTema;
+	}
+
+	@Override
+	public String toString() {
+		return "Atividade [id=" + id + ", num=" + num + ", descricao=" + descricao + ", formatoEntrega="
+				+ formatoEntrega + ", dtInicio=" + dtInicio + ", dtFim=" + dtFim + ", idTema=" + idTema + ", nomeTema="
+				+ nomeTema + "]";
 	}
 
 }

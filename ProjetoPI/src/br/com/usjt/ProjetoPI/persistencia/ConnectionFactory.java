@@ -1,4 +1,4 @@
-package dao;
+package br.com.usjt.ProjetoPI.persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +16,7 @@ public class ConnectionFactory {
 	}
 	
 	public static Connection conectar () throws SQLException{
-		String str = "jdbc:mysql://localhost:3306/usjt_pi?useTimezone=true&serverTimezone=UTC";
+		String str = "jdbc:mysql://localhost/usjt_pi?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false";
 		return DriverManager.getConnection(str, "root", "root");
 	}
 }

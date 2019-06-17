@@ -1,4 +1,4 @@
-package dao;
+package br.com.usjt.ProjetoPI.persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Turma;
+import br.com.usjt.ProjetoPI.model.Turma;
 
 public class TurmaDAO {
 

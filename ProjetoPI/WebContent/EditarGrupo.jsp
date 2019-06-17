@@ -11,14 +11,6 @@
 
 <body class="background-image">
 
-    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if>
-
-    <c:if test="${empty sessionScope['userLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if> -->
-
     <header>
         <c:import url="common/menu.jsp" />
     </header>
@@ -58,7 +50,7 @@
                     </select> 
                 </div>
                 <div class="col-md-6 botao-selecione-aluno">
-                    <button class="btn btn-outline-success" name="command" value="">Associar</button>
+                    <button class="btn btn-outline-success" name="command" value="AdicionarAlunoNoGrupoEditar">Associar</button>
                 </div>
             </div>
 

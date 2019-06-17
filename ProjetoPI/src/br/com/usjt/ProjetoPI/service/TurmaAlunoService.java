@@ -1,7 +1,7 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
-import dao.TurmaAlunoDAO;
-import model.TurmaAluno;
+import br.com.usjt.ProjetoPI.model.TurmaAluno;
+import br.com.usjt.ProjetoPI.persistencia.TurmaAlunoDAO;
 
 public class TurmaAlunoService {
 	

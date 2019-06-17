@@ -1,11 +1,10 @@
-package service;
-
+package br.com.usjt.ProjetoPI.service;
 
 import java.util.ArrayList;
 
-import dao.GrupoDAO;
-import model.Grupo;
-import model.Turma;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.model.Turma;
+import br.com.usjt.ProjetoPI.persistencia.GrupoDAO;
 
 public class GrupoService {
 	
@@ -26,6 +25,7 @@ public class GrupoService {
 	public Grupo carregar(int id) {
 		return dao.carregar(id);
 	}
+	
 	public ArrayList<Grupo> listarGrupos(){
 		return dao.listarGrupos();
 	}

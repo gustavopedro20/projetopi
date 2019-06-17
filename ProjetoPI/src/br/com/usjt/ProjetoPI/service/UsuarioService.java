@@ -1,9 +1,9 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
-import dao.UsuarioDAO;
-import model.Aluno;
-import model.Professor;
-import model.Usuario;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.model.Usuario;
+import br.com.usjt.ProjetoPI.persistencia.UsuarioDAO;
 
 public class UsuarioService {
 

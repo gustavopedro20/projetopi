@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
-import model.Professor;
-import model.Usuario;
-import service.AlunoService;
-import service.ProfessorService;
-import service.UsuarioService;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.model.Usuario;
+import br.com.usjt.ProjetoPI.service.AlunoService;
+import br.com.usjt.ProjetoPI.service.ProfessorService;
+import br.com.usjt.ProjetoPI.service.UsuarioService;
 
 public class CadastrarUsuario implements Command {
 

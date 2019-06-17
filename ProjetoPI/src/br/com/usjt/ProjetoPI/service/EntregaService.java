@@ -1,7 +1,7 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
-import dao.EntregaDAO;
-import model.Entrega;
+import br.com.usjt.ProjetoPI.model.Entrega;
+import br.com.usjt.ProjetoPI.persistencia.EntregaDAO;
 
 public class EntregaService {
 	
@@ -10,17 +10,5 @@ public class EntregaService {
 	public void criar(Entrega entrega) {
 		dao.criar(entrega);
 	}
-
-//	public void atualizar(Entrega entrega) {
-//		dao.atualizar(entrega);
-//	}
-//
-//	public void deletar(int id) {
-//		dao.deletar(id);
-//	}
-//
-//	public Entrega carregar(int id) {
-//		Entrega entrega = dao.carregar(id);
-//		return entrega;
-//	}
+	
 }

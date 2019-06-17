@@ -1,10 +1,10 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
 import java.util.ArrayList;
 
-import dao.ProfessorDAO;
-import model.Professor;
-import model.Usuario;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.model.Usuario;
+import br.com.usjt.ProjetoPI.persistencia.ProfessorDAO;
 
 public class ProfessorService {
 

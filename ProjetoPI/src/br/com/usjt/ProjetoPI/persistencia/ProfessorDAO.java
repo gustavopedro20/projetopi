@@ -1,4 +1,4 @@
-package dao;
+package br.com.usjt.ProjetoPI.persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,14 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Professor;
+import br.com.usjt.ProjetoPI.model.Professor;
 
 public class ProfessorDAO {
-	
-//	public Usuario criarUsuario (Professor professor) {
-//		return professor;	
-//	}
-//	
+
 	public Professor carregar(int id) {
 		String sql = "SELECT u.id, u.nome, u.email, u.senha, p.administrador, p.matricula FROM usuario AS u "
 				+ "INNER JOIN professor AS p ON u.id = p.professor_id WHERE u.id=?";
@@ -46,28 +42,6 @@ public class ProfessorDAO {
 		}
 		return prof;
 	}
-//	public int criar(Professor professor, Usuario usuario) {
-//		String sql = "INSERT INTO professor (professor_id, matricula) VALUES (?, ?) ";
-//		UsuarioDAO dao = new UsuarioDAO(usuario);
-//		
-//		try (Connection conn = ConnectionFactory.conectar();
-//				PreparedStatement ps = conn.prepareStatement(sql);) {
-//			ps.setString(1, professor.getMatricula());
-//			ps.execute();
-//			String sqlQuery = "SELECT LAST_INSERT_ID()";
-//			try (PreparedStatement ps2 = conn.prepareStatement(sqlQuery);
-//					ResultSet rs = ps2.executeQuery();) {
-//				if (rs.next()) {
-//					professor.setId(rs.getInt(1));
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return usuario.getId();
-//	}
 	
 	public void deletar(Professor professor) {
 		String sqlDelete = "DELETE FROM professor WHERE professor_id = ?";
@@ -207,16 +181,3 @@ public class ProfessorDAO {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

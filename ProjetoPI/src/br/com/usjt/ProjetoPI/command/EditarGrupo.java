@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
-import model.Grupo;
-import model.Professor;
-import service.GrupoService;
-import service.ProfessorService;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.service.GrupoService;
+import br.com.usjt.ProjetoPI.service.ProfessorService;
 
 
 public class EditarGrupo implements Command {

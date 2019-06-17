@@ -1,4 +1,4 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 public abstract class Usuario {
 	
@@ -7,14 +7,9 @@ public abstract class Usuario {
 	private String email;
 	private String senha;
 	
-	public Usuario() {
-		
+	public Usuario() {	
 	}
-	
-	public void criar(Aluno aluno) {
-		
-	}
-	
+
 	public Usuario(int id, String nome, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
@@ -52,6 +47,11 @@ public abstract class Usuario {
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
 	
 }

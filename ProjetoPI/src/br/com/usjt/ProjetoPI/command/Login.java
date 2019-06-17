@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
-import model.Atividade;
-import model.Grupo;
-import model.Professor;
-import model.Turma;
-import model.TurmaAluno;
-import service.AlunoService;
-import service.AtividadeService;
-import service.GrupoService;
-import service.ProfessorService;
-import service.TurmaAlunoService;
-import service.TurmaService;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Atividade;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.model.Professor;
+import br.com.usjt.ProjetoPI.model.Turma;
+import br.com.usjt.ProjetoPI.model.TurmaAluno;
+import br.com.usjt.ProjetoPI.service.AlunoService;
+import br.com.usjt.ProjetoPI.service.AtividadeService;
+import br.com.usjt.ProjetoPI.service.GrupoService;
+import br.com.usjt.ProjetoPI.service.ProfessorService;
+import br.com.usjt.ProjetoPI.service.TurmaAlunoService;
+import br.com.usjt.ProjetoPI.service.TurmaService;
 
 public class Login implements Command {
 

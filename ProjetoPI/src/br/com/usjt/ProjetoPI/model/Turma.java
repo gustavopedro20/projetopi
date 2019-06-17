@@ -1,4 +1,4 @@
-package model;
+package br.com.usjt.ProjetoPI.model;
 
 import java.util.ArrayList;
 
@@ -68,6 +68,10 @@ public class Turma {
 		this.grupos = grupos;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Turma [id=" + id + ", semestreLetivo=" + semestreLetivo + ", anoLetivo=" + anoLetivo + ", sigla="
+				+ sigla + ", temaId=" + temaId + ", temaTitulo=" + temaTitulo + ", grupos=" + grupos + "]";
+	}
 	
 }

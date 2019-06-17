@@ -1,4 +1,4 @@
-package util;
+package br.com.usjt.ProjetoPI.util;
 
 public class GerarSenha {
 	

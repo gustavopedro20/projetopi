@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mail.EnviarEmailAtividade;
-import model.Aluno;
-import model.Atividade;
-import model.Entrega;
-import model.Grupo;
-import model.TurmaAluno;
-import service.EntregaService;
+import br.com.usjt.ProjetoPI.mail.EnviarEmailAtividade;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.model.Atividade;
+import br.com.usjt.ProjetoPI.model.Entrega;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.model.TurmaAluno;
+import br.com.usjt.ProjetoPI.service.EntregaService;
 
 public class EnviarAtividade implements Command {
 

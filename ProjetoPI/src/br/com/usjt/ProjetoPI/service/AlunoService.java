@@ -1,9 +1,9 @@
-package service;
+package br.com.usjt.ProjetoPI.service;
 
 import java.util.ArrayList;
 
-import dao.AlunoDAO;
-import model.Aluno;
+import br.com.usjt.ProjetoPI.model.Aluno;
+import br.com.usjt.ProjetoPI.persistencia.AlunoDAO;
 
 public class AlunoService {
 
@@ -12,6 +12,7 @@ public class AlunoService {
 	public Aluno carregar(int id) {
 		return dao.carregar(id);	
 	}
+	
 	public Aluno autenticarAluno(Aluno aluno) {
 		return dao.autenticarAluno(aluno);	
 	}

@@ -44,7 +44,10 @@
                         </select>
                     </div>
                     <div class="col-md-1-group">
-                        <button class="form-control" name="command" value="ListarGruposBuscar">Buscar</button>
+                        <button class="btn btn-outline-warning" name="command" value="ListarGruposBuscar">Buscar</button>
+                    </div>
+                    <div class="col-md-1-group">
+                        <button class="btn btn-outline-success" name="command" value="ListarGruposReiniciar" style="margin-left: 14px">Buscar Todos</button>
                     </div>
                 </dix>
             </div>

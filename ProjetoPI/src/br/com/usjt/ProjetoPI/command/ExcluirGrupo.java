@@ -1,4 +1,4 @@
-package command;
+package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Grupo;
-import service.GrupoService;
+import br.com.usjt.ProjetoPI.model.Grupo;
+import br.com.usjt.ProjetoPI.service.GrupoService;
 
 public class ExcluirGrupo implements Command {
 
@@ -30,27 +30,11 @@ public class ExcluirGrupo implements Command {
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Grupo> listaGrupo = (ArrayList<Grupo>) sessao.getAttribute("listaGrupos");
-		try {
-			listaGrupo.remove(busca(grupo, listaGrupo));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		listaGrupo = grupoService.listarGrupos();
 		sessao.setAttribute("listaGrupos", listaGrupo);
 		disp = request.getRequestDispatcher("ListarGrupos.jsp");
 		disp.forward(request, response);
 
-	}
-
-	public int busca(Grupo grupo, ArrayList<Grupo> listaGrupo) {
-		Grupo g;
-		for (int i = 0; i < listaGrupo.size(); i++) {
-			g = listaGrupo.get(i);
-			if (g.getId() == grupo.getId()) {
-				return i;
-			}
-		}
-		return -1;
 	}
 
 }
