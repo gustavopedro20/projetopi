@@ -11,14 +11,6 @@
 
 <body class="background-image">
 
-	<!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
-        <c:redirect url="index.jsp" />
-	</c:if>
-
-	<c:if test="${empty sessionScope['userLogado']}">     
-        <c:redirect url="index.jsp" />
-	</c:if> -->
-
 	<header>
 		<c:import url="common/menu.jsp" />
 	</header>
@@ -81,8 +73,6 @@
 			</c:if>
 			<div id="actions" class="row">
 				<div class="col-md-12">
-					<!-- <a href="controller.do?command=CarregarEdicaoDoGrupo&id_grupo=${grupo.id}&id_turma=${grupo.turma.id}"
-						class="btn btn-outline-dark">Editar</a> -->
 					<button name="command" value="CarregarEdicaoDoGrupo" class="btn btn-outline-dark">Editar</button>
 					<button id="btn${grupo.id}%>" type="button" class="btn btn-outline-danger" data-toggle="modal"
 						data-target="#delete-modal" data-grupo="${grupo.id}">Excluir</button>

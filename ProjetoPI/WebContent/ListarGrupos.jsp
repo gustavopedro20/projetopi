@@ -8,7 +8,7 @@
     <title>USJT - Listar Grupos</title>
 </head>
 
-<body class="background-image">
+<body class="background-image" data-spy="scroll">
 
     <header>
         <c:import url="common/menu.jsp" />
@@ -52,7 +52,7 @@
                 </dix>
             </div>
             <c:if test="${not empty listaGrupos}">
-                <div id="list" class="row">
+                <div id="list" class="pre-scrollable">
                     <div class="col align-self-start">
                         <table class="table table-hover">
                             <thead class="text-center">

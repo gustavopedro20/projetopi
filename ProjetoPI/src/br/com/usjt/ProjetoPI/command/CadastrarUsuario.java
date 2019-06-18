@@ -40,13 +40,13 @@ public class CadastrarUsuario implements Command {
 		// VER SE EMAIL, RA E MATRICULA JÁ EXISTEM
 		if (tipo.equals("Aluno")) {
 			if (usuarioService.verificarEmail(email) || alunoService.verificarRa(raOuMatricula)) {
-				request.setAttribute("erroCadastro", true);
+				request.setAttribute("erro", true);
 				RequestDispatcher disp = request.getRequestDispatcher("CadastroUsuario.jsp");
 				disp.forward(request, response);
 			}
 		} else if (tipo.equals("Professor")) {
 			if (usuarioService.verificarEmail(email) || profService.verificarMatricula(raOuMatricula)) {
-				request.setAttribute("erroCadastro", true);
+				request.setAttribute("erro", true);
 				RequestDispatcher disp = request.getRequestDispatcher("CadastroUsuario.jsp");
 				disp.forward(request, response);
 			}
@@ -81,7 +81,7 @@ public class CadastrarUsuario implements Command {
 			disp.forward(request, response);
 			
 		} else { // SE NÃO FOR NEM ALUNO NEM PROFESSOR N FAZ NADA
-			request.setAttribute("erroCadastro", true);
+			request.setAttribute("erro", true);
 			RequestDispatcher disp = request.getRequestDispatcher("CadastroUsuario.jsp");
 			disp.forward(request, response);
 		}

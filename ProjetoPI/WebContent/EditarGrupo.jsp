@@ -94,7 +94,6 @@
                         value="EditarGrupo">Salvar</button>
                     <button type="submit" class="btn btn-default" name="command"
                         value="ListarGruposReiniciar">Cancelar</button>
-                    <!-- <a href="controller.do?command=ListarGruposBuscar" class="btn btn-default">Cancelar</a> -->
                 </div>
             </div>
 

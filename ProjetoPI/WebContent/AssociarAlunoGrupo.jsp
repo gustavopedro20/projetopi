@@ -11,14 +11,6 @@
 
 <body class="background-image">
 
-    <!-- <c:if test="${not empty sessionScope['alunoLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if>
-
-    <c:if test="${empty sessionScope['userLogado']}">     
-        <c:redirect url="index.jsp" />
-    </c:if> -->
-
     <c:import url="common/menu.jsp" />
 
     <div id="main" class="container">
@@ -79,11 +71,8 @@
 
             <div id="actions" class="row">
                 <div class="col-md-12">
-                    <!-- <button type="submit" class="btn btn-primary" name="command" value="CriarGrupoAssociarAluno">Salvar</button> -->
-                    <!-- <a class="btn btn-outline-primary" href="controller.do?command=VisualizarGrupo&idGrupo=${grupo.id}">Salvar</a> -->
                     <button class="btn btn-outline-primary" name="command" value="VisualizarGrupo">Salvar</button>
                     <a href="controller.do?command=ExcluirGrupo&id=${grupo.id}" class="btn btn-default">Cancelar</a>
-                    <!-- <a href="ListarGrupos.jsp" class="btn btn-default">Cancelar</a> -->
                 </div>
             </div>
         </form>
