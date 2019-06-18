@@ -51,6 +51,7 @@ public class EnviarAtividade implements Command {
 			String alunoEmail = aluno.getEmail();
 			EnviarEmailAtividade EnviarEmail = new EnviarEmailAtividade();
 			EnviarEmail.enviar(alunoEmail);
+			request.setAttribute("enviado", true);
 		} catch (Exception e) {
 			request.setAttribute("msgErro", true);
 			System.out.println("Erro tentar enviar notificação por email - atividade: " + e.getMessage());

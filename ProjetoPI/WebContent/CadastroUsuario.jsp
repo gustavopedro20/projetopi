@@ -88,7 +88,7 @@
 
     <!-- MODAL MENSAGEM VALIDO -->
     <div class="modal fade" id="valido" tabindex="-1" role="dialog" aria-labelledby="valido" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="valido">Mensagem do sistema:</h5>
@@ -108,7 +108,7 @@
 
     <!-- MODAL MENSAGEM INVALIDO -->
     <div class="modal fade" id="invalido" tabindex="-1" role="dialog" aria-labelledby="valido" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="valido">Mensagem do sistema:</h5>

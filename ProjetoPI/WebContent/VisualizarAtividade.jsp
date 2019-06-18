@@ -76,6 +76,32 @@
             });
         </script>
     </footer>
+
+    <!-- MODAL MENSAGEM INVALIDO -->
+    <div class="modal fade" id="enviado" tabindex="-1" role="dialog" aria-labelledby="enviado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="valido">Mensagem do sistema:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Atividade entregue com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <c:if test="${not empty enviado}">
+        <script>$('#enviado').modal('show')</script>
+    </c:if>
+
 </body>
 
 </html>
