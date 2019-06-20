@@ -1,7 +1,6 @@
 package br.com.usjt.ProjetoPI.command;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.usjt.ProjetoPI.model.Aluno;
 import br.com.usjt.ProjetoPI.model.Grupo;
 import br.com.usjt.ProjetoPI.model.Professor;
 import br.com.usjt.ProjetoPI.service.GrupoService;
@@ -45,9 +43,6 @@ public class EditarGrupo implements Command {
 		RequestDispatcher view = null;
 		HttpSession sessao = request.getSession();
 		
-//		@SuppressWarnings("unchecked")
-//		ArrayList<Aluno> listaAluno = (ArrayList<Aluno>) sessao.getAttribute("lista_alunos");
-//		sessao.setAttribute("lista_alunos", listaAluno);
 		sessao.setAttribute("grupo", grupo);		
 		view = request.getRequestDispatcher("VisualizarGrupo.jsp");
 		view.forward(request, response);

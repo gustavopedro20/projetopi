@@ -22,8 +22,9 @@
             </div>
             <hr>
             <div class="col align-self-start">
-                <dix class="row">
+                <div class="row">
                     <div class="col-md-3 form-group">
+                    	<label>Turma:</label>
                         <select class="form-control" id="sigla" name="sigla">
                             <c:forEach var="turma" items="${comboTurma}">
                                 <option value="${turma.sigla}">${turma.sigla}</option>
@@ -31,6 +32,7 @@
                         </select>
                     </div>
                     <div class="col-md-3 form-group">
+                    	<label>Ano:</label>
                         <select class="form-control" name="ano" id="ano">
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
@@ -38,18 +40,19 @@
                         </select>
                     </div>
                     <div class="col-md-3 form-group">
+                    	<label>Semestre:</label>
                         <select class="form-control" name="semestre" id="semestre">
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
                     </div>
-                    <div class="col-md-1-group">
+                    <div class="col-md-1-group" style="position: relative; top: 32px;">
                         <button class="btn btn-outline-warning" name="command" value="ListarGruposBuscar">Buscar</button>
                     </div>
-                    <div class="col-md-1-group">
+                    <div class="col-md-1-group" style="position: relative; top: 32px;">
                         <button class="btn btn-outline-success" name="command" value="ListarGruposReiniciar" style="margin-left: 14px">Buscar Todos</button>
                     </div>
-                </dix>
+                </div>
             </div>
             <c:if test="${not empty listaGrupos}">
                 <div id="list" class="pre-scrollable">

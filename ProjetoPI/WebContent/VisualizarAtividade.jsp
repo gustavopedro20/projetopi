@@ -96,7 +96,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <c:if test="${not empty enviado}">
         <script>$('#enviado').modal('show')</script>
